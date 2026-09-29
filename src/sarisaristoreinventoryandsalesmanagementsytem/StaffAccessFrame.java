@@ -24,8 +24,11 @@ public class StaffAccessFrame extends javax.swing.JFrame {
      */
     public StaffAccessFrame(String passedName) {
         this.passedName = passedName;
+        
         initComponents();
+        
         textStaff.setEditable(false);
+        
         GraphicsEnvironment ge =
             GraphicsEnvironment.getLocalGraphicsEnvironment();
 
@@ -106,24 +109,24 @@ public class StaffAccessFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 255));
         jLabel5.setText("STAFF ACCESS");
 
         continueButton.setBackground(new java.awt.Color(0, 102, 255));
-        continueButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        continueButton.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         continueButton.setForeground(new java.awt.Color(255, 255, 255));
         continueButton.setText("CONTINUE");
         continueButton.addActionListener(this::continueButtonActionPerformed);
 
         backButton.setBackground(new java.awt.Color(153, 153, 153));
-        backButton.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        backButton.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         backButton.setForeground(new java.awt.Color(255, 255, 255));
         backButton.setText("BACK");
         backButton.addActionListener(this::backButtonActionPerformed);
 
         textStaff.setColumns(20);
-        textStaff.setFont(new java.awt.Font("SansSerif", 2, 18)); // NOI18N
+        textStaff.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
         textStaff.setRows(5);
         textStaff.setText("Before continuing, please remember to \nrecord your attendance in the physical \nattendance notebook provided by the \nstore owner/admin.\n\nPlease make sure your attendance is \nproperly recorded before using the system.\n\n");
         jScrollPane1.setViewportView(textStaff);

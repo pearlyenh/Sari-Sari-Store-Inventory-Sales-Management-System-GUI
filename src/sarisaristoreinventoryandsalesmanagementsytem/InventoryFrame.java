@@ -382,9 +382,7 @@ public class InventoryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_inventoryButton5ActionPerformed
 
     private void inventoryButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryButton12ActionPerformed
-        AddProductFrame add = new AddProductFrame();
-        add.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_inventoryButton12ActionPerformed
 
     private void inventoryButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryButton13ActionPerformed

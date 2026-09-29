@@ -62,15 +62,15 @@ public class Authentication extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         verify = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         pinField = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         showPin = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
 
         welcomePanel.setBackground(new java.awt.Color(153, 153, 153));
         welcomePanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
@@ -98,26 +98,27 @@ public class Authentication extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
-
-        jPanel2.setBackground(new java.awt.Color(0, 102, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel5.setText("ADMIN AUTHENTICATION");
+        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel6.setText("ADMIN AUTHENTICATION");
 
         verify.setBackground(new java.awt.Color(0, 102, 255));
-        verify.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        verify.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        verify.setForeground(new java.awt.Color(255, 255, 255));
         verify.setText("VERIFY");
         verify.addActionListener(this::verifyActionPerformed);
 
         back.setBackground(new java.awt.Color(153, 153, 153));
-        back.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        back.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        back.setForeground(new java.awt.Color(255, 255, 255));
         back.setText("BACK");
         back.addActionListener(this::backActionPerformed);
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel7.setText("Please enter the 4-digit PIN to continue.");
 
         pinField.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
@@ -127,7 +128,7 @@ public class Authentication extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\key-6313_128.png")); // NOI18N
         jLabel4.setText("jLabel4");
 
-        showPin.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        showPin.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         showPin.setText("Show PIN");
         showPin.addActionListener(this::showPinActionPerformed);
 
@@ -142,13 +143,6 @@ public class Authentication extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(139, 139, 139))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(verify, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                                .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(80, 80, 80))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(247, 247, 247))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -156,7 +150,14 @@ public class Authentication extends javax.swing.JFrame {
                         .addGap(128, 128, 128))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(showPin, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))))
+                        .addGap(88, 88, 88))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(verify, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                                .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(62, 62, 62))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +165,7 @@ public class Authentication extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -178,65 +179,43 @@ public class Authentication extends javax.swing.JFrame {
                 .addGap(70, 70, 70))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(872, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(403, 403, 403))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(355, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\DEFENSE.png")); // NOI18N
+        jLabel5.setText("jLabel5");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        LoginFrame login = new LoginFrame();
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_backActionPerformed
-
     private void verifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyActionPerformed
 
         String pin = new String(pinField.getPassword());
-        
+
         if (pin.isEmpty()) {
             JOptionPane.showMessageDialog(this,"Please enter your Admin PIN.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         if (pin.equals("127998121100")) {
             JOptionPane.showMessageDialog(this,"Admin authentication successful!");
 
             MainMenuFrame menu = new MainMenuFrame(passedName);
             menu.setVisible(true);
             this.dispose();
-        } 
+        }
         else {
             JOptionPane.showMessageDialog(this,"Incorrect Admin PIN.", "Error", JOptionPane.ERROR_MESSAGE);
             pinField.setText("");
         }
     }//GEN-LAST:event_verifyActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
 
     private void pinFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinFieldActionPerformed
         // TODO add your handling code here:
@@ -264,9 +243,9 @@ public class Authentication extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField pinField;
     private javax.swing.JCheckBox showPin;
     private javax.swing.JButton verify;
