@@ -22,7 +22,9 @@ public class Authentication extends javax.swing.JFrame {
      */
     public Authentication(String passedName) {
         this.passedName = passedName; 
+        
         initComponents();
+        
         GraphicsEnvironment ge =
             GraphicsEnvironment.getLocalGraphicsEnvironment();
 

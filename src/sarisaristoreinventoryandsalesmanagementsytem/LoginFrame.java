@@ -189,7 +189,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 250, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\3 (1).png")); // NOI18N
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 820));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1500, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,6 +255,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
             if (adminRbutton.isSelected() && !userRole.equals("Admin")) {
                 JOptionPane.showMessageDialog(this,"This account is not an Admin account.","Access Denied",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(!adminRbutton.isSelected() && !staffRbutton.isSelected()){
+                JOptionPane.showMessageDialog(this,"You must select admin or staff button! ", "Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             

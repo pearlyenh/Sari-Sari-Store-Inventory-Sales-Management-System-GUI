@@ -399,7 +399,7 @@
     <Container class="javax.swing.JDesktopPane" name="desktopPane">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="350" y="120" width="1570" height="700"/>
+          <AbsoluteConstraints x="350" y="120" width="1180" height="710"/>
         </Constraint>
       </Constraints>
 

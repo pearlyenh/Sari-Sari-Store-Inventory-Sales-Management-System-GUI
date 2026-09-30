@@ -27,7 +27,7 @@ public class StaffAccessFrame extends javax.swing.JFrame {
         
         initComponents();
         
-        textStaff.setEditable(false);
+        textStaff.setEditable(false); 
         
         GraphicsEnvironment ge =
             GraphicsEnvironment.getLocalGraphicsEnvironment();

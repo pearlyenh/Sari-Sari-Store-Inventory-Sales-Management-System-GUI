@@ -54,6 +54,8 @@ public class MainMenuFrame extends javax.swing.JFrame {
         setBounds(x, y, width, height);
         
         openDashboard();
+        
+        
     }
     
     private void openDashboard() {
@@ -69,6 +71,21 @@ public class MainMenuFrame extends javax.swing.JFrame {
         );
 
         dashboard.setVisible(true);
+    }
+    
+    private void openAddProduct() {
+        DashboardAddProduct addProduct = new DashboardAddProduct();
+
+        desktopPane.add(addProduct);
+
+        addProduct.setBounds(
+            0,
+            0,
+            desktopPane.getWidth(),
+            desktopPane.getHeight()
+        );
+
+        addProduct.setVisible(true);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -250,7 +267,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         pnlHeader.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         getContentPane().add(pnlHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 120));
-        getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 1570, 700));
+        getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 1180, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
