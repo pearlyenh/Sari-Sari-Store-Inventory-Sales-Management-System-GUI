@@ -39,7 +39,7 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
 
         lblDashboardTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblDashboardTitle.setForeground(new java.awt.Color(0, 51, 255));
-        lblDashboardTitle.setText("Add Product");
+        lblDashboardTitle.setText("Add Product Dashboard");
 
         lblDashboardDescription.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblDashboardDescription.setForeground(new java.awt.Color(102, 102, 102));
@@ -53,8 +53,8 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
                 .addGap(70, 70, 70)
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDashboardDescription)
-                    .addComponent(lblDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(834, Short.MAX_VALUE))
+                    .addComponent(lblDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(804, Short.MAX_VALUE))
         );
         pnlDashboardLayout.setVerticalGroup(
             pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

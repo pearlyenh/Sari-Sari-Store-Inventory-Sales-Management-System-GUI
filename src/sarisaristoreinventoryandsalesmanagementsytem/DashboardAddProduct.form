@@ -49,9 +49,9 @@
                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblDashboardDescription" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDashboardTitle" min="-2" pref="266" max="-2" attributes="0"/>
+                      <Component id="lblDashboardTitle" min="-2" pref="296" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="834" max="32767" attributes="0"/>
+                  <EmptySpace pref="804" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -76,7 +76,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Add Product"/>
+            <Property name="text" type="java.lang.String" value="Add Product Dashboard"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDashboardDescription">
