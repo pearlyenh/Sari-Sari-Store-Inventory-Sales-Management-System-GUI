@@ -25,7 +25,7 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         
         buttonGroup1.add(adminRbutton);
-        buttonGroup1.add(staffRbutton);
+        buttonGroup1.add(cRbutton);
         
         GraphicsEnvironment ge =
             GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -74,13 +74,13 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        password = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         showpass = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         adminRbutton = new javax.swing.JRadioButton();
-        staffRbutton = new javax.swing.JRadioButton();
+        cRbutton = new javax.swing.JRadioButton();
         loginButton = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -146,17 +146,17 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel4.setText("Username:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 180, 194, 56));
 
-        username.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        username.addActionListener(this::usernameActionPerformed);
-        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, 446, 41));
+        txtUsername.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        txtUsername.addActionListener(this::txtUsernameActionPerformed);
+        jPanel2.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 240, 446, 41));
 
         jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel13.setText("Password: ");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 300, 194, 56));
 
-        password.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        password.addActionListener(this::passwordActionPerformed);
-        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 360, 446, 42));
+        txtPassword.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        txtPassword.addActionListener(this::txtPasswordActionPerformed);
+        jPanel2.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 360, 446, 42));
 
         showpass.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
         showpass.setText("Show Password");
@@ -168,14 +168,14 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 500, 114, 56));
 
         adminRbutton.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        adminRbutton.setText("ADMIN");
+        adminRbutton.setText("OWNER");
         adminRbutton.addActionListener(this::adminRbuttonActionPerformed);
-        jPanel2.add(adminRbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 580, 98, -1));
+        jPanel2.add(adminRbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, 98, -1));
 
-        staffRbutton.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        staffRbutton.setText("STAFF");
-        staffRbutton.addActionListener(this::staffRbuttonActionPerformed);
-        jPanel2.add(staffRbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 580, 98, -1));
+        cRbutton.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        cRbutton.setText("FAMILY MEMBER");
+        cRbutton.addActionListener(this::cRbuttonActionPerformed);
+        jPanel2.add(cRbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 580, 190, -1));
 
         loginButton.setBackground(new java.awt.Color(0, 102, 255));
         loginButton.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -214,35 +214,35 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
         if(showpass.isSelected()){
-            password.setEchoChar((char)0); // 0 (null)
+            txtPassword.setEchoChar((char)0); // 0 (null)
         }else{
-            password.setEchoChar('*');
+            txtPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_showpassActionPerformed
     // TODO add your handling code here:
 
-    private void staffRbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffRbuttonActionPerformed
+    private void cRbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cRbuttonActionPerformed
 
-    }//GEN-LAST:event_staffRbuttonActionPerformed
+    }//GEN-LAST:event_cRbuttonActionPerformed
 
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usernameActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
 
-        String uN = username.getText();
-        String pW = new String(password.getPassword());
+        String uN = txtUsername.getText();
+        String pW = new String(txtPassword.getPassword());
 
         if (uN.isEmpty() || pW.isEmpty()) {
             JOptionPane.showMessageDialog(this,"Please enter username and password.","Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
         Connection conn = DBConnection.connect();
         
         try {
-            String sql = "SELECT * FROM tbl_users WHERE user_name= ? AND user_password= ?";
+            String sql = "SELECT * FROM tbl_users WHERE username= ? AND user_password= ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1,uN);
             pst.setString(2,pW);
@@ -250,50 +250,58 @@ public class LoginFrame extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();//where the database and opening frames happing
             
             if (rs.next()) {
-                int userId = rs.getInt("user_id");
+                int userId = rs.getInt("userID");
                 String userRole = rs.getString("user_role");
-
-            if (adminRbutton.isSelected() && !userRole.equals("Admin")) {
-                JOptionPane.showMessageDialog(this,"This account is not an Admin account.","Access Denied",JOptionPane.ERROR_MESSAGE);
+                     
+            if (adminRbutton.isSelected() && !userRole.equals("Owner")) {
+                JOptionPane.showMessageDialog(this,"This account is not an owner account.","Access Denied",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            if(!adminRbutton.isSelected() && !staffRbutton.isSelected()){
-                JOptionPane.showMessageDialog(this,"You must select admin or staff button! ", "Error",JOptionPane.ERROR_MESSAGE);
+            if(!adminRbutton.isSelected() && !cRbutton.isSelected()){
+                JOptionPane.showMessageDialog(this,"You must select owner or family member button! ", "Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            if (staffRbutton.isSelected() && !userRole.equals("Staff")) {
-                JOptionPane.showMessageDialog(this,"This account is not a Staff account.","Access Denied",JOptionPane.ERROR_MESSAGE);
+            if (cRbutton.isSelected() && !userRole.equals("Family_Member")) {
+                JOptionPane.showMessageDialog(this,"This account is not a family member account.","Access Denied",JOptionPane.ERROR_MESSAGE);
             return;
             }
             
             DBuserSession.setUser(userId, uN, userRole);
 
             switch (userRole) {
-                case "Admin":
+                case "Owner":
+                    JOptionPane.showMessageDialog(this,"You are logging in as Owner.\nPlease verify your identity.","Owner Verification",JOptionPane.INFORMATION_MESSAGE);
+
                     Authentication adminAuth = new Authentication(uN);
                     adminAuth.setVisible(true);
                     this.dispose();
                     break;
-                case "Staff":
-                    StaffAccessFrame staffNotice = new StaffAccessFrame(uN);
-                    staffNotice.setVisible(true);
+                case "Family_Member":
+                    JOptionPane.showMessageDialog(this,"You are logging in as a Family Member.","Login Successful",JOptionPane.INFORMATION_MESSAGE);
+
+                    MainMenuFrame menu = new MainMenuFrame(userRole);
+                    menu.setVisible(true);
                     this.dispose();
                     break;
-                    }
-            }else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+                default:
+                    JOptionPane.showMessageDialog(this,"Invalid username or password!","Error",JOptionPane.ERROR_MESSAGE);
+                    break;
             }
+            
             conn.close();
-        }catch (Exception e){
-                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-        }
+            } else {
+                JOptionPane.showMessageDialog(this,"Invalid username or password. Please try again.","Warning",JOptionPane.WARNING_MESSAGE);
+            }
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());   
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+}
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void adminRbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRbuttonActionPerformed
 
@@ -310,6 +318,7 @@ public class LoginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton adminRbutton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton cRbutton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -328,10 +337,9 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loginButton;
-    private javax.swing.JPasswordField password;
     private javax.swing.JCheckBox showpass;
-    private javax.swing.JRadioButton staffRbutton;
-    private javax.swing.JTextField username;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     private javax.swing.JPanel welcomePanel;
     // End of variables declaration//GEN-END:variables
 }

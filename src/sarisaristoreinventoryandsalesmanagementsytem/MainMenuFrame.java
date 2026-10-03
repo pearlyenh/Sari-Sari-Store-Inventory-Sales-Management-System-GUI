@@ -16,18 +16,19 @@ import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 public class MainMenuFrame extends javax.swing.JFrame {
     
-    private String passedName;
+    private String userRole;
 
     /**
      * Creates new form Login
      */
-    public MainMenuFrame(String passedName) {
+    public MainMenuFrame(String userRole) {
+        this.userRole = userRole; 
 
         initComponents();
         
-        this.passedName = passedName; 
+
         
-        lblWelcome.setText("Welcome, " + passedName + "!");
+        lblWelcome.setText("Welcome, " + userRole + "!");
 
 
         openDashboard();
@@ -72,8 +73,8 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
         dashboard.setVisible(true);
     }
-    
     private void openAddProduct() {
+
         DashboardAddProduct addProduct = new DashboardAddProduct();
 
         desktopPane.add(addProduct);
@@ -86,6 +87,83 @@ public class MainMenuFrame extends javax.swing.JFrame {
         );
 
         addProduct.setVisible(true);
+    }
+    
+    private void openRestockProduct() {
+
+        DashboardRestockProduct restockProduct = new DashboardRestockProduct();
+
+        desktopPane.add(restockProduct);
+
+        restockProduct.setBounds(
+            0,
+            0,
+            desktopPane.getWidth(),
+            desktopPane.getHeight()
+        );
+
+        restockProduct.setVisible(true);
+    }
+    private void openDailyGain() {
+
+        DashboardDailyGain dailyGain = new DashboardDailyGain(userRole);
+
+        desktopPane.add(dailyGain);
+
+        dailyGain.setBounds(
+            0,
+            0,
+            desktopPane.getWidth(),
+            desktopPane.getHeight()
+        );
+
+        dailyGain.setVisible(true);
+    }
+    private void openPuhunan() {
+
+        DashboardPuhunan puhunan = new DashboardPuhunan();
+
+        desktopPane.add(puhunan);
+
+        puhunan.setBounds(
+            0,
+            0,
+            desktopPane.getWidth(),
+            desktopPane.getHeight()
+        );
+
+        puhunan.setVisible(true);
+    }
+    
+    private void openInventory() {
+
+        DashboardInventory inventory = new DashboardInventory(userRole);
+
+        desktopPane.add(inventory);
+
+        inventory.setBounds(
+            0,
+            0,
+            desktopPane.getWidth(),
+            desktopPane.getHeight()
+        );
+
+        inventory.setVisible(true);
+    }
+    private void openCashier() {
+
+        DashboardCashier cashier = new DashboardCashier(userRole);
+
+        desktopPane.add(cashier);
+
+        cashier.setBounds(
+            0,
+            0,
+            desktopPane.getWidth(),
+            desktopPane.getHeight()
+        );
+
+        cashier.setVisible(true);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -139,6 +217,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnAddProduct.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnAddProduct.setFocusPainted(false);
         btnAddProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
 
         btnRestockProduct.setBackground(new java.awt.Color(0, 51, 153));
         btnRestockProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -148,6 +227,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnRestockProduct.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnRestockProduct.setFocusPainted(false);
         btnRestockProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRestockProduct.addActionListener(this::btnRestockProductActionPerformed);
 
         btnDailyGain.setBackground(new java.awt.Color(0, 51, 153));
         btnDailyGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -157,6 +237,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnDailyGain.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnDailyGain.setFocusPainted(false);
         btnDailyGain.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDailyGain.addActionListener(this::btnDailyGainActionPerformed);
 
         btnPuhunan.setBackground(new java.awt.Color(0, 51, 153));
         btnPuhunan.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -166,6 +247,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnPuhunan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnPuhunan.setFocusPainted(false);
         btnPuhunan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPuhunan.addActionListener(this::btnPuhunanActionPerformed);
 
         btnInventory.setBackground(new java.awt.Color(0, 51, 153));
         btnInventory.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -175,6 +257,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnInventory.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnInventory.setFocusPainted(false);
         btnInventory.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnInventory.addActionListener(this::btnInventoryActionPerformed);
 
         btnCashier.setBackground(new java.awt.Color(0, 51, 153));
         btnCashier.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -184,6 +267,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnCashier.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnCashier.setFocusPainted(false);
         btnCashier.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnCashier.addActionListener(this::btnCashierActionPerformed);
 
         btnLogOut.setBackground(new java.awt.Color(255, 51, 51));
         btnLogOut.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -277,7 +361,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
-        // TODO add your handling code here:
+        openDashboard();
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
@@ -285,6 +369,30 @@ public class MainMenuFrame extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
+
+    private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
+        openInventory();
+    }//GEN-LAST:event_btnInventoryActionPerformed
+
+    private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
+        openAddProduct();
+    }//GEN-LAST:event_btnAddProductActionPerformed
+
+    private void btnRestockProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestockProductActionPerformed
+        openRestockProduct();
+    }//GEN-LAST:event_btnRestockProductActionPerformed
+
+    private void btnDailyGainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyGainActionPerformed
+        openDailyGain();
+    }//GEN-LAST:event_btnDailyGainActionPerformed
+
+    private void btnPuhunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuhunanActionPerformed
+        openPuhunan();
+    }//GEN-LAST:event_btnPuhunanActionPerformed
+
+    private void btnCashierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCashierActionPerformed
+        openCashier();
+    }//GEN-LAST:event_btnCashierActionPerformed
 
     /**
      * @param args the command line arguments

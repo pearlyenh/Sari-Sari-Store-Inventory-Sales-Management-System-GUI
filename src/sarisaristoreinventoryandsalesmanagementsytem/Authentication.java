@@ -121,7 +121,7 @@ public class Authentication extends javax.swing.JFrame {
         back.addActionListener(this::backActionPerformed);
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel7.setText("Please enter the 4-digit PIN to continue.");
+        jLabel7.setText("Please enter the 6-digit PIN to continue.");
 
         pinField.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
         pinField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
@@ -200,7 +200,7 @@ public class Authentication extends javax.swing.JFrame {
             return;
         }
 
-        if (pin.equals("127998121100")) {
+        if (pin.equals("102107")) {
             JOptionPane.showMessageDialog(this,"Admin authentication successful!");
 
             MainMenuFrame menu = new MainMenuFrame(passedName);

@@ -234,7 +234,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Comic Sans MS" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Please enter the 4-digit PIN to continue."/>
+            <Property name="text" type="java.lang.String" value="Please enter the 6-digit PIN to continue."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pinField">
