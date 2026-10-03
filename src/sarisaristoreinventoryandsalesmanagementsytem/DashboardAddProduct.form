@@ -49,38 +49,39 @@
                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox1" max="32767" attributes="0"/>
-                              <Component id="jTextField3" pref="323" max="32767" attributes="0"/>
-                              <Component id="lblDashboardDescription4" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDashboardDescription3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" max="32767" attributes="0"/>
-                              <Component id="lblDashboardDescription2" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDashboardDescription" max="32767" attributes="0"/>
-                              <Component id="lblDashboardTitle" max="32767" attributes="0"/>
-                              <Component id="lblDashboardDescription1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cmbCategory" max="32767" attributes="0"/>
+                                  <Component id="lblDashboardDescription4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDashboardDescription3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtBarcode" max="32767" attributes="0"/>
+                                  <Component id="lblDashboardDescription2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDashboardDescription" pref="323" max="32767" attributes="0"/>
+                                  <Component id="lblDashboardTitle" max="32767" attributes="0"/>
+                                  <Component id="lblDashboardDescription1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtProductName" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="txtOriginalPrice" min="-2" pref="323" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblDashboardDescription5" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField4" min="-2" pref="323" max="-2" attributes="0"/>
-                              <Component id="lblDashboardDescription6" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField5" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="txtUnitCost" min="-2" pref="323" max="-2" attributes="0"/>
                               <Component id="lblDashboardDescription7" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField6" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="txtQuantity" min="-2" pref="323" max="-2" attributes="0"/>
                               <Component id="lblDashboardDescription8" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField7" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="txtLowStockReminder" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="txtSellingPrice" min="-2" pref="323" max="-2" attributes="0"/>
+                              <Component id="lblDashboardDescription9" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDashboardDescription5" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="332" max="32767" attributes="0"/>
+                          <EmptySpace pref="335" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton1" min="-2" pref="214" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="214" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="177" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnReset" min="-2" pref="214" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="btnSaveProduct" min="-2" pref="214" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -90,56 +91,68 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="lblDashboardTitle" min="-2" pref="55" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblDashboardDescription" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDashboardDescription1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDashboardDescription5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="lblDashboardTitle" min="-2" pref="55" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblDashboardDescription" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="lblDashboardDescription1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lblDashboardDescription5" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDashboardDescription2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDashboardDescription7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtBarcode" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="txtSellingPrice" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lblDashboardDescription2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lblDashboardDescription9" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField2" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="jTextField6" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtProductName" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="txtUnitCost" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lblDashboardDescription3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="lblDashboardDescription7" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblDashboardDescription3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDashboardDescription6" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cmbCategory" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="txtQuantity" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblDashboardDescription4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDashboardDescription8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtLowStockReminder" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="txtOriginalPrice" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="201" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnReset" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="btnSaveProduct" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jComboBox1" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="jTextField4" min="-2" pref="42" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDashboardDescription4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDashboardDescription8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField3" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="jTextField7" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="99" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -178,7 +191,7 @@
             <Property name="text" type="java.lang.String" value="Barcode"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtBarcode">
         </Component>
         <Component class="javax.swing.JLabel" name="lblDashboardDescription2">
           <Properties>
@@ -191,7 +204,7 @@
             <Property name="text" type="java.lang.String" value="Product Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txtProductName">
         </Component>
         <Component class="javax.swing.JLabel" name="lblDashboardDescription3">
           <Properties>
@@ -204,7 +217,7 @@
             <Property name="text" type="java.lang.String" value="Category"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cmbCategory">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Comic Sans MS" size="14" style="1"/>
@@ -235,10 +248,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Unit Cost"/>
+            <Property name="text" type="java.lang.String" value="Original Price"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="txtSellingPrice">
         </Component>
         <Component class="javax.swing.JLabel" name="lblDashboardDescription5">
           <Properties>
@@ -251,20 +264,7 @@
             <Property name="text" type="java.lang.String" value="Selling Price"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblDashboardDescription6">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Comic Sans MS" size="18" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Reorder Level"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="txtUnitCost">
         </Component>
         <Component class="javax.swing.JLabel" name="lblDashboardDescription7">
           <Properties>
@@ -274,12 +274,12 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Quantity"/>
+            <Property name="text" type="java.lang.String" value="Quantity / Initial Stock"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="txtQuantity">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnReset">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Comic Sans MS" size="18" style="1"/>
@@ -301,9 +301,9 @@
             <Property name="text" type="java.lang.String" value="Low Stock Reminder"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="txtLowStockReminder">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnSaveProduct">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="0" type="rgb"/>
@@ -316,8 +316,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Save Product"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveProductActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JLabel" name="lblDashboardDescription9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Comic Sans MS" size="18" style="1"/>
@@ -325,8 +328,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Back"/>
+            <Property name="text" type="java.lang.String" value="Unit Cost"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtOriginalPrice">
         </Component>
       </SubComponents>
     </Container>

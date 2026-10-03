@@ -8,8 +8,14 @@ package sarisaristoreinventoryandsalesmanagementsytem;
  *
  * @author Helia Pearl Charish
  */
-import javax.swing.table.TableRowSorter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class DashboardInventory extends javax.swing.JInternalFrame {
 
@@ -19,14 +25,50 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
     
     private String userRole;
     private TableRowSorter sorter;
-    
+
     public DashboardInventory(String userRole) {
         this.userRole = userRole;
-        
+
         initComponents();
-        
+
         sorter = new TableRowSorter<>(tblInventory.getModel());
         tblInventory.setRowSorter(sorter);
+
+        loadProducts();
+    }
+
+    private void loadProducts() {
+        String sql = "SELECT * FROM tbl_products";
+
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            DefaultTableModel model = (DefaultTableModel) tblInventory.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+
+                model.addRow(new Object[]{
+                    rs.getInt("productID"),
+                    rs.getString("barcode"),
+                    rs.getString("productName"),
+                    rs.getString("category"),
+                    rs.getBigDecimal("originalPrice"),
+                    rs.getBigDecimal("sellingPrice"),
+                    rs.getBigDecimal("unitCost"),
+                    rs.getInt("stock")
+                });
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Failed to load products.\n" + e.getMessage(),
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**
