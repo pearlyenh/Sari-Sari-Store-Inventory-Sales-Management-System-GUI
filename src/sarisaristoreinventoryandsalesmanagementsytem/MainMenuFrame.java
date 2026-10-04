@@ -104,6 +104,22 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
         restockProduct.setVisible(true);
     }
+    
+    public void openUpdateProduct(int productID) {
+
+        DashboardUpdate updateProduct = new DashboardUpdate(productID);
+
+        desktopPane.add(updateProduct);
+
+        updateProduct.setBounds(
+                0,
+                0,
+                desktopPane.getWidth(),
+                desktopPane.getHeight()
+        );
+
+        updateProduct.setVisible(true);
+    }
     private void openDailyGain() {
 
         DashboardDailyGain dailyGain = new DashboardDailyGain(userRole);

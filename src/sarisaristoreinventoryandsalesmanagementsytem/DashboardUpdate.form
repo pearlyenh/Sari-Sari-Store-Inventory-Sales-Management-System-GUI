@@ -26,97 +26,41 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="lblAddProduct" min="-2" pref="196" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblDescription" min="-2" pref="332" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="lblAddProduct" min="-2" pref="196" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnReset" min="-2" pref="197" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="btnSaveProduct" min="-2" pref="197" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="txtPurchaseCost" min="-2" pref="332" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cmbLowStockReminder" min="-2" pref="236" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPanel3" max="32767" attributes="0"/>
+                                  <Component id="jPanel1" pref="530" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtProductName" alignment="0" min="-2" pref="332" max="-2" attributes="0"/>
-                                          <Component id="lblProductName" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="cmbCategory" min="-2" pref="236" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel4" min="-2" pref="177" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                              <Component id="lblProductInformation" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jLabel16" min="-2" pref="167" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="txtSellingPrice" min="-2" pref="259" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="lblUnitCost" min="-2" pref="500" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lblPotentialProfit" alignment="1" min="-2" pref="500" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblDescription" min="-2" pref="332" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel6" min="-2" pref="311" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnReset" min="-2" pref="197" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                      <Component id="btnSaveProduct" min="-2" pref="197" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jPanel7" min="-2" pref="524" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jPanel5" min="-2" pref="524" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="665" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -126,86 +70,36 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAddProduct" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDescription" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblProductInformation" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblProductName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblUnitCost" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="lblAddProduct" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="41" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="27" pref="436" max="32767" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="593" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblDescription" min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtProductName" min="-2" pref="45" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cmbCategory" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="lblPotentialProfit" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" pref="43" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="29" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel15" min="-2" pref="43" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtSellingPrice" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel3" min="-2" pref="208" max="-2" attributes="0"/>
+                                  <Component id="jPanel5" min="-2" pref="208" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jPanel1" min="-2" pref="199" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jPanel7" min="-2" pref="199" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtPurchaseCost" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="cmbLowStockReminder" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                          <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" pref="12" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnSaveProduct" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                           <Component id="btnReset" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -222,95 +116,6 @@
         <Property name="text" type="java.lang.String" value="Update Product"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="12" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="66" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Total amount paid for the bundle/pack or individual purchase"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblProductName">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Product Name"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtProductName">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Enter Product Name "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value=" Purchase Cost"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cmbCategory">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="14" style="1"/>
-        </Property>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="9">
-            <StringItem index="0" value="Food &amp; Snacks"/>
-            <StringItem index="1" value="Drinks &amp; Beverages"/>
-            <StringItem index="2" value="Personal &amp; Beauty Care"/>
-            <StringItem index="3" value="Household Products"/>
-            <StringItem index="4" value="School &amp; Office Supplies"/>
-            <StringItem index="5" value="Baby Products"/>
-            <StringItem index="6" value="Grocery &amp; Cooking"/>
-            <StringItem index="7" value="Medicines"/>
-            <StringItem index="8" value="Others"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Category"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Number of Pieces (Initial Stock)"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblDescription">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -322,144 +127,7 @@
         <Property name="text" type="java.lang.String" value="Modify product information and pricing details."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPurchaseCost">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Enter total purchase cost"/>
-      </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPurchaseCostKeyReleased"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="PURCHASE INFORMATION"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="CALCULATED INFORMATION"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblProductInformation">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="PRODUCT INFORMATION"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblUnitCost">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value=" Unit Cost / Original Price per Piece: "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblPotentialProfit">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value=" Potential Profit per Item: "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="SELLING INFORMATION"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel16">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value=" Selling Price"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel17">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="33" red="0" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Low Stock Reminder "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtSellingPrice">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="14" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Enter selling price per item"/>
-      </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSellingPriceKeyReleased"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cmbLowStockReminder">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Comic Sans MS" size="14" style="1"/>
-        </Property>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="5"/>
-            <StringItem index="1" value="10"/>
-            <StringItem index="2" value="15"/>
-            <StringItem index="3" value="20"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnReset">
       <Properties>
@@ -473,26 +141,19 @@
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtNumberOfPieces" min="-2" pref="332" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="93" max="32767" attributes="0"/>
-                  <Component id="txtNumberOfPieces" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtNumberOfPieces">
@@ -505,7 +166,113 @@
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumberOfPiecesKeyReleased"/>
           </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="330" y="130" width="180" height="45"/>
+            </Constraint>
+          </Constraints>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Number of Pieces (Initial Stock)"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="30" y="140" width="311" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtPurchaseCost">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Enter total purchase cost"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPurchaseCostKeyReleased"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="200" y="70" width="310" height="45"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Purchase Cost"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="80" width="177" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="18" y="7" width="500" height="44"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel10" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel10">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Comic Sans MS" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="PURCHASE INFORMATION"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="btnSaveProduct">
@@ -525,5 +292,395 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveProductActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanel3">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="10" width="490" height="-1"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <Component id="lblProductInformation" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+                      <Component id="lblProductInformation" min="-2" pref="43" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lblProductInformation">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Comic Sans MS" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="PRODUCT INFORMATION"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lblProductName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Product Name"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="90" width="140" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtProductName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Enter Product Name "/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtProductNameActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="170" y="80" width="340" height="45"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Category"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="150" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbCategory">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="14" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="9">
+                <StringItem index="0" value="Food &amp; Snacks"/>
+                <StringItem index="1" value="Drinks &amp; Beverages"/>
+                <StringItem index="2" value="Personal &amp; Beauty Care"/>
+                <StringItem index="3" value="Household Products"/>
+                <StringItem index="4" value="School &amp; Office Supplies"/>
+                <StringItem index="5" value="Baby Products"/>
+                <StringItem index="6" value="Grocery &amp; Cooking"/>
+                <StringItem index="7" value="Medicines"/>
+                <StringItem index="8" value="Others"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="170" y="140" width="340" height="44"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel5">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="66" red="0" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel6">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="18" y="7" width="490" height="44"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel12" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel12">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Comic Sans MS" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="CALCULATED INFORMATION"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lblUnitCost">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Unit Cost / Original Price per Piece: "/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="80" width="500" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPotentialProfit">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Potential Profit per Item: "/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="140" width="500" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel7">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+            <BevelBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="false"/>
+      </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel8">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="18" y="7" width="490" height="44"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="134" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel13" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel13">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Comic Sans MS" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="SELLING INFORMATION"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="jLabel16">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Helia Pearl Charish\Downloads\gold-philippine-peso-coin-18576_32.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Selling Price"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="80" width="167" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel17">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Low Stock Reminder "/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="20" y="140" width="-1" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbLowStockReminder">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="14" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="5"/>
+                <StringItem index="1" value="10"/>
+                <StringItem index="2" value="15"/>
+                <StringItem index="3" value="20"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="130" width="290" height="44"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSellingPrice">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Comic Sans MS" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Enter selling price per item"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSellingPriceKeyReleased"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="220" y="70" width="290" height="45"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

@@ -321,9 +321,10 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
 
         int productID = (int) tblInventory.getModel()
                 .getValueAt(modelRow, 0);
-        JOptionPane.showMessageDialog(
-        this,
-        "Selected Product ID: " + productID);
+        
+        MainMenuFrame mainMenu = (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        mainMenu.openUpdateProduct(productID);
+
         
         String sql = "SELECT * FROM tbl_products WHERE productID = ?";
 
