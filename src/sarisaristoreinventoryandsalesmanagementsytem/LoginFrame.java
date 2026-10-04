@@ -144,7 +144,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel4.setText("Username:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 180, 194, 56));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 180, 194, 56));
 
         txtUsername.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         txtUsername.addActionListener(this::txtUsernameActionPerformed);
@@ -152,7 +152,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel13.setText("Password: ");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 300, 194, 56));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 300, 194, 56));
 
         txtPassword.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         txtPassword.addActionListener(this::txtPasswordActionPerformed);
@@ -189,7 +189,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 250, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\3 (1).png")); // NOI18N
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1500, 820));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1510, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

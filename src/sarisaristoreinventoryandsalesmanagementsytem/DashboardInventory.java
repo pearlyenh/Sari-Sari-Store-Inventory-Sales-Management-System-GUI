@@ -8,6 +8,7 @@ package sarisaristoreinventoryandsalesmanagementsytem;
  *
  * @author Helia Pearl Charish
  */
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,29 +45,33 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
              PreparedStatement pst = conn.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
-            DefaultTableModel model = (DefaultTableModel) tblInventory.getModel();
+            DefaultTableModel model =
+                    (DefaultTableModel) tblInventory.getModel();
+
             model.setRowCount(0);
 
             while (rs.next()) {
 
                 model.addRow(new Object[]{
                     rs.getInt("productID"),
-                    rs.getString("barcode"),
                     rs.getString("productName"),
                     rs.getString("category"),
-                    rs.getBigDecimal("originalPrice"),
-                    rs.getBigDecimal("sellingPrice"),
+                    rs.getBigDecimal("purchaseCost"),
                     rs.getBigDecimal("unitCost"),
-                    rs.getInt("stock")
+                    rs.getBigDecimal("sellingPrice"),
+                    rs.getBigDecimal("potentialProfit"),
+                    rs.getInt("stock"),
+                    rs.getInt("lowStockReminder")
                 });
             }
 
         } catch (SQLException e) {
+
             JOptionPane.showMessageDialog(
-                this,
-                "Failed to load products.\n" + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Failed to load products.\n" + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }
@@ -85,10 +90,10 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
         lblDashboardDescription = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInventory = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnAddProduct = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnRestock = new javax.swing.JButton();
         pnlSearch = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
@@ -113,66 +118,87 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
         tblInventory.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         tblInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Barcode", "Product Name", "Caterory", "Original Price", "Selling Price", "Unit Cost", "Stock"
+                "ID", "Product Name", "Caterory", "Purchase Cost", "Unit Cost", "Selling Price", "Potential Profit", "Stock", "Low Stock Reminder"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblInventory.setGridColor(new java.awt.Color(102, 102, 102));
         jScrollPane1.setViewportView(tblInventory);
+        if (tblInventory.getColumnModel().getColumnCount() > 0) {
+            tblInventory.getColumnModel().getColumn(0).setResizable(false);
+            tblInventory.getColumnModel().getColumn(1).setResizable(false);
+            tblInventory.getColumnModel().getColumn(2).setResizable(false);
+            tblInventory.getColumnModel().getColumn(3).setResizable(false);
+            tblInventory.getColumnModel().getColumn(4).setResizable(false);
+            tblInventory.getColumnModel().getColumn(5).setResizable(false);
+            tblInventory.getColumnModel().getColumn(6).setResizable(false);
+            tblInventory.getColumnModel().getColumn(7).setResizable(false);
+            tblInventory.getColumnModel().getColumn(8).setResizable(false);
+        }
 
-        jButton1.setBackground(new java.awt.Color(0, 51, 255));
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Product");
+        btnAddProduct.setBackground(new java.awt.Color(0, 51, 255));
+        btnAddProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddProduct.setText("Add Product");
+        btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 204));
-        jButton5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Update");
+        btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
+        btnUpdate.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(this::btnUpdateActionPerformed);
 
-        jButton6.setBackground(new java.awt.Color(0, 51, 255));
-        jButton6.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Delete");
+        btnDelete.setBackground(new java.awt.Color(0, 51, 255));
+        btnDelete.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Delete");
 
-        jButton7.setBackground(new java.awt.Color(0, 51, 255));
-        jButton7.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Restock");
+        btnRestock.setBackground(new java.awt.Color(0, 51, 255));
+        btnRestock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnRestock.setForeground(new java.awt.Color(255, 255, 255));
+        btnRestock.setText("Restock");
 
         txtSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        txtSearch.setText("Search product or barcode...");
+        txtSearch.setText("Search product ");
         txtSearch.addActionListener(this::txtSearchActionPerformed);
 
         btnSearch.setBackground(new java.awt.Color(0, 51, 255));
@@ -212,13 +238,13 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlDashboardLayout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDashboardLayout.createSequentialGroup()
                         .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,10 +272,10 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -263,18 +289,91 @@ public class DashboardInventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String searchText = txtSearch.getText().trim();
-        
-        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText, 1, 2));
+    String searchText = txtSearch.getText().trim();
+
+        if (searchText.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(
+                RowFilter.regexFilter("(?i)" + searchText, 1)
+            );
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddProductActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int selectedRow = tblInventory.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please select a product to update.",
+                    "No Product Selected",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int modelRow = tblInventory.convertRowIndexToModel(selectedRow);
+
+        int productID = (int) tblInventory.getModel()
+                .getValueAt(modelRow, 0);
+        JOptionPane.showMessageDialog(
+        this,
+        "Selected Product ID: " + productID);
+        
+        String sql = "SELECT * FROM tbl_products WHERE productID = ?";
+
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setInt(1, productID);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    String productName = rs.getString("productName");
+                    String category = rs.getString("category");
+                    BigDecimal purchaseCost = rs.getBigDecimal("purchaseCost");
+                    int numberOfPieces = rs.getInt("numberOfPieces");
+                    BigDecimal sellingPrice = rs.getBigDecimal("sellingPrice");
+                    int lowStockReminder = rs.getInt("lowStockReminder");
+
+                    // Temporary test
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Product: " + productName
+                            + "\nCategory: " + category
+                            + "\nPurchase Cost: ₱" + purchaseCost
+                            + "\nNumber of Pieces: " + numberOfPieces
+                            + "\nSelling Price: ₱" + sellingPrice
+                            + "\nLow Stock Reminder: " + lowStockReminder
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to load product.\n" + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddProduct;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRestock;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDashboardDescription;
     private javax.swing.JLabel lblDashboardTitle;

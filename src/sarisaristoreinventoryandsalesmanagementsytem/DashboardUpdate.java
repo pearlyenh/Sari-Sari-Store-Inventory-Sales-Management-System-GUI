@@ -11,12 +11,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DashboardAddProduct extends javax.swing.JInternalFrame {
+public class DashboardUpdate extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form DashboardAddProduct
      */
-    public DashboardAddProduct() {
+    public DashboardUpdate() {
         initComponents();
     }
     
@@ -84,7 +84,6 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
         txtPurchaseCost = new javax.swing.JTextField();
-        txtNumberOfPieces = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         lblProductInformation = new javax.swing.JLabel();
@@ -97,13 +96,15 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
         txtSellingPrice = new javax.swing.JTextField();
         cmbLowStockReminder = new javax.swing.JComboBox<>();
         btnReset = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        txtNumberOfPieces = new javax.swing.JTextField();
         btnSaveProduct = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         lblAddProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblAddProduct.setForeground(new java.awt.Color(0, 51, 255));
-        lblAddProduct.setText("Add Product");
+        lblAddProduct.setText("Update Product");
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -134,21 +135,13 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
 
         lblDescription.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblDescription.setForeground(new java.awt.Color(102, 102, 102));
-        lblDescription.setText("Enter product details to add to inventory.");
+        lblDescription.setText("Modify product information and pricing details.");
 
         txtPurchaseCost.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtPurchaseCost.setText("Enter total purchase cost");
         txtPurchaseCost.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPurchaseCostKeyReleased(evt);
-            }
-        });
-
-        txtNumberOfPieces.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        txtNumberOfPieces.setText("Enter number of pieces");
-        txtNumberOfPieces.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNumberOfPiecesKeyReleased(evt);
             }
         });
 
@@ -199,13 +192,38 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
         cmbLowStockReminder.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15", "20" }));
 
         btnReset.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        btnReset.setText("Reset");
+        btnReset.setText("Back");
         btnReset.addActionListener(this::btnResetActionPerformed);
+
+        txtNumberOfPieces.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        txtNumberOfPieces.setText("Enter number of pieces");
+        txtNumberOfPieces.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNumberOfPiecesKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtNumberOfPieces, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addComponent(txtNumberOfPieces, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         btnSaveProduct.setBackground(new java.awt.Color(0, 51, 255));
         btnSaveProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnSaveProduct.setForeground(new java.awt.Color(255, 255, 255));
-        btnSaveProduct.setText("Save Product");
+        btnSaveProduct.setText("Update Product");
         btnSaveProduct.addActionListener(this::btnSaveProductActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,7 +232,7 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(lblAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -222,7 +240,8 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(btnSaveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,9 +299,7 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
                                     .addComponent(lblPotentialProfit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(86, 86, 86))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNumberOfPieces, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -313,12 +330,10 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel5)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
-                                .addComponent(lblPotentialProfit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(lblPotentialProfit)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
@@ -341,12 +356,16 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
                             .addComponent(jLabel17))
                         .addGap(12, 12, 12)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(txtNumberOfPieces, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSaveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSaveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(189, 189, 189))
         );
 
@@ -526,6 +545,7 @@ public class DashboardAddProduct extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAddProduct;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblPotentialProfit;
