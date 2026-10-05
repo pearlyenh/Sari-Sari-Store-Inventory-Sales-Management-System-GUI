@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package sarisaristoreinventoryandsalesmanagementsytem;
+package Dashboard_Internal_Frames;
 
 /**
  *
  * @author Helia Pearl Charish
  */
-public class DashboardInternalFrame extends javax.swing.JInternalFrame {
+public class Dashboard extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form DashboardInternalFrame
      */
-    public DashboardInternalFrame() {
+    public Dashboard() {
         initComponents();
     }
 

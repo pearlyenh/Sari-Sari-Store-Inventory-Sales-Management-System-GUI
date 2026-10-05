@@ -2,19 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package sarisaristoreinventoryandsalesmanagementsytem;
+package Login;
 
 /**
  *
  * @author Helia Pearl Charish
  */
 
+import Database.DBuserSession;
+import Database.DBConnection;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 public class LoginFrame extends javax.swing.JFrame {
     
 

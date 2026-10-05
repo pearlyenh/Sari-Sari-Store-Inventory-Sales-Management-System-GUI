@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package sarisaristoreinventoryandsalesmanagementsytem;
+package Dashboard_Internal_Frames;
 
 /**
  *
  * @author Helia Pearl Charish
  */
 
-public class DashboardCashier extends javax.swing.JInternalFrame {
+public class Cashier extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form DashboardInternalFrame
@@ -17,7 +17,7 @@ public class DashboardCashier extends javax.swing.JInternalFrame {
     
     private String userRole;
     
-    public DashboardCashier(String userRole) {
+    public Cashier(String userRole) {
         this.userRole = userRole;
         initComponents();
     }

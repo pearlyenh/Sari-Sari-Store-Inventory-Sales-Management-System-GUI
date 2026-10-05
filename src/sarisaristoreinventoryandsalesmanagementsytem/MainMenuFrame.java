@@ -9,6 +9,15 @@ package sarisaristoreinventoryandsalesmanagementsytem;
  * @author Helia Pearl Charish
  */
 
+import Login.LoginFrame;
+import Dashboard_Internal_Frames.Update;
+import Dashboard_Internal_Frames.RestockProduct;
+import Dashboard_Internal_Frames.Puhunan;
+import Dashboard_Internal_Frames.Dashboard;
+import Dashboard_Internal_Frames.DailyGain;
+import Dashboard_Internal_Frames.AddProduct;
+import Dashboard_Internal_Frames.Inventory;
+import Dashboard_Internal_Frames.Cashier;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -60,7 +69,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }
     
     private void openDashboard() {
-        DashboardInternalFrame dashboard = new DashboardInternalFrame();
+        Dashboard dashboard = new Dashboard();
 
         desktopPane.add(dashboard);
 
@@ -75,7 +84,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }
     private void openAddProduct() {
 
-        DashboardAddProduct addProduct = new DashboardAddProduct();
+        AddProduct addProduct = new AddProduct();
 
         desktopPane.add(addProduct);
 
@@ -91,7 +100,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     
     private void openRestockProduct() {
 
-        DashboardRestockProduct restockProduct = new DashboardRestockProduct();
+        RestockProduct restockProduct = new RestockProduct();
 
         desktopPane.add(restockProduct);
 
@@ -107,7 +116,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     
     public void openUpdateProduct(int productID) {
 
-        DashboardUpdate updateProduct = new DashboardUpdate(productID);
+        Update updateProduct = new Update(productID);
 
         desktopPane.add(updateProduct);
 
@@ -122,7 +131,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }
     private void openDailyGain() {
 
-        DashboardDailyGain dailyGain = new DashboardDailyGain(userRole);
+        DailyGain dailyGain = new DailyGain(userRole);
 
         desktopPane.add(dailyGain);
 
@@ -137,7 +146,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }
     private void openPuhunan() {
 
-        DashboardPuhunan puhunan = new DashboardPuhunan();
+        Puhunan puhunan = new Puhunan();
 
         desktopPane.add(puhunan);
 
@@ -153,7 +162,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     
     private void openInventory() {
 
-        DashboardInventory inventory = new DashboardInventory(userRole);
+        Inventory inventory = new Inventory(userRole);
 
         desktopPane.add(inventory);
 
@@ -168,7 +177,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }
     private void openCashier() {
 
-        DashboardCashier cashier = new DashboardCashier(userRole);
+        Cashier cashier = new Cashier(userRole);
 
         desktopPane.add(cashier);
 

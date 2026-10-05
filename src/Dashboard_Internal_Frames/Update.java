@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package sarisaristoreinventoryandsalesmanagementsytem;
+package Dashboard_Internal_Frames;
 
+import Database.DBConnection;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javax.swing.JOptionPane;
@@ -11,11 +12,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DashboardUpdate extends javax.swing.JInternalFrame {
+public class Update extends javax.swing.JInternalFrame {
 
 private int productID;
 
-    public DashboardUpdate(int productID) {
+    public Update(int productID) {
         initComponents();
         
         this.productID = productID;

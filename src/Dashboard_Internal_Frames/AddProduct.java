@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package sarisaristoreinventoryandsalesmanagementsytem;
+package Dashboard_Internal_Frames;
 
+import Database.DBConnection;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import javax.swing.JOptionPane;
@@ -11,12 +12,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DashboardAddProduct extends javax.swing.JInternalFrame {
+public class AddProduct extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form DashboardAddProduct
      */
-    public DashboardAddProduct() {
+    public AddProduct() {
         initComponents();
     }
     
