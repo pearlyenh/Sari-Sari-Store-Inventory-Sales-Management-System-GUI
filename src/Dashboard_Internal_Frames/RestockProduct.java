@@ -330,9 +330,8 @@ private void calculateRestockValues() {
         pnlDashboard = new javax.swing.JPanel();
         lblDashboardTitle = new javax.swing.JLabel();
         lblDashboardDescription = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnRestock = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblProductInformation = new javax.swing.JLabel();
@@ -370,19 +369,16 @@ private void calculateRestockValues() {
         lblDashboardDescription.setForeground(new java.awt.Color(102, 102, 102));
         lblDashboardDescription.setText("Enter product barcode to restock.");
 
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 255));
-        jButton1.setText("Reset");
+        btnReset.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(0, 51, 255));
+        btnReset.setText("Reset");
+        btnReset.addActionListener(this::btnResetActionPerformed);
 
-        jButton2.setBackground(new java.awt.Color(0, 51, 255));
-        jButton2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Save Product");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
-
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 51, 255));
-        jButton3.setText("Back");
+        btnRestock.setBackground(new java.awt.Color(0, 51, 255));
+        btnRestock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnRestock.setForeground(new java.awt.Color(255, 255, 255));
+        btnRestock.setText("Restock Product");
+        btnRestock.addActionListener(this::btnRestockActionPerformed);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -542,15 +538,14 @@ private void calculateRestockValues() {
             .addGroup(pnlDashboardLayout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDashboardLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 412, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65))
             .addGroup(pnlDashboardLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -574,9 +569,8 @@ private void calculateRestockValues() {
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addGap(48, 48, 48)
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -597,16 +591,223 @@ private void calculateRestockValues() {
         calculateRestockValues();
     }//GEN-LAST:event_txtNumberOfPiecesKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestockActionPerformed
+    // Check if a product is selected
+    if (cmbProduct.getSelectedItem() == null
+            || cmbProduct.getSelectedItem()
+                    .toString()
+                    .equals("Select a product...")) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please select a product.",
+                "Product Required",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    // Get additional purchase cost
+    String additionalCostText =
+            txtAdditionalPurchaseCost.getText().trim();
+
+    if (additionalCostText.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter the additional purchase cost.",
+                "Purchase Cost Required",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    // Get number of additional pieces
+    String piecesText =
+            txtNumberOfPieces.getText().trim();
+
+    if (piecesText.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter the number of pieces.",
+                "Number of Pieces Required",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    BigDecimal additionalPurchaseCost;
+    int numberOfPieces;
+
+    try {
+
+        additionalPurchaseCost =
+                new BigDecimal(additionalCostText);
+
+        numberOfPieces =
+                Integer.parseInt(piecesText);
+
+    } catch (NumberFormatException e) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please enter valid numbers.",
+                "Invalid Input",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    // Validate positive values
+    if (additionalPurchaseCost.compareTo(
+            BigDecimal.ZERO) <= 0) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Additional purchase cost must be greater than 0.",
+                "Invalid Purchase Cost",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    if (numberOfPieces <= 0) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Number of pieces must be greater than 0.",
+                "Invalid Number of Pieces",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    // Check that current product information is loaded
+    if (currentUnitCost == null
+            || currentSellingPrice == null) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Please select a valid product.",
+                "Product Error",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+    // Calculate current inventory cost
+    BigDecimal currentInventoryCost =
+            currentUnitCost.multiply(
+                    BigDecimal.valueOf(currentStock)
+            );
+
+    // Calculate new total inventory cost
+    BigDecimal newTotalCost =
+            currentInventoryCost.add(
+                    additionalPurchaseCost
+            );
+
+    // Calculate new stock
+    int newStock =
+            currentStock + numberOfPieces;
+
+    // Calculate new weighted-average unit cost
+    BigDecimal newUnitCost =
+            newTotalCost.divide(
+                    BigDecimal.valueOf(newStock),
+                    2,
+                    RoundingMode.HALF_UP
+            );
+
+    // Calculate new potential profit
+    BigDecimal newPotentialProfit =
+            currentSellingPrice.subtract(
+                    newUnitCost
+            );
+    
+    String productName =
+        cmbProduct.getSelectedItem().toString();
+
+    String sql =
+        "UPDATE tbl_products SET "
+        + "stock = ?, "
+        + "unitCost = ?, "
+        + "potentialProfit = ? "
+        + "WHERE productName = ?";
+    
+    try (Connection conn = DBConnection.connect();
+     PreparedStatement pst = conn.prepareStatement(sql)) {
+
+    pst.setInt(1, newStock);
+    pst.setBigDecimal(2, newUnitCost);
+    pst.setBigDecimal(3, newPotentialProfit);
+    pst.setString(4, productName);
+
+    int rowsUpdated = pst.executeUpdate();
+
+    if (rowsUpdated > 0) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Product restocked successfully!",
+                "Restock Successful",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+
+    } else {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Product was not found.",
+                "Restock Failed",
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+
+} catch (SQLException e) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Failed to restock product.\n"
+                    + e.getMessage(),
+            "Database Error",
+            JOptionPane.ERROR_MESSAGE
+    );
+
+    return;
+}
+    
+    loadProductInformation();
+
+        txtAdditionalPurchaseCost.setText("");
+        txtNumberOfPieces.setText("");
+
+        lblNewUnitCost.setText("New Unit Cost: ");
+        lblNewStock.setText("New Stock: ");
+        lblPotentialProfit.setText(
+                "Potential Profit per Item: "
+        );
+    }//GEN-LAST:event_btnRestockActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnRestock;
     private javax.swing.JComboBox<String> cmbProduct;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
