@@ -144,13 +144,13 @@ private void loadProductInformation() {
                 );
 
                 lblCurrentUnitCost.setText(
-                        "Current Unit Cost: ₱"
+                        "Current Unit Cost: "
                         + currentUnitCost
                                 .setScale(2, RoundingMode.HALF_UP)
                 );
 
                 lblCurrentSellingPrice.setText(
-                        "Current Selling Price: ₱"
+                        "Current Selling Price: "
                         + currentSellingPrice
                                 .setScale(2, RoundingMode.HALF_UP)
                 );
@@ -296,7 +296,7 @@ private void calculateRestockValues() {
          */
 
         lblNewUnitCost.setText(
-                "New Unit Cost: ₱"
+                "New Unit Cost: "
                 + newUnitCost.setScale(
                         2,
                         RoundingMode.HALF_UP
@@ -310,7 +310,7 @@ private void calculateRestockValues() {
         );
 
         lblPotentialProfit.setText(
-                "Potential Profit per Item: ₱"
+                "Potential Profit per Item: "
                 + potentialProfit.setScale(
                         2,
                         RoundingMode.HALF_UP

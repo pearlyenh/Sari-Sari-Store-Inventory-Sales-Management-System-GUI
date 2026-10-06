@@ -588,7 +588,7 @@ private void calculateProductValues() {
             if (sellingPrice.compareTo(unitCost) <= 0) {
                 JOptionPane.showMessageDialog(
                     this,
-                    "Selling price must be higher than the unit cost of ₱"
+                    "Selling price must be higher than the unit cost of "
                     + unitCost.setScale(2, RoundingMode.HALF_UP),
                     "Invalid Selling Price",
                     JOptionPane.WARNING_MESSAGE

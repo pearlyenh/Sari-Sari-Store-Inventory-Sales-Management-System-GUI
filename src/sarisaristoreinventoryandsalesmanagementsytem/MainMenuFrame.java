@@ -166,7 +166,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-plus-5834_32 (2).png")); // NOI18N
         btnAddProduct.setText("   Add Product");
-        btnAddProduct.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnAddProduct.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         btnAddProduct.setFocusPainted(false);
         btnAddProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
@@ -177,6 +177,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnRestockProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-to-basket-5854_32 (2).png")); // NOI18N
         btnRestockProduct.setText("   Restock Product");
         btnRestockProduct.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnRestockProduct.setBorderPainted(false);
         btnRestockProduct.setFocusPainted(false);
         btnRestockProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRestockProduct.addActionListener(this::btnRestockProductActionPerformed);
