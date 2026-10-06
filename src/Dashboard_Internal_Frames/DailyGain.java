@@ -20,8 +20,9 @@ public class DailyGain extends javax.swing.JInternalFrame {
     private String userRole;
     
     public DailyGain(String userRole) {
-        this.userRole = userRole;
         initComponents();
+        
+        this.userRole = userRole;
 
         InternalFrameUtils.setupInternalFrame(this);
     }

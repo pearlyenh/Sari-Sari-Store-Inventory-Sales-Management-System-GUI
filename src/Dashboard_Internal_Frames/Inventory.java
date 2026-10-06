@@ -4,10 +4,6 @@
  */
 package Dashboard_Internal_Frames;
 
-/**
- *
- * @author Helia Pearl Charish
- */
 import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
 import Database.DBConnection;
 import java.math.BigDecimal;
@@ -22,20 +18,15 @@ import javax.swing.table.TableRowSorter;
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 
 public class Inventory extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form DashboardInternalFrame
-     */
     
     private String userRole;
     private TableRowSorter sorter;
 
     public Inventory(String userRole) {
-        this.userRole = userRole;
-
         initComponents();
         
-        InternalFrameUtils.setupInternalFrame(this);
+        this.userRole = userRole;
+        
 
         sorter = new TableRowSorter<>(tblInventory.getModel());
         tblInventory.setRowSorter(sorter);
@@ -201,6 +192,7 @@ public class Inventory extends javax.swing.JInternalFrame {
         btnRestock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnRestock.setForeground(new java.awt.Color(255, 255, 255));
         btnRestock.setText("Restock");
+        btnRestock.addActionListener(this::btnRestockActionPerformed);
 
         txtSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         txtSearch.setText("Search product ");
@@ -306,7 +298,13 @@ public class Inventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
-        // TODO add your handling code here:
+        MainMenuFrame mainMenu =
+                (MainMenuFrame) javax.swing.SwingUtilities
+                        .getWindowAncestor(this);
+
+        if (mainMenu != null) {
+            mainMenu.openAddProduct();
+        }
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -327,51 +325,23 @@ public class Inventory extends javax.swing.JInternalFrame {
         int productID = (int) tblInventory.getModel()
                 .getValueAt(modelRow, 0);
         
-        MainMenuFrame mainMenu = (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        MainMenuFrame mainMenu = 
+                (MainMenuFrame) javax.swing.SwingUtilities
+                        .getWindowAncestor(this);
+        
         mainMenu.openUpdateProduct(productID);
 
-        
-        String sql = "SELECT * FROM tbl_products WHERE productID = ?";
-
-        try (Connection conn = DBConnection.connect();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
-
-            pst.setInt(1, productID);
-
-            try (ResultSet rs = pst.executeQuery()) {
-
-                if (rs.next()) {
-
-                    String productName = rs.getString("productName");
-                    String category = rs.getString("category");
-                    BigDecimal purchaseCost = rs.getBigDecimal("purchaseCost");
-                    int numberOfPieces = rs.getInt("numberOfPieces");
-                    BigDecimal sellingPrice = rs.getBigDecimal("sellingPrice");
-                    int lowStockReminder = rs.getInt("lowStockReminder");
-
-                    // Temporary test
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Product: " + productName
-                            + "\nCategory: " + category
-                            + "\nPurchase Cost: ₱" + purchaseCost
-                            + "\nNumber of Pieces: " + numberOfPieces
-                            + "\nSelling Price: ₱" + sellingPrice
-                            + "\nLow Stock Reminder: " + lowStockReminder
-                    );
-                }
-            }
-
-        } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to load product.\n" + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-        }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestockActionPerformed
+        MainMenuFrame mainMenu =
+            (MainMenuFrame) javax.swing.SwingUtilities
+                        .getWindowAncestor(this);
+
+        if (mainMenu != null) {
+            mainMenu.openRestockProduct();
+        }
+    }//GEN-LAST:event_btnRestockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

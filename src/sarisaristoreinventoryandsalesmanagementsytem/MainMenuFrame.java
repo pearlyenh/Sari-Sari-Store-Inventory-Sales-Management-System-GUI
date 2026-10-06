@@ -24,6 +24,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import javax.swing.JInternalFrame;
 
 import javax.swing.JOptionPane;
 
@@ -31,10 +32,8 @@ import javax.swing.JOptionPane;
 public class MainMenuFrame extends javax.swing.JFrame {
     
     private String userRole;
+    private Inventory inventoryFrame;
 
-    /**
-     * Creates new form Login
-     */
     public MainMenuFrame(String userRole) {
         this.userRole = userRole; 
 
@@ -42,8 +41,6 @@ public class MainMenuFrame extends javax.swing.JFrame {
         
         lblWelcome.setText("Welcome, " + userRole + "!");
         
-
-        openDashboard();
         
         InternalFrameUtils.setupDesktopPane(desktopPane);
     
@@ -69,132 +66,57 @@ public class MainMenuFrame extends javax.swing.JFrame {
         setBounds(x, y, width, height);
         
         openDashboard();
+    }
+    
+    //disposing the internal frames
+    private void showFrame(JInternalFrame frame) {
+        desktopPane.removeAll();
         
+        InternalFrameUtils.setupInternalFrame(frame);
         
+        desktopPane.add(frame);
+        frame.setBounds(0,0, desktopPane.getWidth(), desktopPane.getHeight());
+        frame.setVisible(true);
+        desktopPane.revalidate();
+        desktopPane.repaint();
     }
     
-    private void openDashboard() {
-        Dashboard dashboard = new Dashboard();
-
-        desktopPane.add(dashboard);
-
-        dashboard.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        dashboard.setVisible(true);
-    }
-    private void openAddProduct() {
-
-        AddProduct addProduct = new AddProduct();
-
-        desktopPane.add(addProduct);
-
-        addProduct.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        addProduct.setVisible(true);
+    public void openDashboard() {
+        Dashboard dashboard = new Dashboard(userRole);
+        showFrame(dashboard);
     }
     
-    private void openRestockProduct() {
-
-        RestockProduct restockProduct = new RestockProduct();
-
-        desktopPane.add(restockProduct);
-
-        restockProduct.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        restockProduct.setVisible(true);
+    public void openAddProduct() {
+        AddProduct addProduct = new AddProduct(userRole);
+        showFrame(addProduct);
     }
-    
-    public void openUpdateProduct(int productID) {
-
-        Update updateProduct = new Update(productID, userRole);
-
-        desktopPane.add(updateProduct);
-
-        updateProduct.setBounds(
-                0,
-                0,
-                desktopPane.getWidth(),
-                desktopPane.getHeight()
-        );
-
-        updateProduct.setVisible(true);
+    public void openRestockProduct(){
+        RestockProduct restockProduct = new RestockProduct(userRole);
+        showFrame(restockProduct);
     }
-    private void openDailyGain() {
-
+    public void openDailyGain(){
         DailyGain dailyGain = new DailyGain(userRole);
-
-        desktopPane.add(dailyGain);
-
-        dailyGain.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        dailyGain.setVisible(true);
+        showFrame(dailyGain);
     }
-    private void openPuhunan() {
-
-        Puhunan puhunan = new Puhunan();
-
-        desktopPane.add(puhunan);
-
-        puhunan.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        puhunan.setVisible(true);
+    public void openPuhunan(){
+        Puhunan puhunan = new Puhunan(userRole);
+        showFrame(puhunan);
+    }
+    public void openInventory(){
+        inventoryFrame =  new Inventory(userRole);
+        showFrame(inventoryFrame);
+    }
+    public void openUpdateProduct(int productID){
+        Update updateProduct = new Update(productID, userRole);
+        showFrame(updateProduct);
+    }
+    public void openCashier(){
+        Cashier cashier = new Cashier(userRole);
+        showFrame(cashier);
     }
     
-    private void openInventory() {
-
-        Inventory inventory = new Inventory(userRole);
-
-        desktopPane.add(inventory);
-
-        inventory.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        inventory.setVisible(true);
-    }
-    private void openCashier() {
-
-        Cashier cashier = new Cashier(userRole);
-
-        desktopPane.add(cashier);
-
-        cashier.setBounds(
-            0,
-            0,
-            desktopPane.getWidth(),
-            desktopPane.getHeight()
-        );
-
-        cashier.setVisible(true);
-    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -448,4 +370,5 @@ public class MainMenuFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlSidebar;
     // End of variables declaration//GEN-END:variables
+
 }

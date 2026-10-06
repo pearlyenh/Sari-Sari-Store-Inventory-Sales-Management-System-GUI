@@ -12,11 +12,12 @@ import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
  */
 public class Dashboard extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form DashboardInternalFrame
-     */
-    public Dashboard() {
+    private String userRole;
+    
+    public Dashboard(String userRole) {
         initComponents();
+        
+        this.userRole = userRole;
 
         InternalFrameUtils.setupInternalFrame(this);
     }

@@ -12,11 +12,12 @@ import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
  */
 public class Puhunan extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form DashboardInternalFrame
-     */
-    public Puhunan() {
+    private String userRole;
+    
+    public Puhunan(String userRole) {
         initComponents();
+        
+        this.userRole = userRole;
         
         InternalFrameUtils.setupInternalFrame(this);
     }

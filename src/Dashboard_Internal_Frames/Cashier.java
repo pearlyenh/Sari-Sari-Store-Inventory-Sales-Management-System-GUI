@@ -20,8 +20,9 @@ public class Cashier extends javax.swing.JInternalFrame {
     private String userRole;
     
     public Cashier(String userRole) {
-        this.userRole = userRole;
         initComponents();
+        
+        this.userRole = userRole;
         
         InternalFrameUtils.setupInternalFrame(this);
     }

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 
 public class Update extends javax.swing.JInternalFrame {
 
@@ -32,7 +33,7 @@ private String userRole;
         loadProduct();
     }
     
-    private void loadProduct() {
+    public void loadProduct() {
 
         String sql = "SELECT * FROM tbl_products WHERE productID = ?";
 
@@ -65,7 +66,7 @@ private String userRole;
                     );
 
                     lblUnitCost.setText(
-                            "₱ " + rs.getBigDecimal("unitCost")
+                            "Unit Cost / Original Price per Piece:" + rs.getBigDecimal("unitCost")
                     );
 
                     txtSellingPrice.setText(
@@ -74,7 +75,7 @@ private String userRole;
                     );
 
                     lblPotentialProfit.setText(
-                            "₱ " + rs.getBigDecimal("potentialProfit")
+                            "Potential Profit per Item: " + rs.getBigDecimal("potentialProfit")
                     );
 
                     cmbLowStockReminder.setSelectedItem(
@@ -96,10 +97,92 @@ private String userRole;
         }
     }
     
-    private void calculateProductValues() {
-   // 
+private void calculateProductValues() {
 
+    String purchaseCostText =
+            txtPurchaseCost.getText().trim();
+
+    String piecesText =
+            txtNumberOfPieces.getText().trim();
+
+    String sellingPriceText =
+            txtSellingPrice.getText().trim();
+
+    // Calculate Unit Cost first
+    if (!purchaseCostText.isEmpty()
+            && !piecesText.isEmpty()) {
+
+        try {
+
+            BigDecimal purchaseCost =
+                    new BigDecimal(purchaseCostText);
+
+            int numberOfPieces =
+                    Integer.parseInt(piecesText);
+
+            if (numberOfPieces > 0) {
+
+                BigDecimal unitCost =
+                        purchaseCost.divide(
+                                BigDecimal.valueOf(numberOfPieces),
+                                2,
+                                RoundingMode.HALF_UP
+                        );
+
+                lblUnitCost.setText(
+                        "Unit Cost / Original Price per Piece: "
+                                + unitCost + " pesos"
+                );
+
+                // Calculate Potential Profit only
+                // when Selling Price is available
+                if (!sellingPriceText.isEmpty()) {
+
+                    BigDecimal sellingPrice =
+                            new BigDecimal(sellingPriceText);
+
+                    BigDecimal potentialProfit =
+                            sellingPrice.subtract(unitCost);
+
+                    lblPotentialProfit.setText(
+                            "Potential Profit per Item: "
+                                    + potentialProfit + " pesos"
+                    );
+
+                } else {
+
+                    lblPotentialProfit.setText(
+                            "Potential Profit per Item: "
+                    );
+                }
+
+            } else {
+
+                lblUnitCost.setText(
+                        "Unit Cost / Original Price per Piece: "
+                );
+
+                lblPotentialProfit.setText(
+                        "Potential Profit per Item: "
+                );
+            }
+
+        } catch (NumberFormatException e) {
+
+            // User is still typing
+        }
+
+    } else {
+
+        lblUnitCost.setText(
+                "Unit Cost / Original Price per Piece: "
+        );
+
+        lblPotentialProfit.setText(
+                "Potential Profit per Item: "
+        );
     }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -422,153 +505,14 @@ private String userRole;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        txtProductName.setText("Enter Product Name");
-        cmbCategory.setSelectedIndex(0);
-        txtPurchaseCost.setText("Enter purchase cost");
-        txtNumberOfPieces.setText("Enter number of piece");
-        txtSellingPrice.setText("Enter selling price");
-        cmbLowStockReminder.setSelectedIndex(0);
+        MainMenuFrame mainMenu =
+                (MainMenuFrame) javax.swing.SwingUtilities
+                        .getWindowAncestor(this);
 
-        lblUnitCost.setText("Unit Cost / Original Price per Piece: ");
-        lblPotentialProfit.setText("Potential Profit per Item: ");
-        
-        Inventory openInv = new Inventory(userRole);
-        openInv.setVisible(true);
-        this.dispose();
-        
-        
-        
+        if (mainMenu != null) {
+            mainMenu.openInventory();
+        }
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void tbnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnUpdateActionPerformed
-                                             // Check required fields
-        if (txtProductName.getText().trim().isEmpty()
-                || txtPurchaseCost.getText().trim().isEmpty()
-                || txtNumberOfPieces.getText().trim().isEmpty()
-                || txtSellingPrice.getText().trim().isEmpty()
-                || cmbLowStockReminder.getSelectedItem() == null) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please complete all required fields.",
-                    "Incomplete Information",
-                    JOptionPane.WARNING_MESSAGE
-            );
-            return;
-        }
-
-        try {
-            String productName = txtProductName.getText().trim();
-            String category = cmbCategory.getSelectedItem().toString();
-
-            BigDecimal purchaseCost =
-                    new BigDecimal(txtPurchaseCost.getText().trim());
-
-            int numberOfPieces =
-                    Integer.parseInt(txtNumberOfPieces.getText().trim());
-
-            BigDecimal sellingPrice =
-                    new BigDecimal(txtSellingPrice.getText().trim());
-
-            int lowStockReminder =
-                    Integer.parseInt(
-                            cmbLowStockReminder.getSelectedItem().toString()
-                    );
-
-            // Number of pieces must be greater than zero
-            if (numberOfPieces <= 0) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Number of pieces must be greater than zero.",
-                        "Invalid Quantity",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
-            }
-
-            // Calculate unit cost
-            BigDecimal unitCost =
-                    purchaseCost.divide(
-                            BigDecimal.valueOf(numberOfPieces),
-                            2,
-                            RoundingMode.HALF_UP
-                    );
-
-            // Selling price must be higher than unit cost
-            if (sellingPrice.compareTo(unitCost) <= 0) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Selling price must be higher than the unit cost of ₱"
-                                + unitCost.setScale(2, RoundingMode.HALF_UP),
-                        "Invalid Selling Price",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
-            }
-
-            // Calculate potential profit
-            BigDecimal potentialProfit =
-                    sellingPrice.subtract(unitCost);
-
-            // Update product
-            String sql = "UPDATE tbl_products SET "
-                    + "productName = ?, "
-                    + "category = ?, "
-                    + "purchaseCost = ?, "
-                    + "numberOfPieces = ?, "
-                    + "unitCost = ?, "
-                    + "sellingPrice = ?, "
-                    + "potentialProfit = ?, "
-                    + "lowStockReminder = ? "
-                    + "WHERE productID = ?";
-
-            try (Connection conn = DBConnection.connect();
-                 PreparedStatement pst = conn.prepareStatement(sql)) {
-
-                pst.setString(1, productName);
-                pst.setString(2, category);
-                pst.setBigDecimal(3, purchaseCost);
-                pst.setInt(4, numberOfPieces);
-                pst.setBigDecimal(5, unitCost);
-                pst.setBigDecimal(6, sellingPrice);
-                pst.setBigDecimal(7, potentialProfit);
-                pst.setInt(8, lowStockReminder);
-                pst.setInt(9, productID);
-
-                int rowsUpdated = pst.executeUpdate();
-
-                if (rowsUpdated > 0) {
-
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Product successfully updated!",
-                            "Success",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
-
-                    dispose();
-                }
-            }
-
-        } catch (NumberFormatException e) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter valid numbers for purchase cost, number of pieces, and selling price.",
-                    "Invalid Input",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
-        } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to update product.\n" + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-        }
-    }//GEN-LAST:event_tbnUpdateActionPerformed
 
     private void txtPurchaseCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPurchaseCostKeyReleased
         calculateProductValues();
@@ -585,6 +529,137 @@ private String userRole;
     private void txtProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProductNameActionPerformed
+
+    private void tbnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnUpdateActionPerformed
+        // Check required fields
+        if (txtProductName.getText().trim().isEmpty()
+            || txtPurchaseCost.getText().trim().isEmpty()
+            || txtNumberOfPieces.getText().trim().isEmpty()
+            || txtSellingPrice.getText().trim().isEmpty()
+            || cmbLowStockReminder.getSelectedItem() == null) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Please complete all required fields.",
+                "Incomplete Information",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        try {
+            String productName = txtProductName.getText().trim();
+            String category = cmbCategory.getSelectedItem().toString();
+
+            BigDecimal purchaseCost =
+            new BigDecimal(txtPurchaseCost.getText().trim());
+
+            int numberOfPieces =
+            Integer.parseInt(txtNumberOfPieces.getText().trim());
+
+            BigDecimal sellingPrice =
+            new BigDecimal(txtSellingPrice.getText().trim());
+
+            int lowStockReminder =
+            Integer.parseInt(
+                cmbLowStockReminder.getSelectedItem().toString()
+            );
+
+            // Number of pieces must be greater than zero
+            if (numberOfPieces <= 0) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Number of pieces must be greater than zero.",
+                    "Invalid Quantity",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // Calculate unit cost
+            BigDecimal unitCost =
+            purchaseCost.divide(
+                BigDecimal.valueOf(numberOfPieces),
+                2,
+                RoundingMode.HALF_UP
+            );
+
+            // Selling price must be higher than unit cost
+            if (sellingPrice.compareTo(unitCost) <= 0) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Selling price must be higher than the unit cost of ₱"
+                    + unitCost.setScale(2, RoundingMode.HALF_UP),
+                    "Invalid Selling Price",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // Calculate potential profit
+            BigDecimal potentialProfit =
+            sellingPrice.subtract(unitCost);
+
+            // Update product
+            String sql = "UPDATE tbl_products SET "
+            + "productName = ?, "
+            + "category = ?, "
+            + "purchaseCost = ?, "
+            + "numberOfPieces = ?, "
+            + "unitCost = ?, "
+            + "sellingPrice = ?, "
+            + "potentialProfit = ?, "
+            + "lowStockReminder = ? "
+            + "WHERE productID = ?";
+
+            try (Connection conn = DBConnection.connect();
+                PreparedStatement pst = conn.prepareStatement(sql)) {
+
+                pst.setString(1, productName);
+                pst.setString(2, category);
+                pst.setBigDecimal(3, purchaseCost);
+                pst.setInt(4, numberOfPieces);
+                pst.setBigDecimal(5, unitCost);
+                pst.setBigDecimal(6, sellingPrice);
+                pst.setBigDecimal(7, potentialProfit);
+                pst.setInt(8, lowStockReminder);
+                pst.setInt(9, productID);
+
+                int rowsUpdated = pst.executeUpdate();
+
+                if (rowsUpdated > 0) {
+
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Product successfully updated!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+
+                    MainMenuFrame mainMenu = (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                    mainMenu.openInventory();
+                }
+            }
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Please enter valid numbers for purchase cost, number of pieces, and selling price.",
+                "Invalid Input",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Failed to update product.\n" + e.getMessage(),
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_tbnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -14,66 +14,103 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddProduct extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form DashboardAddProduct
-     */
-    public AddProduct() {
+    
+    private String userRole;
+    
+    public AddProduct(String userRole) {
         initComponents();
+        
+        this.userRole = userRole;
         
         InternalFrameUtils.setupInternalFrame(this);
     }
     
-    private void calculateProductValues() {
-        
-        String purchaseCostText = txtPurchaseCost.getText().trim();
-        String piecesText = txtNumberOfPieces.getText().trim();
-        String sellingPriceText = txtSellingPrice.getText().trim();
-        
+private void calculateProductValues() {
+
+    String purchaseCostText =
+            txtPurchaseCost.getText().trim();
+
+    String piecesText =
+            txtNumberOfPieces.getText().trim();
+
+    String sellingPriceText =
+            txtSellingPrice.getText().trim();
+
+    // Calculate Unit Cost first
+    if (!purchaseCostText.isEmpty()
+            && !piecesText.isEmpty()) {
+
         try {
+
             BigDecimal purchaseCost =
                     new BigDecimal(purchaseCostText);
 
-            BigDecimal numberOfPieces =
-                    new BigDecimal(piecesText);
+            int numberOfPieces =
+                    Integer.parseInt(piecesText);
 
-            BigDecimal sellingPrice =
-                    new BigDecimal(sellingPriceText);
-            
-            if (numberOfPieces.compareTo(BigDecimal.ZERO) <= 0) {
-                lblUnitCost.setText("₱ 0.00");
-                lblPotentialProfit.setText("₱ 0.00");
-                return;
-            }
+            if (numberOfPieces > 0) {
 
-            
-            BigDecimal unitCost =
-                purchaseCost.divide(
-                    numberOfPieces,
-                    2,
-                    RoundingMode.HALF_UP);
-            
-            BigDecimal potentialProfit =
-                sellingPrice.subtract(unitCost);
-            
-            if (potentialProfit.compareTo(BigDecimal.ZERO) < 0) {
-                lblPotentialProfit.setText("Invalid Selling Price.");
-                JOptionPane.showMessageDialog(this,"The selling price must be greater than original price", "Warning",JOptionPane.WARNING_MESSAGE);
-                return;
+                BigDecimal unitCost =
+                        purchaseCost.divide(
+                                BigDecimal.valueOf(numberOfPieces),
+                                2,
+                                RoundingMode.HALF_UP
+                        );
+
+                lblUnitCost.setText(
+                        "Unit Cost / Original Price per Piece: "
+                                + unitCost + " pesos"
+                );
+
+                // Calculate Potential Profit only
+                // when Selling Price is available
+                if (!sellingPriceText.isEmpty()) {
+
+                    BigDecimal sellingPrice =
+                            new BigDecimal(sellingPriceText);
+
+                    BigDecimal potentialProfit =
+                            sellingPrice.subtract(unitCost);
+
+                    lblPotentialProfit.setText(
+                            "Potential Profit per Item: "
+                                    + potentialProfit + " pesos"
+                    );
+
+                } else {
+
+                    lblPotentialProfit.setText(
+                            "Potential Profit per Item: "
+                    );
+                }
+
+            } else {
+
+                lblUnitCost.setText(
+                        "Unit Cost / Original Price per Piece: "
+                );
+
+                lblPotentialProfit.setText(
+                        "Potential Profit per Item: "
+                );
             }
-            if (sellingPrice.compareTo(unitCost) <= 0) {
-                lblPotentialProfit.setText("Invalid Selling Price");
-                return;
-            }
-            
-            lblUnitCost.setText("Unit Cost / Original Price per Piece: " + unitCost + " pesos");
-            lblPotentialProfit.setText("Potential Profit per Item: " + potentialProfit + " pesos");
 
         } catch (NumberFormatException e) {
 
+            // User is still typing
         }
 
+    } else {
+
+        lblUnitCost.setText(
+                "Unit Cost / Original Price per Piece: "
+        );
+
+        lblPotentialProfit.setText(
+                "Potential Profit per Item: "
+        );
     }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -169,7 +206,7 @@ public class AddProduct extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(120, 120, 120))
         );
@@ -180,7 +217,7 @@ public class AddProduct extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 7, 500, 44));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 7, 490, 44));
 
         btnSaveProduct.setBackground(new java.awt.Color(0, 51, 255));
         btnSaveProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -354,9 +391,9 @@ public class AddProduct extends javax.swing.JInternalFrame {
                                 .addComponent(btnSaveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
-                                .addGap(44, 44, 44)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))))
