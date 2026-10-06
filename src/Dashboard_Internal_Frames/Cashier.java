@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import java.math.BigDecimal;
+
 public class Cashier extends javax.swing.JInternalFrame {
 
     /**
@@ -21,14 +23,20 @@ public class Cashier extends javax.swing.JInternalFrame {
      */
     
     private String userRole;
+    private int selectedProductID;
     
     public Cashier(String userRole) {
         initComponents();
-        
+
         this.userRole = userRole;
-        
+
         InternalFrameUtils.setupInternalFrame(this);
-        
+
+        DefaultTableModel cartModel =
+                (DefaultTableModel) tblCart.getModel();
+
+        cartModel.setRowCount(0);
+
         searchProduct();
     }
 
@@ -87,6 +95,84 @@ public class Cashier extends javax.swing.JInternalFrame {
             );
         }
     }
+    
+    private void calculateCartTotal() {
+
+    BigDecimal total = BigDecimal.ZERO;
+
+    DefaultTableModel cartModel =
+            (DefaultTableModel) tblCart.getModel();
+
+    for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+        BigDecimal subtotal =
+                (BigDecimal) cartModel.getValueAt(i, 4);
+
+        total = total.add(subtotal);
+    }
+
+    lblTotal.setText(
+            "Total: "
+            + total.setScale(2, java.math.RoundingMode.HALF_UP)
+    );
+}
+    
+    
+    private void calculateChange() {
+
+    String cashText =
+            txtCashReceived.getText().trim();
+
+    if (cashText.isEmpty()) {
+        lblChange.setText("Change: 0.00");
+        return;
+    }
+
+    try {
+
+        BigDecimal cashReceived =
+                new BigDecimal(cashText);
+
+        BigDecimal total = BigDecimal.ZERO;
+
+        DefaultTableModel cartModel =
+                (DefaultTableModel) tblCart.getModel();
+
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            BigDecimal subtotal =
+                    (BigDecimal) cartModel.getValueAt(i, 3);
+
+            total = total.add(subtotal);
+        }
+
+        BigDecimal change =
+                cashReceived.subtract(total);
+
+        if (change.compareTo(BigDecimal.ZERO) < 0) {
+
+            lblChange.setText(
+                    "Change: 0.00"
+            );
+
+            return;
+        }
+
+        lblChange.setText(
+                "Change: "
+                + change.setScale(
+                        2,
+                        java.math.RoundingMode.HALF_UP
+                )
+        );
+
+    } catch (NumberFormatException e) {
+
+        lblChange.setText(
+                "Change: 0.00"
+        );
+    }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,8 +185,9 @@ public class Cashier extends javax.swing.JInternalFrame {
         txtSearchProduct = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        txtCashReceived = new javax.swing.JTextField();
+        lblChange = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         lblDashboardTitle1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -108,18 +195,19 @@ public class Cashier extends javax.swing.JInternalFrame {
         lblDashboardTitle4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblSelectedProduct = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        btnAddToCart = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtQuantity = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCart = new javax.swing.JTable();
         lblDashboardTitle3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -168,46 +256,31 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTotal.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
         lblTotal.setText("TOTAL:");
+        jPanel1.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 16, 326, -1));
 
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton1.setText("UTANG");
+        txtCashReceived.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        txtCashReceived.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCashReceivedKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtCashReceived, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 150, 40));
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 51));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("PAY CASH");
+        lblChange.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblChange.setForeground(new java.awt.Color(255, 255, 255));
+        lblChange.setText("Change: ");
+        jPanel1.add(lblChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 280, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblTotal)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
+        jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Cash Received: ");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         lblDashboardTitle1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblDashboardTitle1.setForeground(new java.awt.Color(0, 51, 255));
@@ -235,6 +308,11 @@ public class Cashier extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblProductList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductListMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblProductList);
         if (tblProductList.getColumnModel().getColumnCount() > 0) {
             tblProductList.getColumnModel().getColumn(0).setResizable(false);
@@ -252,15 +330,10 @@ public class Cashier extends javax.swing.JInternalFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 49, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 153, 0));
-        jLabel2.setText("Quantity: ");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel4.setText("SELECTED PRODUCT");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        lblSelectedProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblSelectedProduct.setForeground(new java.awt.Color(0, 51, 255));
+        lblSelectedProduct.setText("SELECTED PRODUCT: ");
+        jPanel4.add(lblSelectedProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 260, -1));
 
         jPanel5.setBackground(new java.awt.Color(0, 51, 255));
 
@@ -287,17 +360,31 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 50));
 
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel5.setText("Product: Coca-Cola 290ml");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 230, -1));
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, 40));
+        btnAddToCart.setBackground(new java.awt.Color(255, 153, 0));
+        btnAddToCart.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnAddToCart.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddToCart.setText("ADD TO CART");
+        btnAddToCart.addActionListener(this::btnAddToCartActionPerformed);
+        jPanel4.add(btnAddToCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, 50));
 
-        jButton4.setBackground(new java.awt.Color(255, 153, 0));
-        jButton4.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("ADD TO CART");
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, 50));
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 51, 255));
+        jLabel5.setText("SELECTED PRODUCT: ");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        txtQuantity.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        txtQuantity.addActionListener(this::txtQuantityActionPerformed);
+        txtQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtQuantityKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 150, 40));
+
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel4.setText("Quantity: ");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -357,7 +444,6 @@ public class Cashier extends javax.swing.JInternalFrame {
             tblCart.getColumnModel().getColumn(2).setResizable(false);
             tblCart.getColumnModel().getColumn(3).setResizable(false);
             tblCart.getColumnModel().getColumn(4).setResizable(false);
-            tblCart.getColumnModel().getColumn(4).setHeaderValue("Quantity");
         }
 
         lblDashboardTitle3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -387,10 +473,13 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("CLEAR");
+        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jButton1.setText("UTANG");
+
+        jButton3.setBackground(new java.awt.Color(0, 51, 255));
+        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("PAY CASH");
 
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
         pnlDashboard.setLayout(pnlDashboardLayout);
@@ -412,8 +501,12 @@ public class Cashier extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(pnlDashboardLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(26, Short.MAX_VALUE))))
         );
@@ -433,11 +526,13 @@ public class Cashier extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -454,18 +549,171 @@ public class Cashier extends javax.swing.JInternalFrame {
         searchProduct();
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    private void tblProductListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductListMouseClicked
+        int selectedRow = tblProductList.getSelectedRow();
+        
+        if (selectedRow == -1) {
+             return;
+        }
+        
+        selectedProductID =
+                (int) tblProductList.getValueAt(selectedRow, 0);
+        
+        String selectedProductName =
+                tblProductList.getValueAt(selectedRow, 1).toString();
+        
+        lblSelectedProduct.setText(
+                "Selected Product: " + selectedProductName
+        );
+    }//GEN-LAST:event_tblProductListMouseClicked
+
+    private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
+
+        // Get the quantity entered by the cashier
+        String quantityText =
+                txtQuantity.getText().trim();
+
+        System.out.println(
+                "Quantity entered: [" + quantityText + "]"
+        );
+
+        // Check if quantity is empty
+        if (quantityText.isEmpty()) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please enter a quantity.",
+                    "Quantity Required",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        // Convert quantity from String to int
+        int quantity;
+
+        try {
+
+            quantity = Integer.parseInt(quantityText);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please enter a valid quantity.",
+                    "Invalid Quantity",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        // Check if quantity is greater than 0
+        if (quantity <= 0) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Quantity must be greater than 0.",
+                    "Invalid Quantity",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        // Check if a product was selected
+        if (tblProductList.getSelectedRow() == -1) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please select a product first.",
+                    "No Product Selected",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        // Get the available stock of the selected product
+        int availableStock =
+                (int) tblProductList.getValueAt(
+                        tblProductList.getSelectedRow(), 4
+                );
+        
+        if (quantity > availableStock) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Not enough stock. Only "
+                            + availableStock
+                            + " pieces available.",
+                    "Insufficient Stock",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+        
+        String productName =
+            tblProductList.getValueAt(
+                    tblProductList.getSelectedRow(), 1
+            ).toString();
+        
+        String category =
+            tblProductList.getValueAt(
+                    tblProductList.getSelectedRow(), 2
+            ).toString();
+        
+        BigDecimal sellingPrice =
+            (BigDecimal) tblProductList.getValueAt(
+                tblProductList.getSelectedRow(), 3
+        );
+        
+        BigDecimal subtotal =
+            sellingPrice.multiply(
+                BigDecimal.valueOf(quantity)
+        );
+        
+        DefaultTableModel cartModel =
+            (DefaultTableModel) tblCart.getModel();
+
+        cartModel.addRow(new Object[]{
+            productName,
+            quantity,
+            sellingPrice,
+            subtotal,
+            "Remove"
+        });
+        
+        calculateCartTotal();
+    }//GEN-LAST:event_btnAddToCartActionPerformed
+
+    private void txtCashReceivedKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashReceivedKeyReleased
+
+        calculateChange();
+
+    }//GEN-LAST:event_txtCashReceivedKeyReleased
+
+    private void txtQuantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantityKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantityKeyReleased
+
+    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddToCart;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -474,16 +722,19 @@ public class Cashier extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblChange;
     private javax.swing.JLabel lblDashboardDescription;
     private javax.swing.JLabel lblDashboardTitle1;
     private javax.swing.JLabel lblDashboardTitle3;
     private javax.swing.JLabel lblDashboardTitle4;
+    private javax.swing.JLabel lblSelectedProduct;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JPanel pnlDashboard;
     private javax.swing.JPanel pnlSearch;
     private javax.swing.JTable tblCart;
     private javax.swing.JTable tblProductList;
+    private javax.swing.JTextField txtCashReceived;
+    private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtSearchProduct;
     // End of variables declaration//GEN-END:variables
 }

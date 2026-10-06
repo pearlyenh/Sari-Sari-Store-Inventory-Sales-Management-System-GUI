@@ -378,6 +378,7 @@ private void calculateRestockValues() {
         jButton2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save Product");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 51, 255));
@@ -595,6 +596,10 @@ private void calculateRestockValues() {
     private void txtNumberOfPiecesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumberOfPiecesKeyReleased
         calculateRestockValues();
     }//GEN-LAST:event_txtNumberOfPiecesKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
