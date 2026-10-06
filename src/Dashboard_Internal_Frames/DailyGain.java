@@ -4,6 +4,8 @@
  */
 package Dashboard_Internal_Frames;
 
+import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
+
 /**
  *
  * @author Helia Pearl Charish
@@ -20,6 +22,8 @@ public class DailyGain extends javax.swing.JInternalFrame {
     public DailyGain(String userRole) {
         this.userRole = userRole;
         initComponents();
+
+        InternalFrameUtils.setupInternalFrame(this);
     }
 
     /**

@@ -18,11 +18,16 @@ import Dashboard_Internal_Frames.DailyGain;
 import Dashboard_Internal_Frames.AddProduct;
 import Dashboard_Internal_Frames.Inventory;
 import Dashboard_Internal_Frames.Cashier;
+
+
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+
 import javax.swing.JOptionPane;
+
+
 public class MainMenuFrame extends javax.swing.JFrame {
     
     private String userRole;
@@ -35,14 +40,14 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
         initComponents();
         
-
-        
         lblWelcome.setText("Welcome, " + userRole + "!");
-
+        
 
         openDashboard();
-    
         
+        InternalFrameUtils.setupDesktopPane(desktopPane);
+    
+        //Screen Size Code
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
         GraphicsDevice[] screens = ge.getScreenDevices();
@@ -116,7 +121,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     
     public void openUpdateProduct(int productID) {
 
-        Update updateProduct = new Update(productID);
+        Update updateProduct = new Update(productID, userRole);
 
         desktopPane.add(updateProduct);
 

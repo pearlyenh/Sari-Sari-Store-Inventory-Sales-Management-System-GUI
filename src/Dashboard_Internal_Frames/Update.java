@@ -4,10 +4,15 @@
  */
 package Dashboard_Internal_Frames;
 
+import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
 import Database.DBConnection;
+import java.sql.ResultSet;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,61 +20,84 @@ import java.sql.SQLException;
 public class Update extends javax.swing.JInternalFrame {
 
 private int productID;
+private String userRole;
 
-    public Update(int productID) {
+    public Update(int productID, String userRole) {
         initComponents();
+        InternalFrameUtils.setupInternalFrame(this);
         
         this.productID = productID;
+        this.userRole = userRole;
+        
+        loadProduct();
+    }
+    
+    private void loadProduct() {
+
+        String sql = "SELECT * FROM tbl_products WHERE productID = ?";
+
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setInt(1, productID);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    txtProductName.setText(
+                            rs.getString("productName")
+                    );
+
+                    cmbCategory.setSelectedItem(
+                            rs.getString("category")
+                    );
+
+                    txtPurchaseCost.setText(
+                            rs.getBigDecimal("purchaseCost")
+                                    .toString()
+                    );
+
+                    txtNumberOfPieces.setText(
+                            String.valueOf(
+                                    rs.getInt("numberOfPieces")
+                            )
+                    );
+
+                    lblUnitCost.setText(
+                            "₱ " + rs.getBigDecimal("unitCost")
+                    );
+
+                    txtSellingPrice.setText(
+                            rs.getBigDecimal("sellingPrice")
+                                    .toString()
+                    );
+
+                    lblPotentialProfit.setText(
+                            "₱ " + rs.getBigDecimal("potentialProfit")
+                    );
+
+                    cmbLowStockReminder.setSelectedItem(
+                            String.valueOf(
+                                    rs.getInt("lowStockReminder")
+                            )
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to load product.\n" + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
     
     private void calculateProductValues() {
-        
-        String purchaseCostText = txtPurchaseCost.getText().trim();
-        String piecesText = txtNumberOfPieces.getText().trim();
-        String sellingPriceText = txtSellingPrice.getText().trim();
-        
-        try {
-            BigDecimal purchaseCost =
-                    new BigDecimal(purchaseCostText);
-
-            BigDecimal numberOfPieces =
-                    new BigDecimal(piecesText);
-
-            BigDecimal sellingPrice =
-                    new BigDecimal(sellingPriceText);
-            
-            if (numberOfPieces.compareTo(BigDecimal.ZERO) <= 0) {
-                lblUnitCost.setText("₱ 0.00");
-                lblPotentialProfit.setText("₱ 0.00");
-                return;
-            }
-
-            
-            BigDecimal unitCost =
-                purchaseCost.divide(
-                    numberOfPieces,
-                    2,
-                    RoundingMode.HALF_UP);
-            
-            BigDecimal potentialProfit =
-                sellingPrice.subtract(unitCost);
-            
-            if (potentialProfit.compareTo(BigDecimal.ZERO) < 0) {
-                lblPotentialProfit.setText("Invalid Selling Price.");
-                JOptionPane.showMessageDialog(this,"The selling price must be greater than original price", "Warning",JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            if (sellingPrice.compareTo(unitCost) <= 0) {
-                lblPotentialProfit.setText("Invalid Selling Price");
-                return;
-            }
-            
-            lblUnitCost.setText("Unit Cost / Original Piece per Price: " + unitCost + " pesos");
-            lblPotentialProfit.setText("Potential Profit per Item: " + potentialProfit + " pesos");
-
-        } catch (NumberFormatException e) {
-
-        }
+   // 
 
     }
     @SuppressWarnings("unchecked")
@@ -79,7 +107,7 @@ private int productID;
         lblAddProduct = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        btnReset = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtNumberOfPieces = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -87,7 +115,7 @@ private int productID;
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        btnSaveProduct = new javax.swing.JButton();
+        tbnUpdate = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblProductInformation = new javax.swing.JLabel();
@@ -118,9 +146,9 @@ private int productID;
         lblDescription.setForeground(new java.awt.Color(102, 102, 102));
         lblDescription.setText("Modify product information and pricing details.");
 
-        btnReset.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        btnReset.setText("Back");
-        btnReset.addActionListener(this::btnResetActionPerformed);
+        btnBack.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -180,11 +208,11 @@ private int productID;
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 7, 500, 44));
 
-        btnSaveProduct.setBackground(new java.awt.Color(0, 51, 255));
-        btnSaveProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        btnSaveProduct.setForeground(new java.awt.Color(255, 255, 255));
-        btnSaveProduct.setText("Update Product");
-        btnSaveProduct.addActionListener(this::btnSaveProductActionPerformed);
+        tbnUpdate.setBackground(new java.awt.Color(0, 51, 255));
+        tbnUpdate.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        tbnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        tbnUpdate.setText("Update Product");
+        tbnUpdate.addActionListener(this::tbnUpdateActionPerformed);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -352,9 +380,9 @@ private int productID;
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(54, 54, 54)
-                                        .addComponent(btnSaveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tbnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(88, 88, 88)
                                 .addComponent(jLabel9))
@@ -385,26 +413,35 @@ private int productID;
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSaveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tbnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        txtProductName.setText("");
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        txtProductName.setText("Enter Product Name");
         cmbCategory.setSelectedIndex(0);
-        txtPurchaseCost.setText("");
-        txtNumberOfPieces.setText("");
-        txtSellingPrice.setText("");
+        txtPurchaseCost.setText("Enter purchase cost");
+        txtNumberOfPieces.setText("Enter number of piece");
+        txtSellingPrice.setText("Enter selling price");
         cmbLowStockReminder.setSelectedIndex(0);
-    }//GEN-LAST:event_btnResetActionPerformed
 
-    private void btnSaveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProductActionPerformed
-                               
-        // Check required fields
+        lblUnitCost.setText("Unit Cost / Original Price per Piece: ");
+        lblPotentialProfit.setText("Potential Profit per Item: ");
+        
+        Inventory openInv = new Inventory(userRole);
+        openInv.setVisible(true);
+        this.dispose();
+        
+        
+        
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void tbnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnUpdateActionPerformed
+                                             // Check required fields
         if (txtProductName.getText().trim().isEmpty()
                 || txtPurchaseCost.getText().trim().isEmpty()
                 || txtNumberOfPieces.getText().trim().isEmpty()
@@ -473,13 +510,17 @@ private int productID;
             BigDecimal potentialProfit =
                     sellingPrice.subtract(unitCost);
 
-            // Initial stock = number of pieces purchased
-            int stock = numberOfPieces;
-
-            String sql = "INSERT INTO tbl_products "
-                    + "(productName, category, purchaseCost, numberOfPieces, "
-                    + "unitCost, potentialProfit, sellingPrice, stock, lowStockReminder) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // Update product
+            String sql = "UPDATE tbl_products SET "
+                    + "productName = ?, "
+                    + "category = ?, "
+                    + "purchaseCost = ?, "
+                    + "numberOfPieces = ?, "
+                    + "unitCost = ?, "
+                    + "sellingPrice = ?, "
+                    + "potentialProfit = ?, "
+                    + "lowStockReminder = ? "
+                    + "WHERE productID = ?";
 
             try (Connection conn = DBConnection.connect();
                  PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -491,30 +532,21 @@ private int productID;
                 pst.setBigDecimal(5, unitCost);
                 pst.setBigDecimal(6, sellingPrice);
                 pst.setBigDecimal(7, potentialProfit);
-                pst.setInt(8, stock);
-                pst.setInt(9, lowStockReminder);
+                pst.setInt(8, lowStockReminder);
+                pst.setInt(9, productID);
 
-                int rowsInserted = pst.executeUpdate();
+                int rowsUpdated = pst.executeUpdate();
 
-                if (rowsInserted > 0) {
+                if (rowsUpdated > 0) {
 
                     JOptionPane.showMessageDialog(
                             this,
-                            "Product successfully added!",
+                            "Product successfully updated!",
                             "Success",
                             JOptionPane.INFORMATION_MESSAGE
                     );
 
-                    // Reset fields
-                    txtProductName.setText("");
-                    cmbCategory.setSelectedIndex(0);
-                    txtPurchaseCost.setText("");
-                    txtNumberOfPieces.setText("");
-                    txtSellingPrice.setText("");
-                    cmbLowStockReminder.setSelectedIndex(0);
-
-                    lblUnitCost.setText("Unit Cost / Original Price per Piece: ");
-                    lblPotentialProfit.setText("Potential Profit per Item: ");
+                    dispose();
                 }
             }
 
@@ -531,12 +563,12 @@ private int productID;
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Failed to save product.\n" + e.getMessage(),
+                    "Failed to update product.\n" + e.getMessage(),
                     "Database Error",
                     JOptionPane.ERROR_MESSAGE
             );
         }
-    }//GEN-LAST:event_btnSaveProductActionPerformed
+    }//GEN-LAST:event_tbnUpdateActionPerformed
 
     private void txtPurchaseCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPurchaseCostKeyReleased
         calculateProductValues();
@@ -556,8 +588,7 @@ private int productID;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnSaveProduct;
+    private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JComboBox<String> cmbLowStockReminder;
     private javax.swing.JLabel jLabel10;
@@ -583,6 +614,7 @@ private int productID;
     private javax.swing.JLabel lblProductInformation;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblUnitCost;
+    private javax.swing.JButton tbnUpdate;
     private javax.swing.JTextField txtNumberOfPieces;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtPurchaseCost;

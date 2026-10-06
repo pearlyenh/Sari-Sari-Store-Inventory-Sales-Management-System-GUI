@@ -8,6 +8,7 @@ package Dashboard_Internal_Frames;
  *
  * @author Helia Pearl Charish
  */
+import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
 import Database.DBConnection;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -33,6 +34,8 @@ public class Inventory extends javax.swing.JInternalFrame {
         this.userRole = userRole;
 
         initComponents();
+        
+        InternalFrameUtils.setupInternalFrame(this);
 
         sorter = new TableRowSorter<>(tblInventory.getModel());
         tblInventory.setRowSorter(sorter);

@@ -4,6 +4,8 @@
  */
 package Dashboard_Internal_Frames;
 
+import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
+
 /**
  *
  * @author Helia Pearl Charish
@@ -15,6 +17,8 @@ public class Puhunan extends javax.swing.JInternalFrame {
      */
     public Puhunan() {
         initComponents();
+        
+        InternalFrameUtils.setupInternalFrame(this);
     }
 
     /**

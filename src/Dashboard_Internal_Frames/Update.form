@@ -49,9 +49,9 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="btnReset" min="-2" pref="197" max="-2" attributes="0"/>
+                                      <Component id="btnBack" min="-2" pref="197" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                      <Component id="btnSaveProduct" min="-2" pref="197" max="-2" attributes="0"/>
+                                      <Component id="tbnUpdate" min="-2" pref="197" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jPanel7" min="-2" pref="524" max="-2" attributes="0"/>
                               </Group>
@@ -94,8 +94,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSaveProduct" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
-                          <Component id="btnReset" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="tbnUpdate" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="btnBack" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -129,7 +129,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
     </Component>
-    <Component class="javax.swing.JButton" name="btnReset">
+    <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Comic Sans MS" size="18" style="1"/>
@@ -137,7 +137,7 @@
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
@@ -275,7 +275,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnSaveProduct">
+    <Component class="javax.swing.JButton" name="tbnUpdate">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
@@ -289,7 +289,7 @@
         <Property name="text" type="java.lang.String" value="Update Product"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveProductActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbnUpdateActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel3">

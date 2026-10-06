@@ -4,6 +4,7 @@
  */
 package Dashboard_Internal_Frames;
 
+import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
 import Database.DBConnection;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,6 +20,8 @@ public class AddProduct extends javax.swing.JInternalFrame {
      */
     public AddProduct() {
         initComponents();
+        
+        InternalFrameUtils.setupInternalFrame(this);
     }
     
     private void calculateProductValues() {
@@ -501,17 +504,17 @@ public class AddProduct extends javax.swing.JInternalFrame {
 
                     JOptionPane.showMessageDialog(
                             this,
-                            "Product successfully added!",
+                            "Product successfully added! \nCheck inventory to see newly added product.",
                             "Success",
                             JOptionPane.INFORMATION_MESSAGE
                     );
 
                     // Reset fields
-                    txtProductName.setText("");
+                    txtProductName.setText("Enter Product Name");
                     cmbCategory.setSelectedIndex(0);
-                    txtPurchaseCost.setText("");
-                    txtNumberOfPieces.setText("");
-                    txtSellingPrice.setText("");
+                    txtPurchaseCost.setText("Enter purchase cost");
+                    txtNumberOfPieces.setText("Enter number of piece");
+                    txtSellingPrice.setText("Enter selling price");
                     cmbLowStockReminder.setSelectedIndex(0);
 
                     lblUnitCost.setText("Unit Cost / Original Price per Piece: ");
