@@ -96,7 +96,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         }
     }
     
-    private void calculateCartTotal() {
+private void calculateCartTotal() {
 
     BigDecimal total = BigDecimal.ZERO;
 
@@ -106,14 +106,17 @@ public class Cashier extends javax.swing.JInternalFrame {
     for (int i = 0; i < cartModel.getRowCount(); i++) {
 
         BigDecimal subtotal =
-                (BigDecimal) cartModel.getValueAt(i, 4);
+                (BigDecimal) cartModel.getValueAt(i, 3);
 
         total = total.add(subtotal);
     }
 
     lblTotal.setText(
             "Total: "
-            + total.setScale(2, java.math.RoundingMode.HALF_UP)
+            + total.setScale(
+                    2,
+                    java.math.RoundingMode.HALF_UP
+            )
     );
 }
     

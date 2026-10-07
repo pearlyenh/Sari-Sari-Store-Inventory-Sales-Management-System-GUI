@@ -519,7 +519,7 @@ private void calculateProductValues() {
 
             String sql = "INSERT INTO tbl_products "
                     + "(productName, category, purchaseCost, numberOfPieces, "
-                    + "unitCost, potentialProfit, sellingPrice, stock, lowStockReminder) "
+                    + "unitCost, sellingPrice, potentialProfit, stock, lowStockReminder) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             try (Connection conn = DBConnection.connect();

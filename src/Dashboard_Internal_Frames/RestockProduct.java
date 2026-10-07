@@ -201,9 +201,15 @@ private void calculateRestockValues() {
     String piecesText =
             txtNumberOfPieces.getText().trim();
 
-    // Wait until both fields have values
+    // Do not calculate while information is incomplete
     if (additionalCostText.isEmpty()
             || piecesText.isEmpty()) {
+
+        lblNewUnitCost.setText("New Unit Cost: ");
+        lblNewStock.setText("New Stock: ");
+        lblPotentialProfit.setText(
+                "Potential Profit per Item: "
+        );
 
         return;
     }
@@ -216,61 +222,42 @@ private void calculateRestockValues() {
         int numberOfPieces =
                 Integer.parseInt(piecesText);
 
-        // Validate pieces
-        if (numberOfPieces <= 0) {
-            return;
-        }
-
-        // Validate purchase cost
+        // Do not calculate invalid values
         if (additionalPurchaseCost.compareTo(
-                BigDecimal.ZERO) <= 0) {
+                BigDecimal.ZERO) <= 0
+                || numberOfPieces <= 0) {
+
+            lblNewUnitCost.setText("New Unit Cost: ");
+            lblNewStock.setText("New Stock: ");
+            lblPotentialProfit.setText(
+                    "Potential Profit per Item: "
+            );
 
             return;
         }
 
-        // Make sure product information exists
         if (currentUnitCost == null
                 || currentSellingPrice == null) {
-
             return;
         }
 
-        /*
-         * STEP 1
-         * Calculate the current inventory cost
-         */
-
+        // 1. Get the current total cost of existing stock
         BigDecimal currentInventoryCost =
                 currentUnitCost.multiply(
                         BigDecimal.valueOf(currentStock)
                 );
 
-
-        /*
-         * STEP 2
-         * Add the new purchase cost
-         */
-
+        // 2. Add the cost of the new stock
         BigDecimal newTotalCost =
                 currentInventoryCost.add(
                         additionalPurchaseCost
                 );
 
-
-        /*
-         * STEP 3
-         * Calculate new stock
-         */
-
+        // 3. Calculate the new total stock
         int newStock =
                 currentStock + numberOfPieces;
 
-
-        /*
-         * STEP 4
-         * Calculate weighted average unit cost
-         */
-
+        // 4. Calculate the new average unit cost
         BigDecimal newUnitCost =
                 newTotalCost.divide(
                         BigDecimal.valueOf(newStock),
@@ -278,23 +265,13 @@ private void calculateRestockValues() {
                         RoundingMode.HALF_UP
                 );
 
-
-        /*
-         * STEP 5
-         * Calculate potential profit per item
-         */
-
+        // 5. SAME PROFIT LOGIC AS ADD PRODUCT
         BigDecimal potentialProfit =
                 currentSellingPrice.subtract(
                         newUnitCost
                 );
 
-
-        /*
-         * STEP 6
-         * Display results
-         */
-
+        // 6. Display calculated values
         lblNewUnitCost.setText(
                 "New Unit Cost: "
                 + newUnitCost.setScale(
@@ -320,7 +297,11 @@ private void calculateRestockValues() {
     } catch (NumberFormatException e) {
 
         // User is still typing.
-        // Do not show an error yet.
+        lblNewUnitCost.setText("New Unit Cost: ");
+        lblNewStock.setText("New Stock: ");
+        lblPotentialProfit.setText(
+                "Potential Profit per Item: "
+        );
     }
 }
     @SuppressWarnings("unchecked")
@@ -592,6 +573,7 @@ private void calculateRestockValues() {
     }//GEN-LAST:event_txtNumberOfPiecesKeyReleased
 
     private void btnRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestockActionPerformed
+
     // Check if a product is selected
     if (cmbProduct.getSelectedItem() == null
             || cmbProduct.getSelectedItem()
@@ -640,6 +622,7 @@ private void calculateRestockValues() {
         return;
     }
 
+    // Convert input values
     BigDecimal additionalPurchaseCost;
     int numberOfPieces;
 
@@ -663,7 +646,7 @@ private void calculateRestockValues() {
         return;
     }
 
-    // Validate positive values
+    // Validate purchase cost
     if (additionalPurchaseCost.compareTo(
             BigDecimal.ZERO) <= 0) {
 
@@ -677,6 +660,7 @@ private void calculateRestockValues() {
         return;
     }
 
+    // Validate number of pieces
     if (numberOfPieces <= 0) {
 
         JOptionPane.showMessageDialog(
@@ -689,7 +673,7 @@ private void calculateRestockValues() {
         return;
     }
 
-    // Check that current product information is loaded
+    // Make sure product information is loaded
     if (currentUnitCost == null
             || currentSellingPrice == null) {
 
@@ -709,13 +693,13 @@ private void calculateRestockValues() {
                     BigDecimal.valueOf(currentStock)
             );
 
-    // Calculate new total inventory cost
+    // Add the new purchase cost
     BigDecimal newTotalCost =
             currentInventoryCost.add(
                     additionalPurchaseCost
             );
 
-    // Calculate new stock
+    // Calculate new total stock
     int newStock =
             currentStock + numberOfPieces;
 
@@ -727,76 +711,117 @@ private void calculateRestockValues() {
                     RoundingMode.HALF_UP
             );
 
-    // Calculate new potential profit
+    // Calculate potential profit
+    // SAME LOGIC AS ADD PRODUCT:
+    // Selling Price - Unit Cost
     BigDecimal newPotentialProfit =
             currentSellingPrice.subtract(
                     newUnitCost
             );
-    
-    String productName =
-        cmbProduct.getSelectedItem().toString();
 
-    String sql =
-        "UPDATE tbl_products SET "
-        + "stock = ?, "
-        + "unitCost = ?, "
-        + "potentialProfit = ? "
-        + "WHERE productName = ?";
-    
-    try (Connection conn = DBConnection.connect();
-     PreparedStatement pst = conn.prepareStatement(sql)) {
-
-    pst.setInt(1, newStock);
-    pst.setBigDecimal(2, newUnitCost);
-    pst.setBigDecimal(3, newPotentialProfit);
-    pst.setString(4, productName);
-
-    int rowsUpdated = pst.executeUpdate();
-
-    if (rowsUpdated > 0) {
+    // Prevent negative or zero profit
+    if (newPotentialProfit.compareTo(
+            BigDecimal.ZERO) <= 0) {
 
         JOptionPane.showMessageDialog(
                 this,
-                "Product restocked successfully!",
-                "Restock Successful",
-                JOptionPane.INFORMATION_MESSAGE
-        );
-
-    } else {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Product was not found.",
-                "Restock Failed",
+                "Restock cannot proceed.\n\n"
+                + "The new unit cost of ₱"
+                + newUnitCost.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                )
+                + " is equal to or higher than the selling price of ₱"
+                + currentSellingPrice.setScale(
+                        2,
+                        RoundingMode.HALF_UP
+                )
+                + ".\n\n"
+                + "The selling price must be higher than the unit cost.",
+                "Invalid Restock",
                 JOptionPane.WARNING_MESSAGE
         );
 
         return;
     }
 
-} catch (SQLException e) {
+    // Get selected product name
+    String productName =
+            cmbProduct.getSelectedItem().toString();
 
-    JOptionPane.showMessageDialog(
-            this,
-            "Failed to restock product.\n"
-                    + e.getMessage(),
-            "Database Error",
-            JOptionPane.ERROR_MESSAGE
+    // Update product information
+    String sql =
+            "UPDATE tbl_products SET "
+            + "stock = ?, "
+            + "unitCost = ?, "
+            + "potentialProfit = ? "
+            + "WHERE productName = ?";
+
+    try (Connection conn = DBConnection.connect();
+         PreparedStatement pst =
+                 conn.prepareStatement(sql)) {
+
+        pst.setInt(1, newStock);
+        pst.setBigDecimal(2, newUnitCost);
+        pst.setBigDecimal(3, newPotentialProfit);
+        pst.setString(4, productName);
+
+        int rowsUpdated =
+                pst.executeUpdate();
+
+        if (rowsUpdated > 0) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Product restocked successfully!",
+                    "Restock Successful",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } else {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Product was not found.",
+                    "Restock Failed",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+    } catch (SQLException e) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Failed to restock product.\n"
+                + e.getMessage(),
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE
+        );
+
+        return;
+    }
+
+    // Clear input fields
+    txtAdditionalPurchaseCost.setText("");
+    txtNumberOfPieces.setText("");
+
+    // Clear calculated values
+    lblNewUnitCost.setText(
+            "New Unit Cost: "
     );
 
-    return;
-}
-    
+    lblNewStock.setText(
+            "New Stock: "
+    );
+
+    lblPotentialProfit.setText(
+            "Potential Profit per Item: "
+    );
+
+    // Reload current product information
     loadProductInformation();
-
-        txtAdditionalPurchaseCost.setText("");
-        txtNumberOfPieces.setText("");
-
-        lblNewUnitCost.setText("New Unit Cost: ");
-        lblNewStock.setText("New Stock: ");
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
-        );
     }//GEN-LAST:event_btnRestockActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
