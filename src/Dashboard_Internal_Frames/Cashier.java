@@ -566,7 +566,7 @@ private void calculateCartTotal() {
                 tblProductList.getValueAt(selectedRow, 1).toString();
         
         lblSelectedProduct.setText(
-                "Selected Product: " + selectedProductName
+                 selectedProductName
         );
     }//GEN-LAST:event_tblProductListMouseClicked
 

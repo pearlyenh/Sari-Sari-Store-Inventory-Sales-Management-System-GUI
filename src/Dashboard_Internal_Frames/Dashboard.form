@@ -274,13 +274,13 @@
                   <Font name="Comic Sans MS" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="GUIDELINES:"/>
+                <Property name="text" type="java.lang.String" value="TIPS ON HOW TO USE THIS SYSTEM:"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="16" y="15" width="316" height="30"/>
+                  <AbsoluteConstraints x="16" y="15" width="430" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

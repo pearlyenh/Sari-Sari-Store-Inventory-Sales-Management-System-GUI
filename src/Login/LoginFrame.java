@@ -22,15 +22,14 @@ public class LoginFrame extends javax.swing.JFrame {
         buttonGroup1.add(adminRbutton);
         buttonGroup1.add(cRbutton);
         
-        GraphicsEnvironment ge =
-            GraphicsEnvironment.getLocalGraphicsEnvironment();
+                //Screen Size Code
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
         GraphicsDevice[] screens = ge.getScreenDevices();
 
         GraphicsDevice screen = screens[0]; // Change to screens[1] for monitor 2
 
-        GraphicsConfiguration gc =
-            screen.getDefaultConfiguration();
+        GraphicsConfiguration gc = screen.getDefaultConfiguration();
 
         Rectangle bounds = gc.getBounds();
         java.awt.Insets insets =
