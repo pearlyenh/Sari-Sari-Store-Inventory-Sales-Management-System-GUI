@@ -6,12 +6,13 @@ package Login;
 
 import Database.DBuserSession;
 import Database.DBConnection;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
+
 import java.sql.*;
+
 import javax.swing.JOptionPane;
+
+import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
+
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 
 public class LoginFrame extends javax.swing.JFrame {
@@ -22,26 +23,8 @@ public class LoginFrame extends javax.swing.JFrame {
         buttonGroup1.add(adminRbutton);
         buttonGroup1.add(cRbutton);
         
-                //Screen Size Code
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-        GraphicsDevice[] screens = ge.getScreenDevices();
-
-        GraphicsDevice screen = screens[0]; // Change to screens[1] for monitor 2
-
-        GraphicsConfiguration gc = screen.getDefaultConfiguration();
-
-        Rectangle bounds = gc.getBounds();
-        java.awt.Insets insets =
-            java.awt.Toolkit.getDefaultToolkit().getScreenInsets(gc);
-
-        int x = bounds.x + insets.left;
-        int y = bounds.y + insets.top;
-
-        int width = bounds.width - insets.left - insets.right;
-        int height = bounds.height - insets.top - insets.bottom;
-    
-        setBounds(x, y, width, height);
+        //Screen Size Code
+        setBounds(FrameUtils.getScreenBounds());
     }
 
     @SuppressWarnings("unchecked")

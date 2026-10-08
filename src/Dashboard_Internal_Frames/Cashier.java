@@ -15,12 +15,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Cashier extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form DashboardInternalFrame
-     */
     
     private String userRole;
     private int selectedProductID;
@@ -36,6 +38,8 @@ public class Cashier extends javax.swing.JInternalFrame {
                 (DefaultTableModel) tblCart.getModel();
 
         cartModel.setRowCount(0);
+        
+        setupCartActionColumn();
 
         searchProduct();
     }
@@ -82,6 +86,7 @@ public class Cashier extends javax.swing.JInternalFrame {
                     rs.getBigDecimal("sellingPrice"),
                     rs.getInt("stock")
                 });
+            
             }
 
         } catch (SQLException e) {
@@ -176,6 +181,126 @@ private void calculateCartTotal() {
         );
     }
 }
+    
+private void setupCartActionColumn() {
+
+    // + Button - Blue
+    DefaultTableCellRenderer addRenderer =
+            new DefaultTableCellRenderer() {
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table,
+                Object value,
+                boolean isSelected,
+                boolean hasFocus,
+                int row,
+                int column) {
+
+            Component component =
+                    super.getTableCellRendererComponent(
+                            table,
+                            value,
+                            isSelected,
+                            hasFocus,
+                            row,
+                            column
+                    );
+
+            component.setBackground(new Color(0, 123, 255));
+            component.setForeground(Color.WHITE);
+
+            setHorizontalAlignment(
+                    DefaultTableCellRenderer.CENTER
+            );
+
+            return component;
+        }
+    };
+
+    // − Button - Red
+    DefaultTableCellRenderer subtractRenderer =
+            new DefaultTableCellRenderer() {
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table,
+                Object value,
+                boolean isSelected,
+                boolean hasFocus,
+                int row,
+                int column) {
+
+            Component component =
+                    super.getTableCellRendererComponent(
+                            table,
+                            value,
+                            isSelected,
+                            hasFocus,
+                            row,
+                            column
+                    );
+
+            component.setBackground(new Color(220, 53, 69));
+            component.setForeground(Color.WHITE);
+
+            setHorizontalAlignment(
+                    DefaultTableCellRenderer.CENTER
+            );
+
+            return component;
+        }
+    };
+
+    // Remove Button - Gray
+    DefaultTableCellRenderer removeRenderer =
+            new DefaultTableCellRenderer() {
+
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table,
+                Object value,
+                boolean isSelected,
+                boolean hasFocus,
+                int row,
+                int column) {
+
+            Component component =
+                    super.getTableCellRendererComponent(
+                            table,
+                            value,
+                            isSelected,
+                            hasFocus,
+                            row,
+                            column
+                    );
+
+            component.setBackground(new Color(108, 117, 125));
+            component.setForeground(Color.WHITE);
+
+            setHorizontalAlignment(
+                    DefaultTableCellRenderer.CENTER
+            );
+
+            return component;
+        }
+    };
+
+    // +
+    tblCart.getColumnModel()
+            .getColumn(4)
+            .setCellRenderer(addRenderer);
+
+    // −
+    tblCart.getColumnModel()
+            .getColumn(5)
+            .setCellRenderer(subtractRenderer);
+
+    // Remove
+    tblCart.getColumnModel()
+            .getColumn(6)
+            .setCellRenderer(removeRenderer);
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,12 +330,13 @@ private void calculateCartTotal() {
         jLabel5 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCart = new javax.swing.JTable();
         lblDashboardTitle3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnUtang = new javax.swing.JButton();
+        btnPayCash = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -335,7 +461,6 @@ private void calculateCartTotal() {
 
         lblSelectedProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblSelectedProduct.setForeground(new java.awt.Color(0, 51, 255));
-        lblSelectedProduct.setText("SELECTED PRODUCT: ");
         jPanel4.add(lblSelectedProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 260, -1));
 
         jPanel5.setBackground(new java.awt.Color(0, 51, 255));
@@ -373,7 +498,7 @@ private void calculateCartTotal() {
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 255));
         jLabel5.setText("SELECTED PRODUCT: ");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         txtQuantity.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtQuantity.addActionListener(this::txtQuantityActionPerformed);
@@ -389,6 +514,11 @@ private void calculateCartTotal() {
         jLabel4.setText("Quantity: ");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel2.setText("_______________________________________________");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 280, -1));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -399,7 +529,7 @@ private void calculateCartTotal() {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(lblDashboardTitle4, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -423,21 +553,26 @@ private void calculateCartTotal() {
         tblCart.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Quantity", "Price", "Subtotal", "Remove"
+                "Product Name", "Quantity", "Price", "Subtotal", "+ Add Qty", "- Remove Qty", "Remove All"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCartMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblCart);
@@ -447,6 +582,8 @@ private void calculateCartTotal() {
             tblCart.getColumnModel().getColumn(2).setResizable(false);
             tblCart.getColumnModel().getColumn(3).setResizable(false);
             tblCart.getColumnModel().getColumn(4).setResizable(false);
+            tblCart.getColumnModel().getColumn(5).setResizable(false);
+            tblCart.getColumnModel().getColumn(6).setResizable(false);
         }
 
         lblDashboardTitle3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -476,13 +613,15 @@ private void calculateCartTotal() {
                 .addContainerGap())
         );
 
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton1.setText("UTANG");
+        btnUtang.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnUtang.setText("UTANG");
+        btnUtang.addActionListener(this::btnUtangActionPerformed);
 
-        jButton3.setBackground(new java.awt.Color(0, 51, 255));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("PAY CASH");
+        btnPayCash.setBackground(new java.awt.Color(0, 51, 255));
+        btnPayCash.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnPayCash.setForeground(new java.awt.Color(255, 255, 255));
+        btnPayCash.setText("PAY CASH");
+        btnPayCash.addActionListener(this::btnPayCashActionPerformed);
 
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
         pnlDashboard.setLayout(pnlDashboardLayout);
@@ -506,9 +645,9 @@ private void calculateCartTotal() {
                                 .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pnlDashboardLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnUtang, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnPayCash, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(26, Short.MAX_VALUE))))
@@ -534,8 +673,8 @@ private void calculateCartTotal() {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnUtang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPayCash, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -568,6 +707,7 @@ private void calculateCartTotal() {
         lblSelectedProduct.setText(
                  selectedProductName
         );
+        txtQuantity.setText("");
     }//GEN-LAST:event_tblProductListMouseClicked
 
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
@@ -679,16 +819,76 @@ private void calculateCartTotal() {
         );
         
         DefaultTableModel cartModel =
-            (DefaultTableModel) tblCart.getModel();
+                (DefaultTableModel) tblCart.getModel();
 
-        cartModel.addRow(new Object[]{
-            productName,
-            quantity,
-            sellingPrice,
-            subtotal,
-            "Remove"
-        });
-        
+        // Check if product already exists in the cart
+        boolean productAlreadyInCart = false;
+
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            String cartProductName =
+                    cartModel.getValueAt(i, 0).toString();
+
+            if (cartProductName.equals(productName)) {
+
+                int currentQuantity =
+                        (int) cartModel.getValueAt(i, 1);
+
+                int newQuantity =
+                        currentQuantity + quantity;
+
+                // Check combined quantity against stock
+                if (newQuantity > availableStock) {
+
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Not enough stock available.\n"
+                        + "Available stock: " + availableStock
+                        + "\nCurrent quantity in cart: "
+                        + currentQuantity,
+                        "Insufficient Stock",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    return;
+                }
+
+                BigDecimal newSubtotal =
+                        sellingPrice.multiply(
+                                BigDecimal.valueOf(newQuantity)
+                        );
+
+                cartModel.setValueAt(
+                        newQuantity,
+                        i,
+                        1
+                );
+
+                cartModel.setValueAt(
+                        newSubtotal,
+                        i,
+                        3
+                );
+
+                productAlreadyInCart = true;
+
+                break;
+            }
+        }
+
+        // If product is NOT already in cart, create a new row
+        if (!productAlreadyInCart) {
+
+            cartModel.addRow(new Object[]{
+                productName,
+                quantity,
+                sellingPrice,
+                subtotal,
+                "+",
+                "−",
+                "Remove"
+            });
+        }
         calculateCartTotal();
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
@@ -706,13 +906,581 @@ private void calculateCartTotal() {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQuantityActionPerformed
 
+    private void tblCartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCartMouseClicked
+        int selectedRow = tblCart.getSelectedRow();
+        int selectedColumn = tblCart.getSelectedColumn();
+
+        if (selectedRow == -1) {
+            return;
+        }
+        
+        if (selectedColumn == 4) {
+
+            int currentQuantity =
+                    (int) tblCart.getValueAt(selectedRow, 1);
+
+            String productName =
+                    tblCart.getValueAt(selectedRow, 0).toString();
+
+            String sql =
+                    "SELECT stock FROM tbl_products "
+                    + "WHERE productName = ?";
+
+            try (Connection conn = DBConnection.connect();
+                 PreparedStatement pst = conn.prepareStatement(sql)) {
+
+                pst.setString(1, productName);
+
+                try (ResultSet rs = pst.executeQuery()) {
+
+                    if (rs.next()) {
+
+                        int availableStock =
+                                rs.getInt("stock");
+
+                        if (currentQuantity >= availableStock) {
+
+                            JOptionPane.showMessageDialog(
+                                this,
+                                "Cannot add more.\n"
+                                + "Available stock: "
+                                + availableStock,
+                                "Stock Limit",
+                                JOptionPane.WARNING_MESSAGE
+                            );
+
+                            return;
+                        }
+
+                        int newQuantity =
+                                currentQuantity + 1;
+
+                        BigDecimal price =
+                                (BigDecimal) tblCart
+                                        .getValueAt(selectedRow, 2);
+
+                        BigDecimal newSubtotal =
+                                price.multiply(
+                                    BigDecimal.valueOf(newQuantity)
+                                );
+
+                        tblCart.setValueAt(
+                                newQuantity,
+                                selectedRow,
+                                1
+                        );
+
+                        tblCart.setValueAt(
+                                newSubtotal,
+                                selectedRow,
+                                3
+                        );
+
+                        calculateCartTotal();
+                    }
+                }
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to check stock:\n"
+                    + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+        if (selectedColumn == 5) {
+
+            int currentQuantity =
+                    (int) tblCart.getValueAt(selectedRow, 1);
+
+            int newQuantity =
+                    currentQuantity - 1;
+
+            if (newQuantity <= 0) {
+
+                ((DefaultTableModel) tblCart.getModel())
+                        .removeRow(selectedRow);
+
+            } else {
+
+                BigDecimal price =
+                        (BigDecimal) tblCart.getValueAt(
+                                selectedRow, 2
+                        );
+
+                BigDecimal newSubtotal =
+                        price.multiply(
+                                BigDecimal.valueOf(newQuantity)
+                        );
+
+                tblCart.setValueAt(
+                        newQuantity,
+                        selectedRow,
+                        1
+                );
+
+                tblCart.setValueAt(
+                        newSubtotal,
+                        selectedRow,
+                        3
+                );
+            }
+
+            calculateCartTotal();
+        }
+        
+        if (selectedColumn == 6) {
+
+            DefaultTableModel cartModel =
+                    (DefaultTableModel) tblCart.getModel();
+
+            cartModel.removeRow(selectedRow);
+
+            calculateCartTotal();
+        }
+    }//GEN-LAST:event_tblCartMouseClicked
+
+    private void btnPayCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayCashActionPerformed
+        System.out.println("PAY CASH BUTTON CLICKED");
+        
+        DefaultTableModel cartModel =
+            (DefaultTableModel) tblCart.getModel();
+
+    if (cartModel.getRowCount() == 0) {
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Cart is empty. Please add a product first.",
+            "Empty Cart",
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        return;
+    }
+    
+        String cashText = txtCashReceived.getText().trim();
+
+        if (cashText.isEmpty()) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Please enter the cash received.",
+                "Cash Required",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+        
+        
+        BigDecimal cashReceived;
+
+        try {
+
+            cashReceived = new BigDecimal(cashText);
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Please enter a valid cash amount.",
+                "Invalid Cash",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+        
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            BigDecimal subtotal =
+                    (BigDecimal) cartModel.getValueAt(i, 3);
+
+            total = total.add(subtotal);
+        }
+        
+
+        if (cashReceived.compareTo(total) < 0) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Insufficient cash.\n"
+                + "Total: ₱" + total.setScale(2)
+                + "\nCash Received: ₱" + cashReceived.setScale(2),
+                "Insufficient Cash",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+        
+        BigDecimal change =
+            cashReceived.subtract(total);
+        
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+        String productName =
+                cartModel.getValueAt(i, 0).toString();
+
+        int cartQuantity =
+                (int) cartModel.getValueAt(i, 1);
+
+        String sql =
+                "SELECT stock FROM tbl_products "
+                + "WHERE productName = ?";
+
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, productName);
+
+            try (ResultSet rs = pst.executeQuery()) {
+
+                if (rs.next()) {
+
+                    int currentStock =
+                            rs.getInt("stock");
+
+                    if (cartQuantity > currentStock) {
+
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "Not enough stock for "
+                            + productName + ".\n"
+                            + "Available stock: "
+                            + currentStock
+                            + "\nQuantity in cart: "
+                            + cartQuantity,
+                            "Insufficient Stock",
+                            JOptionPane.WARNING_MESSAGE
+                        );
+
+                        return;
+                    }
+
+                } else {
+
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Product not found: "
+                        + productName,
+                        "Product Not Found",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+
+                    return;
+                }
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Failed to check product stock:\n"
+                + e.getMessage(),
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+
+            return;
+        }
+    }
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            String productName =
+                    cartModel.getValueAt(i, 0).toString();
+
+            int cartQuantity =
+                    (int) cartModel.getValueAt(i, 1);
+
+            String sql =
+                    "UPDATE tbl_products "
+                    + "SET stock = stock - ? "
+                    + "WHERE productName = ?";
+
+            try (Connection conn = DBConnection.connect();
+                 PreparedStatement pst = conn.prepareStatement(sql)) {
+
+                pst.setInt(1, cartQuantity);
+                pst.setString(2, productName);
+
+                int rowsUpdated = pst.executeUpdate();
+
+                System.out.println(
+                    "Rows updated for "
+                    + productName
+                    + ": "
+                    + rowsUpdated
+                );
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to update product stock:\n"
+                    + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+
+                return;
+            }
+        }
+        //RESET
+        cartModel.setRowCount(0);
+        txtCashReceived.setText("");
+        lblChange.setText("Change: 0.00");
+        lblTotal.setText("TOTAL: 0.00");
+        txtQuantity.setText("");
+        lblSelectedProduct.setText("");
+        
+        searchProduct();
+        
+        JOptionPane.showMessageDialog(
+            this,
+            "Payment successful!\n"
+            + "Total: ₱" + total.setScale(2)
+            + "\nCash Received: ₱" + cashReceived.setScale(2)
+            + "\nChange: ₱" + change.setScale(2),
+            "Payment Successful",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_btnPayCashActionPerformed
+
+    private void btnUtangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtangActionPerformed
+        String cashText = txtCashReceived.getText().trim();
+
+        if (!cashText.isEmpty()) {
+
+            int answer = JOptionPane.showConfirmDialog(
+                this,
+                "Cash received has been entered.\n\n"
+                + "Are you sure you want to record this "
+                + "as an UTANG transaction?",
+                "UTANG Transaction",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            if (answer != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            txtCashReceived.setText("");
+            lblChange.setText("Change: 0.00");
+        }
+        
+        DefaultTableModel cartModel =
+                (DefaultTableModel) tblCart.getModel();
+
+        // Check if cart is empty
+        if (cartModel.getRowCount() == 0) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "The cart is empty.",
+                "Empty Cart",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        // Build the utang list
+        StringBuilder utangList = new StringBuilder();
+
+        utangList.append(
+            "UTANG REMINDER\n\n"
+            + "Please write the following items from your customers\n"
+            + "in the physical utang notebook before proceeding:\n\n"
+        );
+
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            String productName =
+                    cartModel.getValueAt(i, 0).toString();
+
+            int quantity =
+                    (int) cartModel.getValueAt(i, 1);
+
+            BigDecimal subtotal =
+                    (BigDecimal) cartModel.getValueAt(i, 3);
+
+            utangList.append(
+                "x" + quantity
+                + "   " + productName
+                + "   ₱" + subtotal.setScale(2)
+                + "\n"
+            );
+        }
+
+        utangList.append(
+            "\nPlease list them to help manage your store properly."
+            + "\n\nHave you written the utang list?"
+        );
+
+        // YES button
+        int answer = JOptionPane.showOptionDialog(
+            this,
+            utangList.toString(),
+            "UTANG REMINDER",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            new Object[]{"YES"},
+            "YES"
+        );
+
+        // If the dialog is closed using X, stop the process
+        if (answer != 0) {
+            return;
+        }
+        
+                // Re-check stock before recording utang
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            String productName =
+                    cartModel.getValueAt(i, 0).toString();
+
+            int cartQuantity =
+                    (int) cartModel.getValueAt(i, 1);
+
+            String sql =
+                    "SELECT stock FROM tbl_products "
+                    + "WHERE productName = ?";
+
+            try (Connection conn = DBConnection.connect();
+                 PreparedStatement pst = conn.prepareStatement(sql)) {
+
+                pst.setString(1, productName);
+
+                try (ResultSet rs = pst.executeQuery()) {
+
+                    if (rs.next()) {
+
+                        int currentStock =
+                                rs.getInt("stock");
+
+                        if (cartQuantity > currentStock) {
+
+                            JOptionPane.showMessageDialog(
+                                this,
+                                "Not enough stock for "
+                                + productName
+                                + ".\nAvailable stock: "
+                                + currentStock
+                                + "\nQuantity in cart: "
+                                + cartQuantity,
+                                "Insufficient Stock",
+                                JOptionPane.WARNING_MESSAGE
+                            );
+
+                            return;
+                        }
+
+                    } else {
+
+                        JOptionPane.showMessageDialog(
+                            this,
+                            "Product not found: "
+                            + productName,
+                            "Product Not Found",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+
+                        return;
+                    }
+                }
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to check stock:\n"
+                    + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+
+                return;
+            }
+        }
+        
+                // Deduct utang quantities from inventory
+        for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+            String productName =
+                    cartModel.getValueAt(i, 0).toString();
+
+            int cartQuantity =
+                    (int) cartModel.getValueAt(i, 1);
+
+            String sql =
+                    "UPDATE tbl_products "
+                    + "SET stock = stock - ? "
+                    + "WHERE productName = ?";
+
+            try (Connection conn = DBConnection.connect();
+                 PreparedStatement pst = conn.prepareStatement(sql)) {
+
+                pst.setInt(1, cartQuantity);
+                pst.setString(2, productName);
+
+                int rowsUpdated =
+                        pst.executeUpdate();
+
+                System.out.println(
+                    "Rows updated for "
+                    + productName
+                    + ": "
+                    + rowsUpdated
+                );
+
+            } catch (SQLException e) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Failed to update product stock:\n"
+                    + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
+
+                return;
+            }
+        }
+        //RESET
+        cartModel.setRowCount(0);
+        txtCashReceived.setText("");
+        lblChange.setText("Change: 0.00");
+        lblTotal.setText("TOTAL: 0.00");
+        txtQuantity.setText("");
+        lblSelectedProduct.setText("");
+        
+        searchProduct();
+        
+        JOptionPane.showMessageDialog(
+            this,
+            "Utang recorded successfully!\n"
+            + "The items have been deducted from inventory.",
+            "Utang Recorded",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_btnUtangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddToCart;
+    private javax.swing.JButton btnPayCash;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnUtang;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

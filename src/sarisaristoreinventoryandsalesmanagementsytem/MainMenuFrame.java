@@ -20,13 +20,8 @@ import Dashboard_Internal_Frames.Inventory;
 import Dashboard_Internal_Frames.Cashier;
 
 
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 import javax.swing.JInternalFrame;
 
-import javax.swing.JOptionPane;
 
 
 public class MainMenuFrame extends javax.swing.JFrame {
@@ -45,25 +40,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         InternalFrameUtils.setupDesktopPane(desktopPane);
     
         //Screen Size Code
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-        GraphicsDevice[] screens = ge.getScreenDevices();
-
-        GraphicsDevice screen = screens[0]; // Change to screens[1] for monitor 2
-
-        GraphicsConfiguration gc = screen.getDefaultConfiguration();
-
-        Rectangle bounds = gc.getBounds();
-        java.awt.Insets insets =
-            java.awt.Toolkit.getDefaultToolkit().getScreenInsets(gc);
-
-        int x = bounds.x + insets.left;
-        int y = bounds.y + insets.top;
-
-        int width = bounds.width - insets.left - insets.right;
-        int height = bounds.height - insets.top - insets.bottom;
-    
-        setBounds(x, y, width, height);
+        setBounds(FrameUtils.getScreenBounds());
         
         openDashboard();
     }
@@ -151,7 +128,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnDashboard.setForeground(new java.awt.Color(255, 255, 255));
         btnDashboard.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\dashboard-5481_32.png")); // NOI18N
         btnDashboard.setText("   Dashboard");
-        btnDashboard.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnDashboard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDashboard.setFocusPainted(false);
         btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDashboard.addActionListener(this::btnDashboardActionPerformed);
@@ -166,7 +143,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-plus-5834_32 (2).png")); // NOI18N
         btnAddProduct.setText("   Add Product");
-        btnAddProduct.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        btnAddProduct.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAddProduct.setFocusPainted(false);
         btnAddProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
@@ -176,8 +153,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnRestockProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnRestockProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-to-basket-5854_32 (2).png")); // NOI18N
         btnRestockProduct.setText("   Restock Product");
-        btnRestockProduct.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnRestockProduct.setBorderPainted(false);
+        btnRestockProduct.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRestockProduct.setFocusPainted(false);
         btnRestockProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRestockProduct.addActionListener(this::btnRestockProductActionPerformed);
@@ -187,7 +163,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnDailyGain.setForeground(new java.awt.Color(255, 255, 255));
         btnDailyGain.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\medical-history-healthcare-report-green-26326_32 (5).png")); // NOI18N
         btnDailyGain.setText("   Daily Gain / History");
-        btnDailyGain.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnDailyGain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnDailyGain.setFocusPainted(false);
         btnDailyGain.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDailyGain.addActionListener(this::btnDailyGainActionPerformed);
@@ -197,7 +173,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnPuhunan.setForeground(new java.awt.Color(255, 255, 255));
         btnPuhunan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\return-on-investment-dollar-28163_32 (1).png")); // NOI18N
         btnPuhunan.setText("   Puhunan");
-        btnPuhunan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnPuhunan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnPuhunan.setFocusPainted(false);
         btnPuhunan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPuhunan.addActionListener(this::btnPuhunanActionPerformed);
@@ -207,7 +183,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnInventory.setForeground(new java.awt.Color(255, 255, 255));
         btnInventory.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\gift-box-5792_32.png")); // NOI18N
         btnInventory.setText("   Inventory");
-        btnInventory.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnInventory.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnInventory.setFocusPainted(false);
         btnInventory.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInventory.addActionListener(this::btnInventoryActionPerformed);
@@ -217,7 +193,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnCashier.setForeground(new java.awt.Color(255, 255, 255));
         btnCashier.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\wallet-5880_32.png")); // NOI18N
         btnCashier.setText("   Cashier");
-        btnCashier.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnCashier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCashier.setFocusPainted(false);
         btnCashier.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCashier.addActionListener(this::btnCashierActionPerformed);
@@ -227,7 +203,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLogOut.setForeground(new java.awt.Color(255, 255, 255));
         btnLogOut.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\red-circle-logout-arrow-20586_32 (1).png")); // NOI18N
         btnLogOut.setText("   Logout");
-        btnLogOut.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnLogOut.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnLogOut.setFocusPainted(false);
         btnLogOut.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnLogOut.addActionListener(this::btnLogOutActionPerformed);
@@ -236,30 +212,31 @@ public class MainMenuFrame extends javax.swing.JFrame {
         pnlSidebar.setLayout(pnlSidebarLayout);
         pnlSidebarLayout.setHorizontalGroup(
             pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSidebarLayout.createSequentialGroup()
-                .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSidebarLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
+                .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlSidebarLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlSidebarLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRestockProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDailyGain, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPuhunan, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnInventory, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCashier, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLogOut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCashier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInventory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPuhunan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDailyGain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                            .addComponent(btnRestockProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAddProduct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDashboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(23, 23, 23))
         );
         pnlSidebarLayout.setVerticalGroup(
             pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSidebarLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(33, 33, 33)
                 .addComponent(btnDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(73, 73, 73)
                 .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRestockProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -10,11 +10,8 @@ package Login;
  */
 
 import Login.LoginFrame;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
 import javax.swing.JOptionPane;
+import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 public class Authentication extends javax.swing.JFrame {
     private String passedName;
@@ -27,26 +24,8 @@ public class Authentication extends javax.swing.JFrame {
         
         initComponents();
         
-                //Screen Size Code
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-        GraphicsDevice[] screens = ge.getScreenDevices();
-
-        GraphicsDevice screen = screens[0]; // Change to screens[1] for monitor 2
-
-        GraphicsConfiguration gc = screen.getDefaultConfiguration();
-
-        Rectangle bounds = gc.getBounds();
-        java.awt.Insets insets =
-            java.awt.Toolkit.getDefaultToolkit().getScreenInsets(gc);
-
-        int x = bounds.x + insets.left;
-        int y = bounds.y + insets.top;
-
-        int width = bounds.width - insets.left - insets.right;
-        int height = bounds.height - insets.top - insets.bottom;
-    
-        setBounds(x, y, width, height);
+        //Screen Size Code
+        setBounds(FrameUtils.getScreenBounds());
         
     }
 
