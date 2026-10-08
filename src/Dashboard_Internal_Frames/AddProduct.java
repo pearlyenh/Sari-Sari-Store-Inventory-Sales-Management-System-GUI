@@ -5,12 +5,17 @@
 package Dashboard_Internal_Frames;
 
 import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
+
 import Database.DBConnection;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
 import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddProduct extends javax.swing.JInternalFrame {
@@ -464,6 +469,47 @@ private void calculateProductValues() {
         try {
             String productName = txtProductName.getText().trim();
             String category = cmbCategory.getSelectedItem().toString();
+            
+            // Check if product already exists
+            String checkSql =
+                    "SELECT productID "
+                    + "FROM tbl_products "
+                    + "WHERE LOWER(productName) = LOWER(?) "
+                    + "AND status = 'Active'";
+
+            try (Connection conn = DBConnection.connect();
+                 PreparedStatement checkPst = conn.prepareStatement(checkSql)) {
+
+                checkPst.setString(1, productName);
+
+                try (ResultSet rs = checkPst.executeQuery()) {
+
+                    if (rs.next()) {
+
+                        int answer = JOptionPane.showConfirmDialog(
+                                this,
+                                "This product already exists.\n\n"
+                                + "Would you like to restock it instead?",
+                                "Duplicate Product",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.WARNING_MESSAGE
+                        );
+
+                        if (answer == JOptionPane.YES_OPTION) {
+
+                            JOptionPane.showMessageDialog(
+                                    this,
+                                    "Please use the Restock Product section "
+                                    + "to add more stock.",
+                                    "Restock Product",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
+                        }
+
+                        return;
+                    }
+                }
+            }
 
             BigDecimal purchaseCost =
                     new BigDecimal(txtPurchaseCost.getText().trim());

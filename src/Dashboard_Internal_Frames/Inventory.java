@@ -170,20 +170,98 @@ public class Inventory extends javax.swing.JInternalFrame {
     
     private void filterStockStatus() {
 
+        String searchText =
+                txtSearch.getText().trim();
+
+        if (searchText.equals("Search product by name...")) {
+            searchText = "";
+        }
+
+        String selectedFilter =
+                cmbStockFilter.getSelectedItem().toString();
+
+        java.util.List<RowFilter<Object, Object>> filters =
+                new java.util.ArrayList<>();
+
+        // Search filter
+        if (!searchText.isEmpty()) {
+
+            filters.add(
+                RowFilter.regexFilter(
+                    "(?i)" + searchText,
+                    1
+                )
+            );
+        }
+
+        // Stock status filter
+        if (!selectedFilter.equals("ALL PRODUCTS")) {
+
+            filters.add(
+                RowFilter.regexFilter(
+                    "^" + selectedFilter.toUpperCase() + "$",
+                    9
+                )
+            );
+        }
+
+        // Apply filters
+        if (filters.isEmpty()) {
+
+            sorter.setRowFilter(null);
+
+        } else {
+
+            sorter.setRowFilter(
+                RowFilter.andFilter(filters)
+            );
+        }
+    }
+    
+    private void applyInventoryFilters() {
+
+    String searchText = txtSearch.getText().trim();
+
+    if (searchText.equals("Search product by name...")) {
+        searchText = "";
+    }
+
     String selectedFilter =
             cmbStockFilter.getSelectedItem().toString();
 
-    if (selectedFilter.equals("ALL PRODUCTS")) {
+    java.util.List<RowFilter<Object, Object>> filters =
+            new java.util.ArrayList<>();
+
+    // Product name search
+    if (!searchText.isEmpty()) {
+
+        filters.add(
+            RowFilter.regexFilter(
+                "(?i)" + searchText,
+                1
+            )
+        );
+    }
+
+    // Stock status filter
+    if (!selectedFilter.equals("ALL PRODUCTS")) {
+
+        filters.add(
+            RowFilter.regexFilter(
+                "^" + selectedFilter.toUpperCase() + "$",
+                9
+            )
+        );
+    }
+
+    if (filters.isEmpty()) {
 
         sorter.setRowFilter(null);
 
     } else {
 
         sorter.setRowFilter(
-            RowFilter.regexFilter(
-                "^" + selectedFilter + "$",
-                9
-            )
+            RowFilter.andFilter(filters)
         );
     }
 }
@@ -321,6 +399,11 @@ public class Inventory extends javax.swing.JInternalFrame {
         txtSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         txtSearch.setText("Search product ");
         txtSearch.addActionListener(this::txtSearchActionPerformed);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         btnSearch.setBackground(new java.awt.Color(0, 51, 255));
         btnSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
@@ -371,15 +454,7 @@ public class Inventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-    String searchText = txtSearch.getText().trim();
-
-        if (searchText.isEmpty()) {
-            sorter.setRowFilter(null);
-        } else {
-            sorter.setRowFilter(
-                RowFilter.regexFilter("(?i)" + searchText, 1)
-            );
-        }
+        applyInventoryFilters();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
@@ -496,8 +571,15 @@ public class Inventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void cmbStockFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStockFilterActionPerformed
-        filterStockStatus();
+        applyInventoryFilters();
     }//GEN-LAST:event_cmbStockFilterActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        
+        System.out.println("KEY RELEASED: " + txtSearch.getText());
+        applyInventoryFilters();
+        
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
