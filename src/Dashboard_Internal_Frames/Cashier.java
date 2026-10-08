@@ -1255,25 +1255,25 @@ private void setupCartActionColumn() {
     private void btnUtangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtangActionPerformed
         String cashText = txtCashReceived.getText().trim();
 
-        if (!cashText.isEmpty()) {
+    if (!cashText.isEmpty()) {
 
-            int answer = JOptionPane.showConfirmDialog(
-                this,
-                "Cash received has been entered.\n\n"
-                + "Are you sure you want to record this "
-                + "as an UTANG transaction?",
-                "UTANG Transaction",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE
-            );
+        int answer = JOptionPane.showConfirmDialog(
+            this,
+            "Cash received has been entered.\n\n"
+            + "Are you sure you want to record this "
+            + "as an UTANG transaction?",
+            "UTANG Transaction",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
 
-            if (answer != JOptionPane.YES_OPTION) {
-                return;
-            }
-
-            txtCashReceived.setText("");
-            lblChange.setText("Change: 0.00");
+        if (answer != JOptionPane.YES_OPTION) {
+            return;
         }
+
+        txtCashReceived.setText("");
+        lblChange.setText("Change: 0.00");
+    }
         
         DefaultTableModel cartModel =
                 (DefaultTableModel) tblCart.getModel();

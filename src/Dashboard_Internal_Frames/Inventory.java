@@ -5,37 +5,56 @@
 package Dashboard_Internal_Frames;
 
 import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
+import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
+
+
 import Database.DBConnection;
+
 import java.math.BigDecimal;
+
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
+
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Inventory extends javax.swing.JInternalFrame {
     
     private String userRole;
-    private TableRowSorter sorter;
+    private TableRowSorter<DefaultTableModel> sorter;
 
     public Inventory(String userRole) {
         initComponents();
-        
-        this.userRole = userRole;
-        
 
-        sorter = new TableRowSorter<>(tblInventory.getModel());
+        this.userRole = userRole;
+
+        sorter = new TableRowSorter<>(
+            (DefaultTableModel) tblInventory.getModel()
+        );
+
         tblInventory.setRowSorter(sorter);
+
+        setupStockStatusColors();
 
         loadProducts();
     }
 
     private void loadProducts() {
-        String sql = "SELECT * FROM tbl_products";
+        String sql =
+                "SELECT * FROM tbl_products "
+                + "WHERE status = 'Active'";
 
         try (Connection conn = DBConnection.connect();
              PreparedStatement pst = conn.prepareStatement(sql);
@@ -48,6 +67,21 @@ public class Inventory extends javax.swing.JInternalFrame {
 
             while (rs.next()) {
 
+                int stock = rs.getInt("stock");
+                int lowStockReminder = rs.getInt("lowStockReminder");
+
+                String stockStatus;
+
+                if (stock == 0) {
+                    stockStatus = "NO STOCK";
+                } else if (stock <= lowStockReminder) {
+                    stockStatus = "LOW STOCK";
+                } else if (stock <= lowStockReminder + 2) {
+                    stockStatus = "ALMOST LOW";
+                } else {
+                    stockStatus = "MANY STOCKS";
+                }
+
                 model.addRow(new Object[]{
                     rs.getInt("productID"),
                     rs.getString("productName"),
@@ -56,8 +90,9 @@ public class Inventory extends javax.swing.JInternalFrame {
                     rs.getBigDecimal("unitCost"),
                     rs.getBigDecimal("sellingPrice"),
                     rs.getBigDecimal("potentialProfit"),
-                    rs.getInt("stock"),
-                    rs.getInt("lowStockReminder")
+                    stock,
+                    lowStockReminder,
+                    stockStatus
                 });
             }
 
@@ -71,6 +106,87 @@ public class Inventory extends javax.swing.JInternalFrame {
             );
         }
     }
+    
+    private void setupStockStatusColors() {
+
+    tblInventory.getColumnModel()
+            .getColumn(9)
+            .setCellRenderer(new DefaultTableCellRenderer() {
+
+                @Override
+                public Component getTableCellRendererComponent(
+                        JTable table,
+                        Object value,
+                        boolean isSelected,
+                        boolean hasFocus,
+                        int row,
+                        int column) {
+
+                    Component component =
+                            super.getTableCellRendererComponent(
+                                    table,
+                                    value,
+                                    isSelected,
+                                    hasFocus,
+                                    row,
+                                    column
+                            );
+
+                    String status =
+                            value == null
+                            ? ""
+                            : value.toString();
+
+                    if (status.equals("NO STOCK")) {
+
+                        component.setBackground(Color.GRAY);
+                        component.setForeground(Color.WHITE);
+
+                    } else if (status.equals("LOW STOCK")) {
+
+                        component.setBackground(Color.RED);
+                        component.setForeground(Color.WHITE);
+
+                    } else if (status.equals("ALMOST LOW")) {
+
+                        component.setBackground(Color.ORANGE);
+                        component.setForeground(Color.BLACK);
+
+                    } else if (status.equals("MANY STOCKS")) {
+
+                        component.setBackground(Color.GREEN);
+                        component.setForeground(Color.BLACK);
+
+                    } else {
+
+                        component.setBackground(Color.WHITE);
+                        component.setForeground(Color.BLACK);
+                    }
+
+                    return component;
+                }
+            });
+}
+    
+    private void filterStockStatus() {
+
+    String selectedFilter =
+            cmbStockFilter.getSelectedItem().toString();
+
+    if (selectedFilter.equals("ALL PRODUCTS")) {
+
+        sorter.setRowFilter(null);
+
+    } else {
+
+        sorter.setRowFilter(
+            RowFilter.regexFilter(
+                "^" + selectedFilter + "$",
+                9
+            )
+        );
+    }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -88,6 +204,8 @@ public class Inventory extends javax.swing.JInternalFrame {
         pnlSearch = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmbStockFilter = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Dashboard");
@@ -96,56 +214,59 @@ public class Inventory extends javax.swing.JInternalFrame {
 
         pnlDashboard.setBackground(new java.awt.Color(255, 255, 255));
         pnlDashboard.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDashboardTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblDashboardTitle.setForeground(new java.awt.Color(0, 51, 255));
         lblDashboardTitle.setText("Inventory");
+        pnlDashboard.add(lblDashboardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 266, 55));
 
         lblDashboardDescription.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblDashboardDescription.setForeground(new java.awt.Color(102, 102, 102));
         lblDashboardDescription.setText("View and manage your product inventory.");
+        pnlDashboard.add(lblDashboardDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         tblInventory.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tblInventory.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         tblInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Product Name", "Caterory", "Purchase Cost", "Unit Cost", "Selling Price", "Potential Profit", "Stock", "Low Stock Reminder"
+                "ID", "Product Name", "Caterory", "Purchase Cost", "Unit Cost", "Selling Price", "Potential Profit", "Stock", "Low Stock Reminder", "Stock Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -164,30 +285,38 @@ public class Inventory extends javax.swing.JInternalFrame {
             tblInventory.getColumnModel().getColumn(6).setResizable(false);
             tblInventory.getColumnModel().getColumn(7).setResizable(false);
             tblInventory.getColumnModel().getColumn(8).setResizable(false);
+            tblInventory.getColumnModel().getColumn(9).setResizable(false);
         }
 
-        btnAddProduct.setBackground(new java.awt.Color(0, 51, 255));
+        pnlDashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 146, 1040, 440));
+
+        btnAddProduct.setBackground(new java.awt.Color(0, 153, 255));
         btnAddProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setText("Add Product");
         btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
+        pnlDashboard.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 598, 177, 47));
 
         btnUpdate.setBackground(new java.awt.Color(0, 51, 255));
         btnUpdate.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(this::btnUpdateActionPerformed);
+        pnlDashboard.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 598, 177, 47));
 
-        btnDelete.setBackground(new java.awt.Color(0, 51, 255));
+        btnDelete.setBackground(new java.awt.Color(255, 0, 0));
         btnDelete.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
+        pnlDashboard.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 598, 177, 47));
 
-        btnRestock.setBackground(new java.awt.Color(0, 51, 255));
+        btnRestock.setBackground(new java.awt.Color(102, 204, 0));
         btnRestock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnRestock.setForeground(new java.awt.Color(255, 255, 255));
         btnRestock.setText("Restock");
         btnRestock.addActionListener(this::btnRestockActionPerformed);
+        pnlDashboard.add(btnRestock, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 598, 177, 47));
 
         txtSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         txtSearch.setText("Search product ");
@@ -221,55 +350,16 @@ public class Inventory extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
-        pnlDashboard.setLayout(pnlDashboardLayout);
-        pnlDashboardLayout.setHorizontalGroup(
-            pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlDashboardLayout.createSequentialGroup()
-                            .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1040, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDashboardDescription))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
-        );
-        pnlDashboardLayout.setVerticalGroup(
-            pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(lblDashboardDescription))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashboardLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
+        pnlDashboard.add(pnlSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 44, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        jLabel1.setText("Filter Stock:");
+        pnlDashboard.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 80, -1));
+
+        cmbStockFilter.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        cmbStockFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL PRODUCTS", "LOW STOCK", "ALMOST LOW", "MANY STOCKS", "NO STOCK" }));
+        cmbStockFilter.addActionListener(this::cmbStockFilterActionPerformed);
+        pnlDashboard.add(cmbStockFilter, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, 260, 30));
 
         getContentPane().add(pnlDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 670));
 
@@ -338,6 +428,77 @@ public class Inventory extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnRestockActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tblInventory.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Please select a product to delete.",
+                "No Product Selected",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+        
+        //Get the Product ID
+        int modelRow = tblInventory.convertRowIndexToModel(selectedRow);
+
+        int productID =
+                (int) tblInventory.getModel().getValueAt(modelRow, 0);
+        
+        int answer = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete this product?",
+            "Delete Product",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+
+        if (answer != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        String sql =
+        "UPDATE tbl_products "
+        + "SET status = 'Archived' "
+        + "WHERE productID = ?";
+        
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setInt(1, productID);
+
+            int rowsUpdated = pst.executeUpdate();
+
+            if (rowsUpdated > 0) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Product deleted successfully! \nThis cannot be undone.",
+                    "Delete Product",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+
+                loadProducts();
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Failed to delete product:\n"
+                + e.getMessage(),
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void cmbStockFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStockFilterActionPerformed
+        filterStockStatus();
+    }//GEN-LAST:event_cmbStockFilterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
@@ -345,6 +506,8 @@ public class Inventory extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRestock;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cmbStockFilter;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDashboardDescription;
     private javax.swing.JLabel lblDashboardTitle;
