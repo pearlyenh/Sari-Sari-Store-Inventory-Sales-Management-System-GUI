@@ -575,8 +575,7 @@ public class Inventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbStockFilterActionPerformed
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-        
-        System.out.println("KEY RELEASED: " + txtSearch.getText());
+       
         applyInventoryFilters();
         
     }//GEN-LAST:event_txtSearchKeyReleased
