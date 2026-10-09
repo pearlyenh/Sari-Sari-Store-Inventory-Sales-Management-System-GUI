@@ -29,8 +29,6 @@ public class Dashboard extends javax.swing.JInternalFrame {
         pnlDashboard = new javax.swing.JPanel();
         lblDashboardTitle = new javax.swing.JLabel();
         lblDashboardDescription = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         lblDashboardTitle2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -68,32 +66,6 @@ public class Dashboard extends javax.swing.JInternalFrame {
         lblDashboardDescription.setText("Manage your store efficiently.");
         pnlDashboard.add(lblDashboardDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 81, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel3.setPreferredSize(new java.awt.Dimension(360, 400));
-
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("TOP SALES");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jLabel3)
-                .addContainerGap(95, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(268, Short.MAX_VALUE))
-        );
-
-        pnlDashboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, 330, 340));
-
         lblDashboardTitle2.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblDashboardTitle2.setForeground(new java.awt.Color(0, 51, 255));
         lblDashboardTitle2.setText("\"Small Store, Big Dreams\"");
@@ -110,20 +82,20 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(106, 106, 106)
                 .addComponent(jLabel4)
-                .addGap(87, 87, 87))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
-        pnlDashboard.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 330, 340));
+        pnlDashboard.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 150, 370, 340));
 
         jPanel5.setBackground(new java.awt.Color(0, 102, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(360, 400));
@@ -137,9 +109,9 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(83, 83, 83)
                 .addComponent(jLabel5)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +121,7 @@ public class Dashboard extends javax.swing.JInternalFrame {
                 .addContainerGap(267, Short.MAX_VALUE))
         );
 
-        pnlDashboard.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 330, 340));
+        pnlDashboard.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 400, 340));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(new javax.swing.border.MatteBorder(null));
@@ -300,11 +272,9 @@ public class Dashboard extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDashboardRestock1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblDashboardDescription;
