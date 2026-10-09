@@ -15,13 +15,16 @@ import java.sql.SQLException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
 
-/**
- *
- * @author Helia Pearl Charish
- */
 public class RestockProduct extends javax.swing.JInternalFrame {
+    //list to remember all product names
+    private final List<String> allProductNames = new ArrayList<>();
+    private boolean updatingProductDropdown = false;
+    
 
     private String userRole;
     
@@ -38,32 +41,33 @@ public class RestockProduct extends javax.swing.JInternalFrame {
     }
     
 private void loadProducts() {
-
-    String sql = "SELECT productID, productName "
+    
+    String sql =
+            "SELECT productID, productName "
             + "FROM tbl_products "
+            + "WHERE status = 'Active' "
             + "ORDER BY productName";
+
+    allProductNames.clear();
+    cmbProduct.removeAllItems();
 
     try (Connection conn = DBConnection.connect();
          PreparedStatement pst = conn.prepareStatement(sql);
          ResultSet rs = pst.executeQuery()) {
-
-        cmbProduct.removeAllItems();
-
+        
         cmbProduct.addItem("Select a product...");
 
         while (rs.next()) {
+            String productName = rs.getString("productName");
 
-            cmbProduct.addItem(
-                    rs.getString("productName")
-            );
+            allProductNames.add(productName);
+            cmbProduct.addItem(productName);
         }
 
     } catch (SQLException e) {
-
         JOptionPane.showMessageDialog(
                 this,
-                "Failed to load products.\n"
-                        + e.getMessage(),
+                "Failed to load products:\n" + e.getMessage(),
                 "Database Error",
                 JOptionPane.ERROR_MESSAGE
         );
@@ -316,11 +320,11 @@ private void calculateRestockValues() {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         lblProductInformation = new javax.swing.JLabel();
-        lblProductName2 = new javax.swing.JLabel();
         lblCurrentStock = new javax.swing.JLabel();
         lblCurrentUnitCost = new javax.swing.JLabel();
         lblCurrentSellingPrice = new javax.swing.JLabel();
         cmbProduct = new javax.swing.JComboBox<>();
+        lblProductName4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         lblProductInformation1 = new javax.swing.JLabel();
@@ -334,6 +338,8 @@ private void calculateRestockValues() {
         lblNewUnitCost = new javax.swing.JLabel();
         lblNewStock = new javax.swing.JLabel();
         lblPotentialProfit = new javax.swing.JLabel();
+        txtSearchProduct = new javax.swing.JTextField();
+        lblProductName = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Dashboard");
@@ -341,25 +347,30 @@ private void calculateRestockValues() {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlDashboard.setBackground(new java.awt.Color(255, 255, 255));
+        pnlDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDashboardTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblDashboardTitle.setForeground(new java.awt.Color(0, 51, 255));
         lblDashboardTitle.setText("Restock Product");
+        pnlDashboard.add(lblDashboardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 6, 510, 55));
 
         lblDashboardDescription.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblDashboardDescription.setForeground(new java.awt.Color(102, 102, 102));
-        lblDashboardDescription.setText("Enter product barcode to restock.");
+        lblDashboardDescription.setText("Search for a product by name to restock.");
+        pnlDashboard.add(lblDashboardDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 67, 510, -1));
 
         btnReset.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnReset.setForeground(new java.awt.Color(0, 51, 255));
         btnReset.setText("Reset");
         btnReset.addActionListener(this::btnResetActionPerformed);
+        pnlDashboard.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(659, 598, 214, 51));
 
         btnRestock.setBackground(new java.awt.Color(0, 51, 255));
         btnRestock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnRestock.setForeground(new java.awt.Color(255, 255, 255));
         btnRestock.setText("Restock Product");
         btnRestock.addActionListener(this::btnRestockActionPerformed);
+        pnlDashboard.add(btnRestock, new org.netbeans.lib.awtextra.AbsoluteConstraints(891, 598, 214, 51));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -389,11 +400,6 @@ private void calculateRestockValues() {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 990, 40));
 
-        lblProductName2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblProductName2.setForeground(new java.awt.Color(0, 51, 255));
-        lblProductName2.setText("Product Name");
-        jPanel3.add(lblProductName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 140, -1));
-
         lblCurrentStock.setBackground(new java.awt.Color(255, 255, 255));
         lblCurrentStock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         lblCurrentStock.setForeground(new java.awt.Color(0, 51, 255));
@@ -415,6 +421,13 @@ private void calculateRestockValues() {
         cmbProduct.addActionListener(this::cmbProductActionPerformed);
         jPanel3.add(cmbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 820, 40));
 
+        lblProductName4.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblProductName4.setForeground(new java.awt.Color(0, 51, 255));
+        lblProductName4.setText("Product Name");
+        jPanel3.add(lblProductName4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 140, -1));
+
+        pnlDashboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 108, 1035, 166));
+
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -432,7 +445,7 @@ private void calculateRestockValues() {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lblProductInformation1)
-                .addContainerGap(733, Short.MAX_VALUE))
+                .addContainerGap(737, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,6 +481,8 @@ private void calculateRestockValues() {
         lblProductName7.setForeground(new java.awt.Color(0, 51, 255));
         lblProductName7.setText("Number of Pieces: ");
         jPanel5.add(lblProductName7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
+
+        pnlDashboard.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 292, 1035, 118));
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -512,48 +527,21 @@ private void calculateRestockValues() {
         lblPotentialProfit.setText("Potential Profit per Item: ");
         jPanel7.add(lblPotentialProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 380, -1));
 
-        javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
-        pnlDashboard.setLayout(pnlDashboardLayout);
-        pnlDashboardLayout.setHorizontalGroup(
-            pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDashboardLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65))
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDashboardDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlDashboardLayout.setVerticalGroup(
-            pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblDashboardTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDashboardDescription)
-                .addGap(20, 20, 20)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                .addGap(48, 48, 48)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRestock, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
-        );
+        pnlDashboard.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 428, 1035, 122));
+
+        txtSearchProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        txtSearchProduct.setText("Type a product name...");
+        txtSearchProduct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchProductKeyReleased(evt);
+            }
+        });
+        pnlDashboard.add(txtSearchProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 310, 40));
+
+        lblProductName.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblProductName.setForeground(new java.awt.Color(0, 51, 255));
+        lblProductName.setText("Search Product: ");
+        pnlDashboard.add(lblProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 170, -1));
 
         getContentPane().add(pnlDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 670));
 
@@ -561,7 +549,19 @@ private void calculateRestockValues() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbProductActionPerformed
+
+        if (updatingProductDropdown) {
+            return;
+        }
+        
+    Object selected = cmbProduct.getSelectedItem();
+
+    if (selected == null
+            || selected.toString().equals("Select a product")) {
+        return;
+    }
         loadProductInformation();
+        
     }//GEN-LAST:event_cmbProductActionPerformed
 
     private void txtAdditionalPurchaseCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdditionalPurchaseCostKeyReleased
@@ -586,6 +586,18 @@ private void calculateRestockValues() {
                 "Product Required",
                 JOptionPane.WARNING_MESSAGE
         );
+        
+        if(cmbProduct.equals("Select a product...")){
+            lblCurrentStock.setText("");
+            lblCurrentUnitCost.setText("");
+            lblCurrentSellingPrice.setText("");
+            txtAdditionalPurchaseCost.setText("");
+            txtNumberOfPieces.setText("");
+            lblNewUnitCost.setText("");
+            lblNewStock.setText("");
+            lblPotentialProfit.setText("");
+        }
+
 
         return;
     }
@@ -828,6 +840,42 @@ private void calculateRestockValues() {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void txtSearchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchProductKeyReleased
+
+        String searchText =
+                txtSearchProduct.getText().trim().toLowerCase();
+
+        updatingProductDropdown = true;
+
+        try {
+            cmbProduct.removeAllItems();
+
+            for (String productName : allProductNames) {
+
+                if (productName.toLowerCase().contains(searchText)) {
+                    cmbProduct.addItem(productName);
+                }
+            }
+
+        } finally {
+            updatingProductDropdown = false;
+        }
+
+        if (cmbProduct.getItemCount() > 0) {
+            cmbProduct.setSelectedIndex(0);
+            loadProductInformation();
+        } else {
+            // Clear details if no product matches
+            lblCurrentStock.setText("Current Stock: -");
+            lblCurrentUnitCost.setText("Current Unit Cost: -");
+            lblCurrentSellingPrice.setText("Current Selling Price: -");
+
+            currentStock = 0;
+            currentUnitCost = BigDecimal.ZERO;
+            currentSellingPrice = BigDecimal.ZERO;
+        }
+    }//GEN-LAST:event_txtSearchProductKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReset;
@@ -850,11 +898,13 @@ private void calculateRestockValues() {
     private javax.swing.JLabel lblProductInformation;
     private javax.swing.JLabel lblProductInformation1;
     private javax.swing.JLabel lblProductInformation2;
-    private javax.swing.JLabel lblProductName2;
+    private javax.swing.JLabel lblProductName;
+    private javax.swing.JLabel lblProductName4;
     private javax.swing.JLabel lblProductName7;
     private javax.swing.JLabel lblProductName8;
     private javax.swing.JPanel pnlDashboard;
     private javax.swing.JTextField txtAdditionalPurchaseCost;
     private javax.swing.JTextField txtNumberOfPieces;
+    private javax.swing.JTextField txtSearchProduct;
     // End of variables declaration//GEN-END:variables
 }
