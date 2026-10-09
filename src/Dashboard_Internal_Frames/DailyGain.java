@@ -193,13 +193,13 @@ public class DailyGain extends javax.swing.JInternalFrame {
         dateFrom = new com.toedter.calendar.JDateChooser();
         dateTo = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
-        lblSummaryTitle = new javax.swing.JLabel();
         lblTotalCostTitle = new javax.swing.JLabel();
         lblTotalSalesTitle = new javax.swing.JLabel();
         lblTotalGainTitle = new javax.swing.JLabel();
         lblTotalCost = new javax.swing.JLabel();
         lblTotalGain = new javax.swing.JLabel();
         lblTotalSales = new javax.swing.JLabel();
+        lblSummaryTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Dashboard");
@@ -254,6 +254,7 @@ public class DailyGain extends javax.swing.JInternalFrame {
 
         pnlDashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 328, 1090, 310));
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSearch.setBackground(new java.awt.Color(0, 51, 255));
@@ -281,90 +282,48 @@ public class DailyGain extends javax.swing.JInternalFrame {
 
         pnlDashboard.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 1090, 90));
 
+        jPanel2.setBackground(new java.awt.Color(0, 51, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTotalCostTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblTotalCostTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalCostTitle.setText("Total Cost");
+        jPanel2.add(lblTotalCostTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 150, -1));
+
+        lblTotalSalesTitle.setBackground(new java.awt.Color(255, 255, 255));
+        lblTotalSalesTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblTotalSalesTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalSalesTitle.setText("Total Sales");
+        jPanel2.add(lblTotalSalesTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 180, -1));
+
+        lblTotalGainTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblTotalGainTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalGainTitle.setText("Total Gain");
+        jPanel2.add(lblTotalGainTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 130, -1));
+
+        lblTotalCost.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblTotalCost.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalCost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalCost.setText("0.00");
+        jPanel2.add(lblTotalCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 220, 40));
+
+        lblTotalGain.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblTotalGain.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalGain.setText("0.00");
+        jPanel2.add(lblTotalGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, -1, 40));
+
+        lblTotalSales.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblTotalSales.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalSales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalSales.setText("0.00");
+        jPanel2.add(lblTotalSales, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 240, 40));
+
+        pnlDashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 1090, 90));
+
         lblSummaryTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         lblSummaryTitle.setForeground(new java.awt.Color(0, 51, 255));
         lblSummaryTitle.setText("Today's Summary");
-
-        lblTotalCostTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        lblTotalCostTitle.setForeground(new java.awt.Color(0, 51, 255));
-        lblTotalCostTitle.setText("Total Cost");
-
-        lblTotalSalesTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        lblTotalSalesTitle.setForeground(new java.awt.Color(0, 51, 255));
-        lblTotalSalesTitle.setText("Total Sales");
-
-        lblTotalGainTitle.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        lblTotalGainTitle.setForeground(new java.awt.Color(0, 51, 255));
-        lblTotalGainTitle.setText("Total Gain");
-
-        lblTotalCost.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTotalCost.setForeground(new java.awt.Color(0, 51, 255));
-        lblTotalCost.setText("0.00");
-
-        lblTotalGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTotalGain.setForeground(new java.awt.Color(0, 51, 255));
-        lblTotalGain.setText("0.00");
-
-        lblTotalSales.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTotalSales.setForeground(new java.awt.Color(0, 51, 255));
-        lblTotalSales.setText("0.00");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(422, 422, 422)
-                        .addComponent(lblSummaryTitle)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblTotalSalesTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 413, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTotalCostTitle)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblTotalCost)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(407, 407, 407)
-                                .addComponent(lblTotalGain)
-                                .addGap(59, 59, 59))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTotalGainTitle)
-                                .addGap(51, 51, 51))))))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(68, 68, 68)
-                    .addComponent(lblTotalSales)
-                    .addContainerGap(981, Short.MAX_VALUE)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblSummaryTitle)
-                .addGap(7, 7, 7)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotalSalesTitle)
-                    .addComponent(lblTotalCostTitle)
-                    .addComponent(lblTotalGainTitle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotalCost)
-                    .addComponent(lblTotalGain))
-                .addContainerGap(7, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(58, Short.MAX_VALUE)
-                    .addComponent(lblTotalSales)
-                    .addContainerGap()))
-        );
-
-        pnlDashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 1090, 90));
+        pnlDashboard.add(lblSummaryTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 70, -1, -1));
 
         getContentPane().add(pnlDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 670));
 
