@@ -363,6 +363,7 @@ private void setupCartActionColumn() {
         lblDashboardTitle3 = new javax.swing.JLabel();
         btnUtang = new javax.swing.JButton();
         btnPayCash = new javax.swing.JButton();
+        btnPersonalUse = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -374,10 +375,12 @@ private void setupCartActionColumn() {
 
         pnlDashboard.setBackground(new java.awt.Color(255, 255, 255));
         pnlDashboard.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDashboardDescription.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblDashboardDescription.setForeground(new java.awt.Color(102, 102, 102));
         lblDashboardDescription.setText("Process customer transactions. ");
+        pnlDashboard.add(lblDashboardDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 54, -1, -1));
 
         btnSearch.setBackground(new java.awt.Color(0, 51, 255));
         btnSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
@@ -411,6 +414,8 @@ private void setupCartActionColumn() {
                 .addContainerGap())
         );
 
+        pnlDashboard.add(pnlSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 14, -1, -1));
+
         jPanel1.setBackground(new java.awt.Color(0, 51, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -425,21 +430,24 @@ private void setupCartActionColumn() {
                 txtCashReceivedKeyReleased(evt);
             }
         });
-        jPanel1.add(txtCashReceived, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 150, 40));
+        jPanel1.add(txtCashReceived, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 150, 40));
 
         lblChange.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         lblChange.setForeground(new java.awt.Color(255, 255, 255));
         lblChange.setText("Change: ");
-        jPanel1.add(lblChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 280, -1));
+        jPanel1.add(lblChange, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 280, -1));
 
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cash Received: ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        pnlDashboard.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 415, -1, 160));
 
         lblDashboardTitle1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblDashboardTitle1.setForeground(new java.awt.Color(0, 51, 255));
         lblDashboardTitle1.setText("Cashier");
+        pnlDashboard.add(lblDashboardTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 14, 266, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 255));
 
@@ -500,31 +508,31 @@ private void setupCartActionColumn() {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 50));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 40));
 
         btnAddToCart.setBackground(new java.awt.Color(255, 153, 0));
         btnAddToCart.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnAddToCart.setForeground(new java.awt.Color(255, 255, 255));
         btnAddToCart.setText("ADD TO CART");
         btnAddToCart.addActionListener(this::btnAddToCartActionPerformed);
-        jPanel4.add(btnAddToCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, 50));
+        jPanel4.add(btnAddToCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 240, 50));
 
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 255));
         jLabel5.setText("SELECTED PRODUCT: ");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         txtQuantity.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtQuantity.addActionListener(this::txtQuantityActionPerformed);
@@ -533,12 +541,12 @@ private void setupCartActionColumn() {
                 txtQuantityKeyReleased(evt);
             }
         });
-        jPanel4.add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 150, 40));
+        jPanel4.add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, 40));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 153, 0));
         jLabel4.setText("Quantity: ");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 204));
@@ -568,11 +576,15 @@ private void setupCartActionColumn() {
                 .addContainerGap()
                 .addComponent(lblDashboardTitle4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        pnlDashboard.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -634,75 +646,31 @@ private void setupCartActionColumn() {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblDashboardTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
+        pnlDashboard.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 416, 742, 270));
+
+        btnUtang.setBackground(new java.awt.Color(153, 153, 153));
         btnUtang.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         btnUtang.setText("UTANG");
         btnUtang.addActionListener(this::btnUtangActionPerformed);
+        pnlDashboard.add(btnUtang, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 150, 40));
 
         btnPayCash.setBackground(new java.awt.Color(0, 51, 255));
         btnPayCash.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         btnPayCash.setForeground(new java.awt.Color(255, 255, 255));
         btnPayCash.setText("PAY CASH");
         btnPayCash.addActionListener(this::btnPayCashActionPerformed);
+        pnlDashboard.add(btnPayCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 590, 149, 42));
 
-        javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
-        pnlDashboard.setLayout(pnlDashboardLayout);
-        pnlDashboardLayout.setHorizontalGroup(
-            pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDashboardDescription)
-                            .addComponent(lblDashboardTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(btnUtang, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnPayCash, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(26, Short.MAX_VALUE))))
-        );
-        pnlDashboardLayout.setVerticalGroup(
-            pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDashboardLayout.createSequentialGroup()
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblDashboardTitle1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDashboardDescription)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlDashboardLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUtang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPayCash, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
+        btnPersonalUse.setBackground(new java.awt.Color(204, 204, 204));
+        btnPersonalUse.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnPersonalUse.setText("PERSONAL USE / DAMAGED / LOST");
+        btnPersonalUse.addActionListener(this::btnPersonalUseActionPerformed);
+        pnlDashboard.add(btnPersonalUse, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 640, 340, 42));
 
         getContentPane().add(pnlDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 700));
 
@@ -1549,10 +1517,181 @@ private void setupCartActionColumn() {
         );
     }//GEN-LAST:event_btnUtangActionPerformed
 
+    private void btnPersonalUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalUseActionPerformed
+
+        DefaultTableModel cartModel =
+                (DefaultTableModel) tblCart.getModel();
+
+        // 1. Check if the cart is empty
+        if (cartModel.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Please add a product to the cart first.",
+                    "Empty Cart",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // 2. Confirm the deduction
+        int confirmation = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to deduct these products "
+                + "from inventory?\n\n"
+                + "No sale or utang will be recorded.",
+                "Confirm Stock Deduction",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirmation != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        // 3. Connect to the database
+        try (Connection conn = DBConnection.connect()) {
+
+            if (conn == null) {
+                throw new SQLException(
+                        "Could not connect to the database."
+                );
+            }
+
+            conn.setAutoCommit(false);
+
+            try {
+
+                // 4. Validate every product before deducting stock
+                for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+                    String productName =
+                            cartModel.getValueAt(i, 0).toString();
+
+                    int quantity =
+                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+
+                    if (quantity <= 0) {
+                        throw new SQLException(
+                                "Invalid quantity for " + productName
+                        );
+                    }
+
+                    String sql =
+                            "SELECT stock "
+                            + "FROM tbl_products "
+                            + "WHERE productName = ? "
+                            + "AND status = 'Active' "
+                            + "FOR UPDATE";
+
+                    try (PreparedStatement pst =
+                                 conn.prepareStatement(sql)) {
+
+                        pst.setString(1, productName);
+
+                        try (ResultSet rs = pst.executeQuery()) {
+
+                            if (!rs.next()) {
+                                throw new SQLException(
+                                        "Product not found: " + productName
+                                );
+                            }
+
+                            int stock = rs.getInt("stock");
+
+                            if (quantity > stock) {
+                                throw new SQLException(
+                                        "Not enough stock for " + productName
+                                        + ". Available stock: " + stock
+                                        + "\nQuantity selected: " + quantity
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // 5. Deduct stock after all products pass validation
+                for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+                    String productName =
+                            cartModel.getValueAt(i, 0).toString();
+
+                    int quantity =
+                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+
+                    String sql =
+                            "UPDATE tbl_products "
+                            + "SET stock = stock - ? "
+                            + "WHERE productName = ? "
+                            + "AND status = 'Active' "
+                            + "AND stock >= ?";
+
+                    try (PreparedStatement pst =
+                                 conn.prepareStatement(sql)) {
+
+                        pst.setInt(1, quantity);
+                        pst.setString(2, productName);
+                        pst.setInt(3, quantity);
+
+                        if (pst.executeUpdate() != 1) {
+                            throw new SQLException(
+                                    "Stock deduction failed for " + productName
+                            );
+                        }
+                    }
+                }
+
+                // 6. Save all deductions together
+                conn.commit();
+
+            } catch (SQLException e) {
+
+                try {
+                    conn.rollback();
+                } catch (SQLException rollbackError) {
+                    e.addSuppressed(rollbackError);
+                }
+
+                throw e;
+            }
+
+        } catch (SQLException e) {
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Stock deduction failed:\n" + e.getMessage(),
+                    "Deduction Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // 7. Reset the Cashier interface
+        cartModel.setRowCount(0);
+
+        txtCashReceived.setText("");
+        lblChange.setText("Change: 0.00");
+        lblTotal.setText("TOTAL: 0.00");
+        txtQuantity.setText("");
+        lblSelectedProduct.setText("");
+
+        searchProduct();
+
+        // 8. Show success message
+        JOptionPane.showMessageDialog(
+                this,
+                "Products deducted successfully!\n"
+                + "Inventory stock has been updated.\n"
+                + "No sale, utang, or daily gain was recorded.",
+                "Stock Deducted",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_btnPersonalUseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddToCart;
     private javax.swing.JButton btnPayCash;
+    private javax.swing.JButton btnPersonalUse;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUtang;
     private javax.swing.JLabel jLabel1;

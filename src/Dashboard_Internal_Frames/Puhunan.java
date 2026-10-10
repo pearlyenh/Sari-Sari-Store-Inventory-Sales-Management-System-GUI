@@ -59,7 +59,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
                         rs.getInt("totalStock");
 
                 lblTotalInventoryValue.setText(
-                        "₱" + inventoryValue.setScale(2).toPlainString()
+                        inventoryValue.setScale(2).toPlainString()
                 );
 
                 lblTotalProducts.setText(
@@ -110,7 +110,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
 
                 model.addRow(new Object[]{
                     category,
-                    "₱" + categoryValue.setScale(2).toPlainString()
+                    categoryValue.setScale(2).toPlainString()
                 });
             }
 
@@ -225,7 +225,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
         lblTotalStock.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         lblTotalStock.setForeground(new java.awt.Color(0, 51, 255));
         lblTotalStock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotalStock.setText("0.00 pcs");
+        lblTotalStock.setText("0 pcs");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);

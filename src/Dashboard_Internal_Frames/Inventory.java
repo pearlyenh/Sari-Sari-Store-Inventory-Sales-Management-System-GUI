@@ -81,6 +81,9 @@ public class Inventory extends javax.swing.JInternalFrame {
                 } else {
                     stockStatus = "MANY STOCKS";
                 }
+                
+                System.out.println("Product: " + rs.getString("productName")
+                        + " | Status: " + stockStatus);
 
                 model.addRow(new Object[]{
                     rs.getInt("productID"),
@@ -179,6 +182,15 @@ public class Inventory extends javax.swing.JInternalFrame {
 
         String selectedFilter =
                 cmbStockFilter.getSelectedItem().toString();
+        
+        System.out.println("Column count: " + tblInventory.getColumnCount());
+        System.out.println("Model column count: "
+                + tblInventory.getModel().getColumnCount());
+
+        if (tblInventory.getModel().getRowCount() > 0) {
+            System.out.println("Status column value: "
+                    + tblInventory.getModel().getValueAt(0, 9));
+        }
 
         java.util.List<RowFilter<Object, Object>> filters =
                 new java.util.ArrayList<>();
@@ -204,6 +216,8 @@ public class Inventory extends javax.swing.JInternalFrame {
                 )
             );
         }
+        
+        System.out.println("Is ALL PRODUCTS: " + selectedFilter.equals("ALL PRODUCTS"));
 
         // Apply filters
         if (filters.isEmpty()) {
@@ -218,7 +232,8 @@ public class Inventory extends javax.swing.JInternalFrame {
         }
     }
     
-    private void applyInventoryFilters() {
+
+private void applyInventoryFilters() {
 
     String searchText = txtSearch.getText().trim();
 
@@ -228,16 +243,18 @@ public class Inventory extends javax.swing.JInternalFrame {
 
     String selectedFilter =
             cmbStockFilter.getSelectedItem().toString();
+    
+    System.out.println("Selected filter: " + selectedFilter);
+    System.out.println("Table rows before filter: " + tblInventory.getRowCount());
 
     java.util.List<RowFilter<Object, Object>> filters =
             new java.util.ArrayList<>();
 
     // Product name search
     if (!searchText.isEmpty()) {
-
         filters.add(
             RowFilter.regexFilter(
-                "(?i)" + searchText,
+                "(?i)" + java.util.regex.Pattern.quote(searchText),
                 1
             )
         );
@@ -245,26 +262,24 @@ public class Inventory extends javax.swing.JInternalFrame {
 
     // Stock status filter
     if (!selectedFilter.equals("ALL PRODUCTS")) {
-
         filters.add(
             RowFilter.regexFilter(
-                "^" + selectedFilter.toUpperCase() + "$",
+                "^" + java.util.regex.Pattern.quote(selectedFilter) + "$",
                 9
             )
         );
     }
 
     if (filters.isEmpty()) {
-
         sorter.setRowFilter(null);
-
     } else {
-
         sorter.setRowFilter(
             RowFilter.andFilter(filters)
         );
     }
+    System.out.println("Rows after filter: " + tblInventory.getRowCount());
 }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -571,6 +586,7 @@ public class Inventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void cmbStockFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStockFilterActionPerformed
+        System.out.println("Selected: " + cmbStockFilter.getSelectedItem());
         applyInventoryFilters();
     }//GEN-LAST:event_cmbStockFilterActionPerformed
 
