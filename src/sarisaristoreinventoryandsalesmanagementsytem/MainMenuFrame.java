@@ -150,7 +150,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         pnlSidebar.setBackground(new java.awt.Color(0, 51, 153));
         pnlSidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnDashboard.setBackground(new java.awt.Color(0, 51, 153));
+        btnDashboard.setBackground(new java.awt.Color(0, 153, 255));
         btnDashboard.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnDashboard.setForeground(new java.awt.Color(255, 255, 255));
         btnDashboard.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\dashboard-5481_32.png")); // NOI18N
@@ -167,7 +167,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
         pnlSidebar.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 1084, 227, 50));
 
-        btnAddProduct.setBackground(new java.awt.Color(0, 153, 255));
+        btnAddProduct.setBackground(new java.awt.Color(0, 102, 255));
         btnAddProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-plus-5834_32 (2).png")); // NOI18N
@@ -178,7 +178,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
         pnlSidebar.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 310, 50));
 
-        btnRestockProduct.setBackground(new java.awt.Color(0, 102, 255));
+        btnRestockProduct.setBackground(new java.awt.Color(0, 153, 255));
         btnRestockProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnRestockProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnRestockProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-to-basket-5854_32 (2).png")); // NOI18N
@@ -189,7 +189,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnRestockProduct.addActionListener(this::btnRestockProductActionPerformed);
         pnlSidebar.add(btnRestockProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 310, 50));
 
-        btnInventory.setBackground(new java.awt.Color(0, 51, 255));
+        btnInventory.setBackground(new java.awt.Color(0, 102, 255));
         btnInventory.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnInventory.setForeground(new java.awt.Color(255, 255, 255));
         btnInventory.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\gift-box-5792_32.png")); // NOI18N
@@ -200,7 +200,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnInventory.addActionListener(this::btnInventoryActionPerformed);
         pnlSidebar.add(btnInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 310, 50));
 
-        btnCashier.setBackground(new java.awt.Color(102, 204, 0));
+        btnCashier.setBackground(new java.awt.Color(0, 153, 255));
         btnCashier.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnCashier.setForeground(new java.awt.Color(255, 255, 255));
         btnCashier.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\wallet-5880_32.png")); // NOI18N
@@ -232,7 +232,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         lblTime.setText("09:33:22 PM");
         pnlSidebar.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 130, -1));
 
-        btnDailyGain.setBackground(new java.awt.Color(255, 153, 51));
+        btnDailyGain.setBackground(new java.awt.Color(0, 153, 255));
         btnDailyGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnDailyGain.setForeground(new java.awt.Color(255, 255, 255));
         btnDailyGain.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\medical-history-healthcare-report-green-26326_32 (5).png")); // NOI18N
@@ -243,7 +243,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnDailyGain.addActionListener(this::btnDailyGainActionPerformed);
         pnlSidebar.add(btnDailyGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 310, 50));
 
-        btnPuhunan.setBackground(new java.awt.Color(51, 204, 255));
+        btnPuhunan.setBackground(new java.awt.Color(0, 153, 255));
         btnPuhunan.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnPuhunan.setForeground(new java.awt.Color(255, 255, 255));
         btnPuhunan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\return-on-investment-dollar-28163_32 (1).png")); // NOI18N
