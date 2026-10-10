@@ -34,12 +34,18 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         InternalFrameUtils.setupInternalFrame(this);
 
+        // Hide ProductID at index 4
+        tblCart.getColumnModel().getColumn(4).setMinWidth(0);
+        tblCart.getColumnModel().getColumn(4).setMaxWidth(0);
+        tblCart.getColumnModel().getColumn(4).setPreferredWidth(0);
+
         DefaultTableModel cartModel =
                 (DefaultTableModel) tblCart.getModel();
 
         cartModel.setRowCount(0);
-        
+
         setupCartActionColumn();
+        setupCartActionListener();
 
         searchProduct();
     }
@@ -317,19 +323,88 @@ private void setupCartActionColumn() {
 
     // +
     tblCart.getColumnModel()
-            .getColumn(4)
+            .getColumn(5)
             .setCellRenderer(addRenderer);
 
     // −
     tblCart.getColumnModel()
-            .getColumn(5)
+            .getColumn(6)
             .setCellRenderer(subtractRenderer);
 
     // Remove
     tblCart.getColumnModel()
-            .getColumn(6)
+            .getColumn(7)
             .setCellRenderer(removeRenderer);
 }
+
+
+    private void setupCartActionListener() {
+
+        tblCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                int row = tblCart.rowAtPoint(evt.getPoint());
+                int column = tblCart.columnAtPoint(evt.getPoint());
+
+                if (row < 0) {
+                    return;
+                }
+
+                DefaultTableModel model =
+                        (DefaultTableModel) tblCart.getModel();
+
+                // + Add Qty
+                if (column == 5) {
+
+                    int quantity = Integer.parseInt(
+                            model.getValueAt(row, 1).toString()
+                    );
+
+                    quantity++;
+
+                    model.setValueAt(quantity, row, 1);
+                    updateCartSubtotal(model, row, quantity);
+
+                // - Remove Qty
+                } else if (column == 6) {
+
+                    int quantity = Integer.parseInt(
+                            model.getValueAt(row, 1).toString()
+                    );
+
+                    if (quantity > 1) {
+                        quantity--;
+                        model.setValueAt(quantity, row, 1);
+                        updateCartSubtotal(model, row, quantity);
+                    }
+
+                // Remove All
+                } else if (column == 7) {
+
+                    model.removeRow(row);
+                }
+
+                calculateCartTotal();
+            }
+        });
+    }
+
+    private void updateCartSubtotal(
+            DefaultTableModel model, int row, int quantity) {
+
+        BigDecimal price = new BigDecimal(
+                model.getValueAt(row, 2).toString()
+        );
+
+        BigDecimal subtotal = price.multiply(
+                BigDecimal.valueOf(quantity)
+        );
+
+        model.setValueAt(subtotal, row, 3);
+    }
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -599,17 +674,17 @@ private void setupCartActionColumn() {
         tblCart.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         tblCart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Quantity", "Price", "Subtotal", "+ Add Qty", "- Remove Qty", "Remove All"
+                "Product Name", "Quantity", "Price", "Subtotal", "ProductID", "+ Add Qty", "- Remove Qty", "Remove All"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -881,15 +956,22 @@ private void setupCartActionColumn() {
         // If product is NOT already in cart, create a new row
         if (!productAlreadyInCart) {
 
-            cartModel.addRow(new Object[]{
-                productName,
-                quantity,
-                sellingPrice,
-                subtotal,
-                "+",
-                "−",
-                "Remove"
-            });
+        int productID = Integer.parseInt(
+                tblProductList.getValueAt(
+                        tblProductList.getSelectedRow(), 0
+                ).toString()
+        );
+
+        cartModel.addRow(new Object[]{
+            productName,
+            quantity,
+            sellingPrice,
+            subtotal,
+            productID,
+            "+",
+            "−",
+            "Remove"
+        });
         }
         calculateCartTotal();
     }//GEN-LAST:event_btnAddToCartActionPerformed
