@@ -4,11 +4,6 @@
  */
 package sarisaristoreinventoryandsalesmanagementsytem;
 
-/**
- *
- * @author Helia Pearl Charish
- */
-
 import Login.LoginFrame;
 import Dashboard_Internal_Frames.Update;
 import Dashboard_Internal_Frames.RestockProduct;
@@ -20,6 +15,8 @@ import Dashboard_Internal_Frames.Inventory;
 import Dashboard_Internal_Frames.Cashier;
 
 import javax.swing.JInternalFrame;
+
+import javax.swing.JOptionPane;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -130,13 +127,13 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnAddProduct = new javax.swing.JButton();
         btnRestockProduct = new javax.swing.JButton();
-        btnDailyGain = new javax.swing.JButton();
-        btnPuhunan = new javax.swing.JButton();
         btnInventory = new javax.swing.JButton();
         btnCashier = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
         lblDate = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
+        btnDailyGain = new javax.swing.JButton();
+        btnPuhunan = new javax.swing.JButton();
         pnlHeader = new javax.swing.JPanel();
         lblStoreName = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -170,7 +167,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
         pnlSidebar.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 1084, 227, 50));
 
-        btnAddProduct.setBackground(new java.awt.Color(0, 51, 153));
+        btnAddProduct.setBackground(new java.awt.Color(0, 153, 255));
         btnAddProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnAddProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnAddProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-plus-5834_32 (2).png")); // NOI18N
@@ -179,9 +176,9 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnAddProduct.setFocusPainted(false);
         btnAddProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
-        pnlSidebar.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 310, 50));
+        pnlSidebar.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 310, 50));
 
-        btnRestockProduct.setBackground(new java.awt.Color(0, 51, 153));
+        btnRestockProduct.setBackground(new java.awt.Color(0, 102, 255));
         btnRestockProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnRestockProduct.setForeground(new java.awt.Color(255, 255, 255));
         btnRestockProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\add-to-basket-5854_32 (2).png")); // NOI18N
@@ -190,31 +187,9 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnRestockProduct.setFocusPainted(false);
         btnRestockProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRestockProduct.addActionListener(this::btnRestockProductActionPerformed);
-        pnlSidebar.add(btnRestockProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 310, 50));
+        pnlSidebar.add(btnRestockProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 310, 50));
 
-        btnDailyGain.setBackground(new java.awt.Color(0, 51, 153));
-        btnDailyGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        btnDailyGain.setForeground(new java.awt.Color(255, 255, 255));
-        btnDailyGain.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\medical-history-healthcare-report-green-26326_32 (5).png")); // NOI18N
-        btnDailyGain.setText("   Daily Gain / History");
-        btnDailyGain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnDailyGain.setFocusPainted(false);
-        btnDailyGain.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnDailyGain.addActionListener(this::btnDailyGainActionPerformed);
-        pnlSidebar.add(btnDailyGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 310, 50));
-
-        btnPuhunan.setBackground(new java.awt.Color(0, 51, 153));
-        btnPuhunan.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        btnPuhunan.setForeground(new java.awt.Color(255, 255, 255));
-        btnPuhunan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\return-on-investment-dollar-28163_32 (1).png")); // NOI18N
-        btnPuhunan.setText("   Puhunan");
-        btnPuhunan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnPuhunan.setFocusPainted(false);
-        btnPuhunan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnPuhunan.addActionListener(this::btnPuhunanActionPerformed);
-        pnlSidebar.add(btnPuhunan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 310, 50));
-
-        btnInventory.setBackground(new java.awt.Color(0, 51, 153));
+        btnInventory.setBackground(new java.awt.Color(0, 51, 255));
         btnInventory.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnInventory.setForeground(new java.awt.Color(255, 255, 255));
         btnInventory.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\gift-box-5792_32.png")); // NOI18N
@@ -223,9 +198,9 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnInventory.setFocusPainted(false);
         btnInventory.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnInventory.addActionListener(this::btnInventoryActionPerformed);
-        pnlSidebar.add(btnInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 310, 50));
+        pnlSidebar.add(btnInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 310, 50));
 
-        btnCashier.setBackground(new java.awt.Color(0, 51, 153));
+        btnCashier.setBackground(new java.awt.Color(102, 204, 0));
         btnCashier.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnCashier.setForeground(new java.awt.Color(255, 255, 255));
         btnCashier.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\wallet-5880_32.png")); // NOI18N
@@ -234,7 +209,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnCashier.setFocusPainted(false);
         btnCashier.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCashier.addActionListener(this::btnCashierActionPerformed);
-        pnlSidebar.add(btnCashier, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 310, 50));
+        pnlSidebar.add(btnCashier, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 310, 50));
 
         btnLogOut.setBackground(new java.awt.Color(255, 51, 51));
         btnLogOut.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
@@ -256,6 +231,28 @@ public class MainMenuFrame extends javax.swing.JFrame {
         lblTime.setForeground(new java.awt.Color(255, 255, 255));
         lblTime.setText("09:33:22 PM");
         pnlSidebar.add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 130, -1));
+
+        btnDailyGain.setBackground(new java.awt.Color(255, 153, 51));
+        btnDailyGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnDailyGain.setForeground(new java.awt.Color(255, 255, 255));
+        btnDailyGain.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\medical-history-healthcare-report-green-26326_32 (5).png")); // NOI18N
+        btnDailyGain.setText("   Daily Gain / History");
+        btnDailyGain.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDailyGain.setFocusPainted(false);
+        btnDailyGain.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDailyGain.addActionListener(this::btnDailyGainActionPerformed);
+        pnlSidebar.add(btnDailyGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 310, 50));
+
+        btnPuhunan.setBackground(new java.awt.Color(51, 204, 255));
+        btnPuhunan.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        btnPuhunan.setForeground(new java.awt.Color(255, 255, 255));
+        btnPuhunan.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\return-on-investment-dollar-28163_32 (1).png")); // NOI18N
+        btnPuhunan.setText("   Puhunan");
+        btnPuhunan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnPuhunan.setFocusPainted(false);
+        btnPuhunan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnPuhunan.addActionListener(this::btnPuhunanActionPerformed);
+        pnlSidebar.add(btnPuhunan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 310, 50));
 
         getContentPane().add(pnlSidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 350, 800));
 
@@ -298,9 +295,20 @@ public class MainMenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
-        LoginFrame login = new LoginFrame();
-        login.setVisible(true);
-        this.dispose();
+    
+        int choice = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to log out?",
+            "Confirm Logout",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (choice == JOptionPane.YES_OPTION) {
+            LoginFrame login = new LoginFrame();
+            login.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
