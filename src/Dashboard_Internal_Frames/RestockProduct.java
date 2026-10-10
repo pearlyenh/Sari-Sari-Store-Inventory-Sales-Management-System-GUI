@@ -816,6 +816,7 @@ private void calculateRestockValues() {
     }
 
     // Clear input fields
+    cmbProduct.setSelectedIndex(0);
     txtAdditionalPurchaseCost.setText("");
     txtNumberOfPieces.setText("");
 
@@ -837,7 +838,22 @@ private void calculateRestockValues() {
     }//GEN-LAST:event_btnRestockActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
+        cmbProduct.setSelectedIndex(0);
+        txtAdditionalPurchaseCost.setText("");
+        txtNumberOfPieces.setText("");
+
+
+        lblNewUnitCost.setText(
+                "New Unit Cost: "
+        );
+
+        lblNewStock.setText(
+                "New Stock: "
+        );
+
+        lblPotentialProfit.setText(
+                "Potential Profit per Item: "
+        );
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void txtSearchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchProductKeyReleased

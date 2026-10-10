@@ -52,6 +52,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
         //Live Time
         clockTimer = new javax.swing.Timer(1000, e -> displayDateTime());
         clockTimer.start();
+        
+        if (!userRole.equals("Owner")){
+            btnDailyGain.setVisible(false);
+            btnPuhunan.setVisible(false);
+        }
     }
     
     //disposing the internal frames

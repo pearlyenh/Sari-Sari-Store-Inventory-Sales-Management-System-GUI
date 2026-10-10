@@ -4,23 +4,18 @@
  */
 package Login;
 
-/**
- *
- * @author Helia Pearl Charish
- */
-
 import Login.LoginFrame;
 import javax.swing.JOptionPane;
 import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 public class Authentication extends javax.swing.JFrame {
-    private String passedName;
+    private String userRole;
 
     /**
      * Creates new form Login
      */
-    public Authentication(String passedName) {
-        this.passedName = passedName; 
+    public Authentication(String userRole) {
+        this.userRole = userRole; 
         
         initComponents();
         
@@ -179,9 +174,11 @@ public class Authentication extends javax.swing.JFrame {
         if (pin.equals("102107")) {
             JOptionPane.showMessageDialog(this,"Admin authentication successful!");
 
-            MainMenuFrame menu = new MainMenuFrame(passedName);
+            MainMenuFrame menu = new MainMenuFrame(userRole);
             menu.setVisible(true);
             this.dispose();
+            
+            
         }
         else {
             JOptionPane.showMessageDialog(this,"Incorrect Admin PIN.", "Error", JOptionPane.ERROR_MESSAGE);

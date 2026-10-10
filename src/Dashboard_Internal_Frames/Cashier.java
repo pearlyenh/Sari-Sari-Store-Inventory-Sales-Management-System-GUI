@@ -54,14 +54,17 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         String sql;
 
+
         if (searchText.isEmpty()) {
             sql = "SELECT productID, productName, category, sellingPrice, stock "
-                    + "FROM tbl_products";
+                    + "FROM tbl_products "
+                    + "WHERE status = 'Active'";
         } else {
             sql = "SELECT productID, productName, category, sellingPrice, stock "
                     + "FROM tbl_products "
-                    + "WHERE productName LIKE ?";
+                    + "WHERE productName LIKE ? AND status = 'Active'";
         }
+
 
         try (Connection conn = DBConnection.connect();
              PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -392,6 +395,11 @@ private void setupCartActionColumn() {
         txtSearchProduct.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         txtSearchProduct.setText("Search product by name...");
         txtSearchProduct.addActionListener(this::txtSearchProductActionPerformed);
+        txtSearchProduct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchProductKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlSearchLayout = new javax.swing.GroupLayout(pnlSearch);
         pnlSearch.setLayout(pnlSearchLayout);
@@ -678,7 +686,7 @@ private void setupCartActionColumn() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchProductActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtSearchProductActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -1686,6 +1694,10 @@ private void setupCartActionColumn() {
                 JOptionPane.INFORMATION_MESSAGE
         );
     }//GEN-LAST:event_btnPersonalUseActionPerformed
+
+    private void txtSearchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchProductKeyReleased
+        searchProduct();
+    }//GEN-LAST:event_txtSearchProductKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -352,15 +352,15 @@
         <Component class="javax.swing.JComboBox" name="cmbStockFilter">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Comic Sans MS" size="12" style="1"/>
+              <Font name="Comic Sans MS" size="14" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
                 <StringItem index="0" value="ALL PRODUCTS"/>
-                <StringItem index="1" value="LOW STOCK"/>
-                <StringItem index="2" value="ALMOST LOW"/>
-                <StringItem index="3" value="MANY STOCKS"/>
-                <StringItem index="4" value="NO STOCK"/>
+                <StringItem index="1" value="NO STOCK"/>
+                <StringItem index="2" value="LOW STOCK"/>
+                <StringItem index="3" value="ALMOST LOW"/>
+                <StringItem index="4" value="MANY STOCKS"/>
               </StringArray>
             </Property>
           </Properties>
@@ -372,7 +372,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="850" y="100" width="260" height="30"/>
+              <AbsoluteConstraints x="850" y="102" width="260" height="30"/>
             </Constraint>
           </Constraints>
         </Component>

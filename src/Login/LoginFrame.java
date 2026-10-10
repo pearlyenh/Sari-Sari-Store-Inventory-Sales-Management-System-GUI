@@ -246,10 +246,11 @@ public class LoginFrame extends javax.swing.JFrame {
                 case "Owner":
                     JOptionPane.showMessageDialog(this,"You are logging in as Owner.\nPlease verify your identity.","Owner Verification",JOptionPane.INFORMATION_MESSAGE);
 
-                    Authentication adminAuth = new Authentication(uN);
+                    Authentication adminAuth = new Authentication(userRole);
                     adminAuth.setVisible(true);
                     this.dispose();
                     break;
+                    
                 case "Family_Member":
                     JOptionPane.showMessageDialog(this,"You are logging in as a Family Member.","Login Successful",JOptionPane.INFORMATION_MESSAGE);
 

@@ -147,7 +147,6 @@ public class Puhunan extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCategoryValue = new javax.swing.JTable();
         lblDashboardTitle7 = new javax.swing.JLabel();
-        btnRefresh = new javax.swing.JToggleButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Dashboard");
@@ -310,11 +309,11 @@ public class Puhunan extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lblDashboardTitle7, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(663, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,14 +324,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlDashboard1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 680, 350));
-
-        btnRefresh.setBackground(new java.awt.Color(0, 51, 255));
-        btnRefresh.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
-        btnRefresh.setText("Refresh");
-        btnRefresh.addActionListener(this::btnRefreshActionPerformed);
-        pnlDashboard1.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 170, 50));
+        pnlDashboard1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 1050, 350));
 
         pnlDashboard.add(pnlDashboard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 670));
 
@@ -341,15 +333,8 @@ public class Puhunan extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-
-        loadSummary();
-        loadCategoryValues();
-    }//GEN-LAST:event_btnRefreshActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnRefresh;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
