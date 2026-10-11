@@ -5,6 +5,7 @@ package Dashboard_Internal_Frames;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 import Database.DBConnection;
+import Database.DBuserSession;
 import sarisaristoreinventoryandsalesmanagementsytem.InternalFrameUtils;
 
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         InternalFrameUtils.setupInternalFrame(this);
 
-        // Hide ProductID at index 4
+        // Hide ProductID at index 4 (ProductID)
         tblCart.getColumnModel().getColumn(4).setMinWidth(0);
         tblCart.getColumnModel().getColumn(4).setMaxWidth(0);
         tblCart.getColumnModel().getColumn(4).setPreferredWidth(0);
@@ -45,7 +46,6 @@ public class Cashier extends javax.swing.JInternalFrame {
         cartModel.setRowCount(0);
 
         setupCartActionColumn();
-        setupCartActionListener();
 
         searchProduct();
     }
@@ -337,59 +337,6 @@ private void setupCartActionColumn() {
             .setCellRenderer(removeRenderer);
 }
 
-
-    private void setupCartActionListener() {
-
-        tblCart.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-                int row = tblCart.rowAtPoint(evt.getPoint());
-                int column = tblCart.columnAtPoint(evt.getPoint());
-
-                if (row < 0) {
-                    return;
-                }
-
-                DefaultTableModel model =
-                        (DefaultTableModel) tblCart.getModel();
-
-                // + Add Qty
-                if (column == 5) {
-
-                    int quantity = Integer.parseInt(
-                            model.getValueAt(row, 1).toString()
-                    );
-
-                    quantity++;
-
-                    model.setValueAt(quantity, row, 1);
-                    updateCartSubtotal(model, row, quantity);
-
-                // - Remove Qty
-                } else if (column == 6) {
-
-                    int quantity = Integer.parseInt(
-                            model.getValueAt(row, 1).toString()
-                    );
-
-                    if (quantity > 1) {
-                        quantity--;
-                        model.setValueAt(quantity, row, 1);
-                        updateCartSubtotal(model, row, quantity);
-                    }
-
-                // Remove All
-                } else if (column == 7) {
-
-                    model.removeRow(row);
-                }
-
-                calculateCartTotal();
-            }
-        });
-    }
-
     private void updateCartSubtotal(
             DefaultTableModel model, int row, int quantity) {
 
@@ -440,7 +387,7 @@ private void setupCartActionColumn() {
         tblCart = new javax.swing.JTable();
         lblDashboardTitle3 = new javax.swing.JLabel();
         btnUtang = new javax.swing.JButton();
-        btnPayCash = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
         btnPersonalUse = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
@@ -742,12 +689,12 @@ private void setupCartActionColumn() {
         btnUtang.addActionListener(this::btnUtangActionPerformed);
         pnlDashboard.add(btnUtang, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 590, 150, 40));
 
-        btnPayCash.setBackground(new java.awt.Color(0, 51, 255));
-        btnPayCash.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        btnPayCash.setForeground(new java.awt.Color(255, 255, 255));
-        btnPayCash.setText("PAY CASH");
-        btnPayCash.addActionListener(this::btnPayCashActionPerformed);
-        pnlDashboard.add(btnPayCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 590, 149, 42));
+        btnPay.setBackground(new java.awt.Color(0, 51, 255));
+        btnPay.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnPay.setForeground(new java.awt.Color(255, 255, 255));
+        btnPay.setText("PAY");
+        btnPay.addActionListener(this::btnPayActionPerformed);
+        pnlDashboard.add(btnPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 590, 149, 42));
 
         btnPersonalUse.setBackground(new java.awt.Color(204, 204, 204));
         btnPersonalUse.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -994,11 +941,11 @@ private void setupCartActionColumn() {
         int selectedRow = tblCart.getSelectedRow();
         int selectedColumn = tblCart.getSelectedColumn();
 
-        if (selectedRow == -1) {
+        if (selectedRow < 0) {
             return;
         }
         
-        if (selectedColumn == 4) {
+        if (selectedColumn == 5) {
 
             int currentQuantity =
                     (int) tblCart.getValueAt(selectedRow, 1);
@@ -1075,7 +1022,7 @@ private void setupCartActionColumn() {
                 );
             }
         }
-        if (selectedColumn == 5) {
+        if (selectedColumn == 6) {
 
             int currentQuantity =
                     (int) tblCart.getValueAt(selectedRow, 1);
@@ -1116,7 +1063,7 @@ private void setupCartActionColumn() {
             calculateCartTotal();
         }
         
-        if (selectedColumn == 6) {
+        if (selectedColumn == 7) {
 
             DefaultTableModel cartModel =
                     (DefaultTableModel) tblCart.getModel();
@@ -1127,7 +1074,7 @@ private void setupCartActionColumn() {
         }
     }//GEN-LAST:event_tblCartMouseClicked
 
-    private void btnPayCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayCashActionPerformed
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
 
         DefaultTableModel cartModel =
                 (DefaultTableModel) tblCart.getModel();
@@ -1296,11 +1243,93 @@ private void setupCartActionColumn() {
                     }
                 }
 
+
+                // Save the sale header
+                String saleSQL =
+                        "INSERT INTO tbl_sales (userID, totalAmount) VALUES (?, ?)";
+
+                int saleID;
+
+                try (PreparedStatement salePst = conn.prepareStatement(
+                        saleSQL, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+
+                    salePst.setInt(1, DBuserSession.getUserId());
+                    salePst.setBigDecimal(2, total);
+                    salePst.executeUpdate();
+
+                    try (ResultSet keys = salePst.getGeneratedKeys()) {
+                        if (!keys.next()) {
+                            throw new SQLException("Could not retrieve the sale ID.");
+                        }
+                        saleID = keys.getInt(1);
+                    }
+                }
+
+                // Save each cart item
+                String itemSQL =
+                        "INSERT INTO tbl_sale_items "
+                        + "(saleID, productID, quantity, "
+                        + "sellingPrice, unitCost) "
+                        + "VALUES (?, ?, ?, ?, ?)";
+
+                try (PreparedStatement itemPst =
+                             conn.prepareStatement(itemSQL)) {
+
+                    for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+                        int productID = Integer.parseInt(
+                                cartModel.getValueAt(i, 4).toString()
+                        );
+
+                        int quantity = ((Number)
+                                cartModel.getValueAt(i, 1)).intValue();
+
+                        BigDecimal sellingPrice = (BigDecimal)
+                                cartModel.getValueAt(i, 2);
+
+                        String productSQL =
+                                "SELECT unitCost FROM tbl_products "
+                                + "WHERE productID = ?";
+
+                        BigDecimal unitCost;
+
+                        try (PreparedStatement productPst =
+                                     conn.prepareStatement(productSQL)) {
+
+                            productPst.setInt(1, productID);
+
+                            try (ResultSet rs =
+                                         productPst.executeQuery()) {
+
+                                if (!rs.next()) {
+                                    throw new SQLException(
+                                            "Product not found. ID: "
+                                            + productID
+                                    );
+                                }
+
+                                unitCost = rs.getBigDecimal("unitCost");
+                            }
+                        }
+
+                        itemPst.setInt(1, saleID);
+                        itemPst.setInt(2, productID);
+                        itemPst.setInt(3, quantity);
+                        itemPst.setBigDecimal(4, sellingPrice);
+                        itemPst.setBigDecimal(5, unitCost);
+
+                        itemPst.addBatch();
+                    }
+
+                    itemPst.executeBatch();
+                }
+
                 // Update today's daily summary
                 updateDailyGain(conn, total, totalCost);
 
                 // Commit all database changes
                 conn.commit();
+
 
             } catch (SQLException e) {
 
@@ -1350,7 +1379,7 @@ private void setupCartActionColumn() {
                 "Payment Successful",
                 JOptionPane.INFORMATION_MESSAGE
         );
-    }//GEN-LAST:event_btnPayCashActionPerformed
+    }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnUtangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtangActionPerformed
 
@@ -1550,11 +1579,97 @@ private void setupCartActionColumn() {
                     }
                 }
 
-                // Add this UTANG transaction to today's Daily Gain
+
+                // Save the UTANG sale header
+                String saleSQL =
+                        "INSERT INTO tbl_sales (userID, totalAmount) VALUES (?, ?)";
+                
+                int saleID;
+
+                try (PreparedStatement salePst = conn.prepareStatement(
+                        saleSQL, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+
+                    salePst.setInt(1, DBuserSession.getUserId());
+                    salePst.setBigDecimal(2, totalSales);
+
+                    salePst.executeUpdate();
+
+                    try (ResultSet keys = salePst.getGeneratedKeys()) {
+                        if (!keys.next()) {
+                            throw new SQLException(
+                                    "Could not retrieve the Utang sale ID."
+                            );
+                        }
+
+                        saleID = keys.getInt(1);
+                    }
+                }
+
+                // Save each product included in the UTANG sale
+                String itemSQL =
+                        "INSERT INTO tbl_sale_items "
+                        + "(saleID, productID, quantity, "
+                        + "sellingPrice, unitCost) "
+                        + "VALUES (?, ?, ?, ?, ?)";
+
+                try (PreparedStatement itemPst =
+                             conn.prepareStatement(itemSQL)) {
+
+                    for (int i = 0; i < cartModel.getRowCount(); i++) {
+
+                        int productID = Integer.parseInt(
+                                cartModel.getValueAt(i, 4).toString()
+                        );
+
+                        int quantity = ((Number)
+                                cartModel.getValueAt(i, 1)).intValue();
+
+                        BigDecimal sellingPrice = (BigDecimal)
+                                cartModel.getValueAt(i, 2);
+
+                        String productSQL =
+                                "SELECT unitCost FROM tbl_products "
+                                + "WHERE productID = ?";
+
+                        BigDecimal unitCost;
+
+                        try (PreparedStatement productPst =
+                                     conn.prepareStatement(productSQL)) {
+
+                            productPst.setInt(1, productID);
+
+                            try (ResultSet rs =
+                                         productPst.executeQuery()) {
+
+                                if (!rs.next()) {
+                                    throw new SQLException(
+                                            "Product not found. ID: "
+                                            + productID
+                                    );
+                                }
+
+                                unitCost = rs.getBigDecimal("unitCost");
+                            }
+                        }
+
+                        itemPst.setInt(1, saleID);
+                        itemPst.setInt(2, productID);
+                        itemPst.setInt(3, quantity);
+                        itemPst.setBigDecimal(4, sellingPrice);
+                        itemPst.setBigDecimal(5, unitCost);
+
+                        itemPst.addBatch();
+                    }
+
+                    itemPst.executeBatch();
+                }
+
+                // Update today's Daily Gain
                 updateDailyGain(conn, totalSales, totalCost);
 
                 // Save all database changes together
                 conn.commit();
+
 
             } catch (SQLException e) {
 
@@ -1784,7 +1899,7 @@ private void setupCartActionColumn() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddToCart;
-    private javax.swing.JButton btnPayCash;
+    private javax.swing.JButton btnPay;
     private javax.swing.JButton btnPersonalUse;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUtang;
