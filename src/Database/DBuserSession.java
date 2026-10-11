@@ -4,31 +4,27 @@
  */
 package Database;
 
-/**
- *
- * @author Helia Pearl Charish
- */
 public class DBuserSession {
-    private static int userId;
-    private static String userName;
+    private static int userID;
+    private static String username;
     private static String userRole;
     
     public static void setUser(int id, String user, String role){
-        userId = id;
-        userName = user;
+        userID = id;
+        username = user;
         userRole = role;
     }
     public static int getUserId(){
-        return userId;
+        return userID;
     }
     public static String getUsername(){
-        return userName;
+        return username;
     }
     public static String getRole(){
         return userRole;
     }
     public static void clearSection(){
-        userId = 0;
-        userName = null;
+        userID = 0;
+        username = null;
     }
 }
