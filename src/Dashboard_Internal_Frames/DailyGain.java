@@ -93,17 +93,26 @@ public class DailyGain extends javax.swing.JInternalFrame {
             pst.setDate(1, sqlFromDate);
             pst.setDate(2, sqlToDate);
 
-            try (ResultSet rs = pst.executeQuery()) {
+        try (ResultSet rs = pst.executeQuery()) {
 
-                while (rs.next()) {
-                    model.addRow(new Object[]{
-                        rs.getDate("gainDate"),
-                        rs.getBigDecimal("totalSales"),
-                        rs.getBigDecimal("totalCost"),
-                        rs.getBigDecimal("totalGain")
-                    });
-                }
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getDate("gainDate"),
+                    rs.getBigDecimal("totalSales"),
+                    rs.getBigDecimal("totalCost"),
+                    rs.getBigDecimal("totalGain")
+                });
             }
+
+            if (model.getRowCount() == 0) {
+                model.addRow(new Object[]{
+                    "No records found for the selected date range.",
+                    null,
+                    null,
+                    null
+                });
+            }
+        }
 
         } catch (SQLException e) {
 
