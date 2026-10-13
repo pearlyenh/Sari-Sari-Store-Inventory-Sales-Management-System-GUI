@@ -320,26 +320,26 @@ public class Inventory extends javax.swing.JInternalFrame {
         btnAddProduct.addActionListener(this::btnAddProductActionPerformed);
         pnlDashboard.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 598, 177, 47));
 
-        btnUpdate.setBackground(new java.awt.Color(0, 51, 255));
+        btnUpdate.setBackground(new java.awt.Color(0, 51, 204));
         btnUpdate.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(this::btnUpdateActionPerformed);
-        pnlDashboard.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 598, 177, 47));
+        pnlDashboard.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 600, 177, 47));
 
         btnDelete.setBackground(new java.awt.Color(255, 0, 0));
         btnDelete.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(this::btnDeleteActionPerformed);
-        pnlDashboard.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 598, 177, 47));
+        pnlDashboard.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 177, 47));
 
-        btnRestock.setBackground(new java.awt.Color(102, 204, 0));
+        btnRestock.setBackground(new java.awt.Color(0, 102, 255));
         btnRestock.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnRestock.setForeground(new java.awt.Color(255, 255, 255));
         btnRestock.setText("Restock");
         btnRestock.addActionListener(this::btnRestockActionPerformed);
-        pnlDashboard.add(btnRestock, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 598, 177, 47));
+        pnlDashboard.add(btnRestock, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 600, 177, 47));
 
         txtSearch.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         txtSearch.setText("Search product ");

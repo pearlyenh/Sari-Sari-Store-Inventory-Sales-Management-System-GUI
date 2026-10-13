@@ -56,22 +56,12 @@ public class DailyGain extends javax.swing.JInternalFrame {
         java.util.Date toDate = dateTo.getDate();
 
         if (fromDate == null || toDate == null) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please select both dates.",
-                    "Missing Date",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Please select both dates.","Missing Date",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         if (fromDate.after(toDate)) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "The From date cannot be later than the To date.",
-                    "Invalid Date Range",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"The From date cannot be later than the To date.","Invalid Date Range",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -84,11 +74,9 @@ public class DailyGain extends javax.swing.JInternalFrame {
         try (Connection conn = DBConnection.connect();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            java.sql.Date sqlFromDate =
-                    new java.sql.Date(fromDate.getTime());
+            java.sql.Date sqlFromDate = new java.sql.Date(fromDate.getTime());
 
-            java.sql.Date sqlToDate =
-                    new java.sql.Date(toDate.getTime());
+            java.sql.Date sqlToDate = new java.sql.Date(toDate.getTime());
 
             pst.setDate(1, sqlFromDate);
             pst.setDate(2, sqlToDate);
@@ -117,11 +105,7 @@ public class DailyGain extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to load daily gain history:\n"
-                    + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
+                    this,"Failed to load daily gain history:\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE
             );
         }
     }

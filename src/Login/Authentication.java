@@ -11,6 +11,15 @@ import javax.swing.JOptionPane;
 import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 
+import Database.DBConnection;
+import java.sql.SQLException;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
+
 public class Authentication extends javax.swing.JFrame {
     
     private String userRole;
@@ -169,22 +178,54 @@ public class Authentication extends javax.swing.JFrame {
         String pin = new String(pinField.getPassword());
 
         if (pin.isEmpty()) {
-            JOptionPane.showMessageDialog(this,"Please enter your Admin PIN.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Please enter your Admin PIN.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (pin.equals("102107")) {
-            JOptionPane.showMessageDialog(this,"Admin authentication successful!");
+        String sql = "SELECT owner_pin FROM tbl_users "
+                   + "WHERE user_role = 'Owner'";
 
-            MainMenuFrame menu = new MainMenuFrame(userRole);
-            menu.setVisible(true);
-            this.dispose();
-            
+        try (Connection conn = DBConnection.connect();
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            if (rs.next()) {
+                String storedPin = rs.getString("owner_pin");
+
+                if (storedPin != null && pin.equals(storedPin)) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Admin authentication successful!");
+
+                    MainMenuFrame menu = new MainMenuFrame(userRole);
+                    menu.setVisible(true);
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Incorrect Admin PIN.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    pinField.setText("");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Owner account not found.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Unable to verify PIN: " + e.getMessage(),
+                    "Database Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        else {
-            JOptionPane.showMessageDialog(this,"Incorrect Admin PIN.", "Error", JOptionPane.ERROR_MESSAGE);
-            pinField.setText("");
-        }
+
     }//GEN-LAST:event_verifyActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
