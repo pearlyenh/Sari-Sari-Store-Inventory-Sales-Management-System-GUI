@@ -257,9 +257,23 @@ public class DailyGain extends javax.swing.JInternalFrame {
             new String [] {
                 "Date", "Total Sales", "Total Cost", "Total Gain"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDailyGain.setGridColor(new java.awt.Color(0, 51, 255));
         jScrollPane1.setViewportView(tblDailyGain);
+        if (tblDailyGain.getColumnModel().getColumnCount() > 0) {
+            tblDailyGain.getColumnModel().getColumn(0).setResizable(false);
+            tblDailyGain.getColumnModel().getColumn(1).setResizable(false);
+            tblDailyGain.getColumnModel().getColumn(2).setResizable(false);
+            tblDailyGain.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         pnlDashboard.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 328, 1090, 310));
 
