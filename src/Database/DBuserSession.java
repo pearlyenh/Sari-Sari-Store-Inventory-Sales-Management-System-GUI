@@ -26,5 +26,6 @@ public class DBuserSession {
     public static void clearSection(){
         userID = 0;
         username = null;
+        userRole = null;
     }
 }
