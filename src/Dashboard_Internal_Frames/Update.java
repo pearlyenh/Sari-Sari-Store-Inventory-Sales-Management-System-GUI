@@ -74,13 +74,13 @@ private String userRole;
                                     .toString()
                     );
 
-                    lblPotentialProfit.setText(
-                            "Potential Profit per Item: " + rs.getBigDecimal("potentialProfit")
+                    lblPotentialGain.setText(
+                            "Potential Gain per Item: " + rs.getBigDecimal("potentialGain")
                     );
 
-                    cmbLowStockReminder.setSelectedItem(
+                    cmbLowStockDisplay.setSelectedItem(
                             String.valueOf(
-                                    rs.getInt("lowStockReminder")
+                                    rs.getInt("lowStockDisplay")
                             )
                     );
                 }
@@ -134,25 +134,20 @@ private void calculateProductValues() {
                                 + unitCost + " pesos"
                 );
 
-                // Calculate Potential Profit only
+                // Calculate Potential Gain only
                 // when Selling Price is available
                 if (!sellingPriceText.isEmpty()) {
 
-                    BigDecimal sellingPrice =
-                            new BigDecimal(sellingPriceText);
+                    BigDecimal sellingPrice = new BigDecimal(sellingPriceText);
 
-                    BigDecimal potentialProfit =
-                            sellingPrice.subtract(unitCost);
+                    BigDecimal potentialGain = sellingPrice.subtract(unitCost);
 
-                    lblPotentialProfit.setText(
-                            "Potential Profit per Item: "
-                                    + potentialProfit + " pesos"
-                    );
+                    lblPotentialGain.setText("Potential Gain per Item: "+ potentialGain + " pesos");
 
                 } else {
 
-                    lblPotentialProfit.setText(
-                            "Potential Profit per Item: "
+                    lblPotentialGain.setText(
+                            "Potential Gain per Item: "
                     );
                 }
 
@@ -162,8 +157,8 @@ private void calculateProductValues() {
                         "Unit Cost / Original Price per Piece: "
                 );
 
-                lblPotentialProfit.setText(
-                        "Potential Profit per Item: "
+                lblPotentialGain.setText(
+                        "Potential Gain per Item: "
                 );
             }
 
@@ -178,8 +173,8 @@ private void calculateProductValues() {
                 "Unit Cost / Original Price per Piece: "
         );
 
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
+        lblPotentialGain.setText(
+                "Potential Gain per Item: "
         );
     }
 }
@@ -210,13 +205,13 @@ private void calculateProductValues() {
         jPanel6 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         lblUnitCost = new javax.swing.JLabel();
-        lblPotentialProfit = new javax.swing.JLabel();
+        lblPotentialGain = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        cmbLowStockReminder = new javax.swing.JComboBox<>();
+        cmbLowStockDisplay = new javax.swing.JComboBox<>();
         txtSellingPrice = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -379,11 +374,11 @@ private void calculateProductValues() {
         lblUnitCost.setText(" Unit Cost / Original Price per Piece: ");
         jPanel5.add(lblUnitCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 500, -1));
 
-        lblPotentialProfit.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblPotentialProfit.setForeground(new java.awt.Color(255, 255, 255));
-        lblPotentialProfit.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\gold-philippine-peso-coin-18576_32.png")); // NOI18N
-        lblPotentialProfit.setText(" Potential Profit per Item: ");
-        jPanel5.add(lblPotentialProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 500, -1));
+        lblPotentialGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblPotentialGain.setForeground(new java.awt.Color(255, 255, 255));
+        lblPotentialGain.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\gold-philippine-peso-coin-18576_32.png")); // NOI18N
+        lblPotentialGain.setText(" Potential Gain per Item: ");
+        jPanel5.add(lblPotentialGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 500, -1));
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -423,12 +418,12 @@ private void calculateProductValues() {
 
         jLabel17.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel17.setText("Low Stock Reminder ");
+        jLabel17.setText("Low Stock Display ");
         jPanel7.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        cmbLowStockReminder.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        cmbLowStockReminder.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15", "20" }));
-        jPanel7.add(cmbLowStockReminder, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 290, 44));
+        cmbLowStockDisplay.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        cmbLowStockDisplay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15", "20" }));
+        jPanel7.add(cmbLowStockDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 290, 44));
 
         txtSellingPrice.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         txtSellingPrice.setText("Enter selling price per item");
@@ -536,7 +531,7 @@ private void calculateProductValues() {
             || txtPurchaseCost.getText().trim().isEmpty()
             || txtNumberOfPieces.getText().trim().isEmpty()
             || txtSellingPrice.getText().trim().isEmpty()
-            || cmbLowStockReminder.getSelectedItem() == null) {
+            || cmbLowStockDisplay.getSelectedItem() == null) {
 
             JOptionPane.showMessageDialog(
                 this,
@@ -560,9 +555,9 @@ private void calculateProductValues() {
             BigDecimal sellingPrice =
             new BigDecimal(txtSellingPrice.getText().trim());
 
-            int lowStockReminder =
+            int lowStockDisplay =
             Integer.parseInt(
-                cmbLowStockReminder.getSelectedItem().toString()
+                cmbLowStockDisplay.getSelectedItem().toString()
             );
 
             // Number of pieces must be greater than zero
@@ -597,8 +592,7 @@ private void calculateProductValues() {
             }
 
             // Calculate potential profit
-            BigDecimal potentialProfit =
-            sellingPrice.subtract(unitCost);
+            BigDecimal potentialGain = sellingPrice.subtract(unitCost);
 
             // Update product
             String sql = "UPDATE tbl_products SET "
@@ -608,8 +602,8 @@ private void calculateProductValues() {
             + "numberOfPieces = ?, "
             + "unitCost = ?, "
             + "sellingPrice = ?, "
-            + "potentialProfit = ?, "
-            + "lowStockReminder = ? "
+            + "potentialGain = ?, "
+            + "lowStockDisplay = ? "
             + "WHERE productID = ?";
 
             try (Connection conn = DBConnection.connect();
@@ -621,8 +615,8 @@ private void calculateProductValues() {
                 pst.setInt(4, numberOfPieces);
                 pst.setBigDecimal(5, unitCost);
                 pst.setBigDecimal(6, sellingPrice);
-                pst.setBigDecimal(7, potentialProfit);
-                pst.setInt(8, lowStockReminder);
+                pst.setBigDecimal(7, potentialGain);
+                pst.setInt(8, lowStockDisplay);
                 pst.setInt(9, productID);
 
                 int rowsUpdated = pst.executeUpdate();
@@ -665,7 +659,7 @@ private void calculateProductValues() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbCategory;
-    private javax.swing.JComboBox<String> cmbLowStockReminder;
+    private javax.swing.JComboBox<String> cmbLowStockDisplay;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -685,7 +679,7 @@ private void calculateProductValues() {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel lblAddProduct;
     private javax.swing.JLabel lblDescription;
-    private javax.swing.JLabel lblPotentialProfit;
+    private javax.swing.JLabel lblPotentialGain;
     private javax.swing.JLabel lblProductInformation;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblUnitCost;

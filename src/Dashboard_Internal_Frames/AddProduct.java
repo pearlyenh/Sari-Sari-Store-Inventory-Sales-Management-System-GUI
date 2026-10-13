@@ -459,11 +459,7 @@ private void calculateProductValues() {
                 || cmbLowStockDisplay.getSelectedItem() == null) {
 
             JOptionPane.showMessageDialog(
-                    this,
-                    "Please complete all required fields.",
-                    "Incomplete Information",
-                    JOptionPane.WARNING_MESSAGE
-            );
+                    this,"Please complete all required fields.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -587,11 +583,7 @@ private void calculateProductValues() {
                 if (rowsInserted > 0) {
 
                     JOptionPane.showMessageDialog(
-                            this,
-                            "Product successfully added! \nCheck inventory to see newly added product.",
-                            "Success",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
+                            this,"Product successfully added! \nCheck inventory to see newly added product.","Success",JOptionPane.INFORMATION_MESSAGE);
 
                     // Reset fields
                     txtProductName.setText("Enter Product Name");
@@ -609,20 +601,12 @@ private void calculateProductValues() {
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter valid numbers for purchase cost, number of pieces, and selling price.",
-                    "Invalid Input",
-                    JOptionPane.WARNING_MESSAGE
-            );
+                    this,"Please enter valid numbers for purchase cost, number of pieces, and selling price.","Invalid Input",JOptionPane.WARNING_MESSAGE);
 
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to save product.\n" + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+                    this,"Failed to save product.\n" + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveProductActionPerformed
 

@@ -113,7 +113,7 @@
                     <Column editable="false" title="Purchase Cost" type="java.lang.Object"/>
                     <Column editable="false" title="Unit Cost" type="java.lang.Object"/>
                     <Column editable="false" title="Selling Price" type="java.lang.Object"/>
-                    <Column editable="false" title="Potential Profit" type="java.lang.Object"/>
+                    <Column editable="false" title="Potential Gain" type="java.lang.Object"/>
                     <Column editable="false" title="Stock" type="java.lang.Object"/>
                     <Column editable="false" title="Low Stock Display" type="java.lang.Object"/>
                     <Column editable="false" title="Stock Status" type="java.lang.Object"/>

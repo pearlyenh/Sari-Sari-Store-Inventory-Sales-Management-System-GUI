@@ -332,8 +332,10 @@ public class DailyGain extends javax.swing.JInternalFrame {
 
         lblTotalGain.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         lblTotalGain.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalGain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTotalGain.setText("0.00");
-        jPanel2.add(lblTotalGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 40, -1, 40));
+        lblTotalGain.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblTotalGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 40, 230, 40));
 
         lblTotalSales.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         lblTotalSales.setForeground(new java.awt.Color(255, 255, 255));
