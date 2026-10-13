@@ -284,9 +284,6 @@ public class LoginFrame extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
     }
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton adminRbutton;
