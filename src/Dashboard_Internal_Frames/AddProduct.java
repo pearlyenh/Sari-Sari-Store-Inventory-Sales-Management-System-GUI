@@ -557,7 +557,7 @@ private void calculateProductValues() {
                 return;
             }
 
-            // Calculate potential profit
+            // Calculate potential gain
             BigDecimal potentialGain =
                     sellingPrice.subtract(unitCost);
 

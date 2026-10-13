@@ -115,7 +115,7 @@
                     <Column editable="false" title="Selling Price" type="java.lang.Object"/>
                     <Column editable="false" title="Potential Profit" type="java.lang.Object"/>
                     <Column editable="false" title="Stock" type="java.lang.Object"/>
-                    <Column editable="false" title="Low Stock Reminder" type="java.lang.Object"/>
+                    <Column editable="false" title="Low Stock Display" type="java.lang.Object"/>
                     <Column editable="false" title="Stock Status" type="java.lang.Object"/>
                   </Table>
                 </Property>

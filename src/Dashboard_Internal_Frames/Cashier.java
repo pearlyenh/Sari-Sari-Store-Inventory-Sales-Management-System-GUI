@@ -1076,30 +1076,17 @@ private void setupCartActionColumn() {
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
 
-        DefaultTableModel cartModel =
-                (DefaultTableModel) tblCart.getModel();
+        DefaultTableModel cartModel =(DefaultTableModel) tblCart.getModel();
 
-        // 1. Check if cart is empty
         if (cartModel.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Cart is empty. Please add a product first.",
-                    "Empty Cart",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Cart is empty. Please add a product first.","Empty Cart",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 2. Validate cash received
         String cashText = txtCashReceived.getText().trim();
 
         if (cashText.isEmpty()) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter the cash received.",
-                    "Cash Required",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Please enter the cash received.","Cash Required",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -1113,16 +1100,11 @@ private void setupCartActionColumn() {
             }
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter a valid, non-negative cash amount.",
-                    "Invalid Cash",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Please enter a valid, non-negative cash amount.","Invalid Cash",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 3. Calculate total selling price
+        //Calculate total selling price
         BigDecimal total = BigDecimal.ZERO;
 
         for (int i = 0; i < cartModel.getRowCount(); i++) {
@@ -1133,29 +1115,19 @@ private void setupCartActionColumn() {
         }
 
         if (cashReceived.compareTo(total) < 0) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Insufficient cash.\n"
-                    + "Total: " + total.setScale(2,
-                            java.math.RoundingMode.HALF_UP)
-                    + "\nCash Received: " + cashReceived.setScale(2,
-                            java.math.RoundingMode.HALF_UP),
-                    "Insufficient Cash",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Insufficient cash.\n"+ "Total: " + total.setScale(2,java.math.RoundingMode.HALF_UP)
+                    + "\nCash Received: " + cashReceived.setScale(2,java.math.RoundingMode.HALF_UP),"Insufficient Cash",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         BigDecimal change = cashReceived.subtract(total);
         BigDecimal totalCost = BigDecimal.ZERO;
 
-        // 4. Deduct stock and update daily gain together
+        // Deduct stock and update daily gain together
         try (Connection conn = DBConnection.connect()) {
 
             if (conn == null) {
-                throw new SQLException(
-                        "Could not connect to the database."
-                );
+                throw new SQLException("Could not connect to the database.");
             }
 
             conn.setAutoCommit(false);
@@ -1164,11 +1136,9 @@ private void setupCartActionColumn() {
                 // Check stock and get unit cost
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                    String productName =
-                            cartModel.getValueAt(i, 0).toString();
+                    String productName =cartModel.getValueAt(i, 0).toString();
 
-                    int quantity =
-                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+                    int quantity =((Number) cartModel.getValueAt(i, 1)).intValue();
 
                     String sql =
                             "SELECT stock, unitCost "
@@ -1176,17 +1146,14 @@ private void setupCartActionColumn() {
                             + "WHERE productName = ? "
                             + "AND status = 'Active' FOR UPDATE";
 
-                    try (PreparedStatement pst =
-                                 conn.prepareStatement(sql)) {
+                    try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
                         pst.setString(1, productName);
 
                         try (ResultSet rs = pst.executeQuery()) {
 
                             if (!rs.next()) {
-                                throw new SQLException(
-                                        "Product not found: " + productName
-                                );
+                                throw new SQLException("Product not found: " + productName);
                             }
 
                             int stock = rs.getInt("stock");
@@ -1199,13 +1166,9 @@ private void setupCartActionColumn() {
                                 );
                             }
 
-                            BigDecimal unitCost =
-                                    rs.getBigDecimal("unitCost");
+                            BigDecimal unitCost =rs.getBigDecimal("unitCost");
 
-                            BigDecimal itemCost =
-                                    unitCost.multiply(
-                                            BigDecimal.valueOf(quantity)
-                                    );
+                            BigDecimal itemCost =unitCost.multiply(BigDecimal.valueOf(quantity) );
 
                             totalCost = totalCost.add(itemCost);
                         }
@@ -1246,7 +1209,9 @@ private void setupCartActionColumn() {
 
                 // Save the sale header
                 String saleSQL =
-                        "INSERT INTO tbl_sales (userID, totalAmount) VALUES (?, ?)";
+                        "INSERT INTO tbl_sales "
+                        + "(userID, totalAmount, amountPaid, changeAmount, transactionType) "
+                        + "VALUES (?, ?, ?, ?, ?)";
 
                 int saleID;
 
@@ -1255,12 +1220,17 @@ private void setupCartActionColumn() {
 
                     salePst.setInt(1, DBuserSession.getUserId());
                     salePst.setBigDecimal(2, total);
+                    salePst.setBigDecimal(3, cashReceived);
+                    salePst.setBigDecimal(4, change);
+                    salePst.setString(5, "Paid");
+
                     salePst.executeUpdate();
 
                     try (ResultSet keys = salePst.getGeneratedKeys()) {
                         if (!keys.next()) {
                             throw new SQLException("Could not retrieve the sale ID.");
                         }
+
                         saleID = keys.getInt(1);
                     }
                 }
@@ -1272,20 +1242,15 @@ private void setupCartActionColumn() {
                         + "sellingPrice, unitCost) "
                         + "VALUES (?, ?, ?, ?, ?)";
 
-                try (PreparedStatement itemPst =
-                             conn.prepareStatement(itemSQL)) {
+                try (PreparedStatement itemPst = conn.prepareStatement(itemSQL)) {
 
                     for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                        int productID = Integer.parseInt(
-                                cartModel.getValueAt(i, 4).toString()
-                        );
+                        int productID = Integer.parseInt(cartModel.getValueAt(i, 4).toString());
 
-                        int quantity = ((Number)
-                                cartModel.getValueAt(i, 1)).intValue();
+                        int quantity = ((Number)cartModel.getValueAt(i, 1)).intValue();
 
-                        BigDecimal sellingPrice = (BigDecimal)
-                                cartModel.getValueAt(i, 2);
+                        BigDecimal sellingPrice = (BigDecimal)cartModel.getValueAt(i, 2);
 
                         String productSQL =
                                 "SELECT unitCost FROM tbl_products "
@@ -1293,19 +1258,14 @@ private void setupCartActionColumn() {
 
                         BigDecimal unitCost;
 
-                        try (PreparedStatement productPst =
-                                     conn.prepareStatement(productSQL)) {
+                        try (PreparedStatement productPst =conn.prepareStatement(productSQL)) {
 
                             productPst.setInt(1, productID);
 
-                            try (ResultSet rs =
-                                         productPst.executeQuery()) {
+                            try (ResultSet rs =productPst.executeQuery()) {
 
                                 if (!rs.next()) {
-                                    throw new SQLException(
-                                            "Product not found. ID: "
-                                            + productID
-                                    );
+                                    throw new SQLException("Product not found. ID: "+ productID);
                                 }
 
                                 unitCost = rs.getBigDecimal("unitCost");
@@ -1582,8 +1542,11 @@ private void setupCartActionColumn() {
 
                 // Save the UTANG sale header
                 String saleSQL =
-                        "INSERT INTO tbl_sales (userID, totalAmount) VALUES (?, ?)";
-                
+                        "INSERT INTO tbl_sales "
+                        + "(userID, totalAmount, amountPaid, "
+                        + "changeAmount, transactionType) "
+                        + "VALUES (?, ?, ?, ?, ?)";
+
                 int saleID;
 
                 try (PreparedStatement salePst = conn.prepareStatement(
@@ -1591,6 +1554,9 @@ private void setupCartActionColumn() {
 
                     salePst.setInt(1, DBuserSession.getUserId());
                     salePst.setBigDecimal(2, totalSales);
+                    salePst.setBigDecimal(3, BigDecimal.ZERO);
+                    salePst.setBigDecimal(4, BigDecimal.ZERO);
+                    salePst.setString(5, "Utang");
 
                     salePst.executeUpdate();
 
@@ -1712,11 +1678,9 @@ private void setupCartActionColumn() {
                 "Utang recorded successfully!\n"
                 + "The items have been deducted from inventory."
                 + "\n\nTotal: ₱"
-                + totalSales.setScale(
-                        2, java.math.RoundingMode.HALF_UP)
+                + totalSales.setScale(2, java.math.RoundingMode.HALF_UP)
                 + "\nGain: ₱"
-                + totalSales.subtract(totalCost).setScale(
-                        2, java.math.RoundingMode.HALF_UP),
+                + totalSales.subtract(totalCost).setScale(2, java.math.RoundingMode.HALF_UP),
                 "Utang Recorded",
                 JOptionPane.INFORMATION_MESSAGE
         );
@@ -1724,21 +1688,14 @@ private void setupCartActionColumn() {
 
     private void btnPersonalUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalUseActionPerformed
 
-        DefaultTableModel cartModel =
-                (DefaultTableModel) tblCart.getModel();
+        DefaultTableModel cartModel =(DefaultTableModel) tblCart.getModel();
 
-        // 1. Check if the cart is empty
         if (cartModel.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please add a product to the cart first.",
-                    "Empty Cart",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Please add a product to the cart first.","Empty Cart",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 2. Confirm the deduction
+        // Confirm the deduction
         int confirmation = JOptionPane.showConfirmDialog(
                 this,
                 "Are you sure you want to deduct these products "
@@ -1753,32 +1710,26 @@ private void setupCartActionColumn() {
             return;
         }
 
-        // 3. Connect to the database
+        //Connect to the database
         try (Connection conn = DBConnection.connect()) {
 
             if (conn == null) {
-                throw new SQLException(
-                        "Could not connect to the database."
-                );
+                throw new SQLException("Could not connect to the database.");
             }
 
             conn.setAutoCommit(false);
 
             try {
 
-                // 4. Validate every product before deducting stock
+                // Validate every product before deducting stock
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                    String productName =
-                            cartModel.getValueAt(i, 0).toString();
+                    String productName =cartModel.getValueAt(i, 0).toString();
 
-                    int quantity =
-                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+                    int quantity =((Number) cartModel.getValueAt(i, 1)).intValue();
 
                     if (quantity <= 0) {
-                        throw new SQLException(
-                                "Invalid quantity for " + productName
-                        );
+                        throw new SQLException("Invalid quantity for " + productName);
                     }
 
                     String sql =
@@ -1788,17 +1739,14 @@ private void setupCartActionColumn() {
                             + "AND status = 'Active' "
                             + "FOR UPDATE";
 
-                    try (PreparedStatement pst =
-                                 conn.prepareStatement(sql)) {
+                    try (PreparedStatement pst =conn.prepareStatement(sql)) {
 
                         pst.setString(1, productName);
 
                         try (ResultSet rs = pst.executeQuery()) {
 
                             if (!rs.next()) {
-                                throw new SQLException(
-                                        "Product not found: " + productName
-                                );
+                                throw new SQLException("Product not found: " + productName);
                             }
 
                             int stock = rs.getInt("stock");
@@ -1814,7 +1762,7 @@ private void setupCartActionColumn() {
                     }
                 }
 
-                // 5. Deduct stock after all products pass validation
+                // Deduct stock after all products pass validation
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
                     String productName =
@@ -1843,6 +1791,23 @@ private void setupCartActionColumn() {
                             );
                         }
                     }
+                }
+                
+                // Record the Personal Use transaction
+                String sql =
+                        "INSERT INTO tbl_sales "
+                        + "(userID, totalAmount, amountPaid, "
+                        + "changeAmount, transactionType) "
+                        + "VALUES (?, ?, ?, ?, ?)";
+
+                try (PreparedStatement pst = conn.prepareStatement(sql)) {
+                    pst.setInt(1, DBuserSession.getUserId());
+                    pst.setBigDecimal(2, BigDecimal.ZERO);
+                    pst.setBigDecimal(3, BigDecimal.ZERO);
+                    pst.setBigDecimal(4, BigDecimal.ZERO);
+                    pst.setString(5, "Personal Use");
+
+                    pst.executeUpdate();
                 }
 
                 // 6. Save all deductions together

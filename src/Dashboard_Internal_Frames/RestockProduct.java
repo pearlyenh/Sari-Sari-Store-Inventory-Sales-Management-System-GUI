@@ -109,8 +109,8 @@ private void loadProductInformation() {
                 "New Stock: "
         );
 
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
+        lblPotentialGain.setText(
+                "Potential Gain per Item: "
         );
 
         return;
@@ -168,8 +168,8 @@ private void loadProductInformation() {
                         "New Stock: "
                 );
 
-                lblPotentialProfit.setText(
-                        "Potential Profit per Item: "
+                lblPotentialGain.setText(
+                        "Potential Gain per Item: "
                 );
             }
         }
@@ -211,8 +211,8 @@ private void calculateRestockValues() {
 
         lblNewUnitCost.setText("New Unit Cost: ");
         lblNewStock.setText("New Stock: ");
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
+        lblPotentialGain.setText(
+                "Potential Gain per Item: "
         );
 
         return;
@@ -233,8 +233,8 @@ private void calculateRestockValues() {
 
             lblNewUnitCost.setText("New Unit Cost: ");
             lblNewStock.setText("New Stock: ");
-            lblPotentialProfit.setText(
-                    "Potential Profit per Item: "
+            lblPotentialGain.setText(
+                    "Potential Gain per Item: "
             );
 
             return;
@@ -269,8 +269,8 @@ private void calculateRestockValues() {
                         RoundingMode.HALF_UP
                 );
 
-        // 5. SAME PROFIT LOGIC AS ADD PRODUCT
-        BigDecimal potentialProfit =
+        // 5. SAME GAIN LOGIC AS ADD PRODUCT
+        BigDecimal potentialGain =
                 currentSellingPrice.subtract(
                         newUnitCost
                 );
@@ -290,9 +290,9 @@ private void calculateRestockValues() {
                 + " pieces"
         );
 
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
-                + potentialProfit.setScale(
+        lblPotentialGain.setText(
+                "Potential Gain per Item: "
+                + potentialGain.setScale(
                         2,
                         RoundingMode.HALF_UP
                 )
@@ -303,8 +303,8 @@ private void calculateRestockValues() {
         // User is still typing.
         lblNewUnitCost.setText("New Unit Cost: ");
         lblNewStock.setText("New Stock: ");
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
+        lblPotentialGain.setText(
+                "Potential Gain per Item: "
         );
     }
 }
@@ -337,7 +337,7 @@ private void calculateRestockValues() {
         lblProductInformation2 = new javax.swing.JLabel();
         lblNewUnitCost = new javax.swing.JLabel();
         lblNewStock = new javax.swing.JLabel();
-        lblPotentialProfit = new javax.swing.JLabel();
+        lblPotentialGain = new javax.swing.JLabel();
         txtSearchProduct = new javax.swing.JTextField();
         lblProductName = new javax.swing.JLabel();
 
@@ -522,10 +522,10 @@ private void calculateRestockValues() {
         lblNewStock.setText("New Stock: ");
         jPanel7.add(lblNewStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 290, -1));
 
-        lblPotentialProfit.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblPotentialProfit.setForeground(new java.awt.Color(0, 51, 255));
-        lblPotentialProfit.setText("Potential Profit per Item: ");
-        jPanel7.add(lblPotentialProfit, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 380, -1));
+        lblPotentialGain.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblPotentialGain.setForeground(new java.awt.Color(0, 51, 255));
+        lblPotentialGain.setText("Potential Gain per Item: ");
+        jPanel7.add(lblPotentialGain, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 380, -1));
 
         pnlDashboard.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 428, 1035, 122));
 
@@ -595,7 +595,7 @@ private void calculateRestockValues() {
             txtNumberOfPieces.setText("");
             lblNewUnitCost.setText("");
             lblNewStock.setText("");
-            lblPotentialProfit.setText("");
+            lblPotentialGain.setText("");
         }
 
 
@@ -723,16 +723,16 @@ private void calculateRestockValues() {
                     RoundingMode.HALF_UP
             );
 
-    // Calculate potential profit
+    // Calculate potential gain
     // SAME LOGIC AS ADD PRODUCT:
     // Selling Price - Unit Cost
-    BigDecimal newPotentialProfit =
+    BigDecimal newPotentialGain =
             currentSellingPrice.subtract(
                     newUnitCost
             );
 
-    // Prevent negative or zero profit
-    if (newPotentialProfit.compareTo(
+    // Prevent negative or zero gain
+    if (newPotentialGain.compareTo(
             BigDecimal.ZERO) <= 0) {
 
         JOptionPane.showMessageDialog(
@@ -766,7 +766,7 @@ private void calculateRestockValues() {
             "UPDATE tbl_products SET "
             + "stock = ?, "
             + "unitCost = ?, "
-            + "potentialProfit = ? "
+            + "potentialGain = ? "
             + "WHERE productName = ?";
 
     try (Connection conn = DBConnection.connect();
@@ -775,7 +775,7 @@ private void calculateRestockValues() {
 
         pst.setInt(1, newStock);
         pst.setBigDecimal(2, newUnitCost);
-        pst.setBigDecimal(3, newPotentialProfit);
+        pst.setBigDecimal(3, newPotentialGain);
         pst.setString(4, productName);
 
         int rowsUpdated =
@@ -829,8 +829,8 @@ private void calculateRestockValues() {
             "New Stock: "
     );
 
-    lblPotentialProfit.setText(
-            "Potential Profit per Item: "
+    lblPotentialGain.setText(
+            "Potential Gain per Item: "
     );
 
     // Reload current product information
@@ -851,8 +851,8 @@ private void calculateRestockValues() {
                 "New Stock: "
         );
 
-        lblPotentialProfit.setText(
-                "Potential Profit per Item: "
+        lblPotentialGain.setText(
+                "Potential Gain per Item: "
         );
     }//GEN-LAST:event_btnResetActionPerformed
 
@@ -910,7 +910,7 @@ private void calculateRestockValues() {
     private javax.swing.JLabel lblDashboardTitle;
     private javax.swing.JLabel lblNewStock;
     private javax.swing.JLabel lblNewUnitCost;
-    private javax.swing.JLabel lblPotentialProfit;
+    private javax.swing.JLabel lblPotentialGain;
     private javax.swing.JLabel lblProductInformation;
     private javax.swing.JLabel lblProductInformation1;
     private javax.swing.JLabel lblProductInformation2;

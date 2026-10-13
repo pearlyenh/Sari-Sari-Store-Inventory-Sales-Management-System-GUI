@@ -285,7 +285,7 @@ public class Inventory extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Product Name", "Caterory", "Purchase Cost", "Unit Cost", "Selling Price", "Potential Profit", "Stock", "Low Stock Reminder", "Stock Status"
+                "ID", "Product Name", "Caterory", "Purchase Cost", "Unit Cost", "Selling Price", "Potential Profit", "Stock", "Low Stock Display", "Stock Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -481,7 +481,7 @@ public class Inventory extends javax.swing.JInternalFrame {
         
         String sql =
         "UPDATE tbl_products "
-        + "SET status = 'Archived' "
+        + "SET status = 'Deleted' "
         + "WHERE productID = ?";
         
         try (Connection conn = DBConnection.connect();
