@@ -5,15 +5,17 @@
 package Login;
 
 import Login.LoginFrame;
+
 import javax.swing.JOptionPane;
+
 import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
+
 public class Authentication extends javax.swing.JFrame {
+    
     private String userRole;
 
-    /**
-     * Creates new form Login
-     */
+
     public Authentication(String userRole) {
         this.userRole = userRole; 
         
@@ -177,7 +179,6 @@ public class Authentication extends javax.swing.JFrame {
             MainMenuFrame menu = new MainMenuFrame(userRole);
             menu.setVisible(true);
             this.dispose();
-            
             
         }
         else {

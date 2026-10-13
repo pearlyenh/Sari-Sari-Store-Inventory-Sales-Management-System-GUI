@@ -35,7 +35,7 @@ public class Dashboard extends javax.swing.JInternalFrame {
             "SELECT "
             + "COUNT(*) AS totalProducts, "
             + "COALESCE(SUM(CASE "
-            + "WHEN stock <= lowStockReminder THEN 1 "
+            + "WHEN stock <= lowStockDisplay THEN 1 "
             + "ELSE 0 END), 0) AS lowStock "
             + "FROM tbl_products "
             + "WHERE status = 'Active'";

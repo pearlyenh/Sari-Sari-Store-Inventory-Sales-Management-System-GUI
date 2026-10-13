@@ -68,15 +68,15 @@ public class Inventory extends javax.swing.JInternalFrame {
             while (rs.next()) {
 
                 int stock = rs.getInt("stock");
-                int lowStockReminder = rs.getInt("lowStockReminder");
+                int lowStockDisplay = rs.getInt("lowStockDisplay");
 
                 String stockStatus;
 
                 if (stock == 0) {
                     stockStatus = "NO STOCK";
-                } else if (stock <= lowStockReminder) {
+                } else if (stock <= lowStockDisplay) {
                     stockStatus = "LOW STOCK";
-                } else if (stock <= lowStockReminder + 2) {
+                } else if (stock <= lowStockDisplay + 2) {
                     stockStatus = "ALMOST LOW";
                 } else {
                     stockStatus = "MANY STOCKS";
@@ -89,9 +89,9 @@ public class Inventory extends javax.swing.JInternalFrame {
                     rs.getBigDecimal("purchaseCost"),
                     rs.getBigDecimal("unitCost"),
                     rs.getBigDecimal("sellingPrice"),
-                    rs.getBigDecimal("potentialProfit"),
+                    rs.getBigDecimal("potentialGain"),
                     stock,
-                    lowStockReminder,
+                    lowStockDisplay,
                     stockStatus
                 });
             }
@@ -469,7 +469,7 @@ public class Inventory extends javax.swing.JInternalFrame {
         
         int answer = JOptionPane.showConfirmDialog(
             this,
-            "Are you sure you want to delete this product?",
+            "Are you sure you want to delete this product? \nThis cannot be undone.",
             "Delete Product",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.WARNING_MESSAGE

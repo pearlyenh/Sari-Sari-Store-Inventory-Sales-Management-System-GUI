@@ -296,14 +296,8 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
     
-        int choice = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to log out?",
-            "Confirm Logout",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-        );
-
+        int choice = JOptionPane.showConfirmDialog(this,"Are you sure you want to log out?","Confirm Logout",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        
         if (choice == JOptionPane.YES_OPTION) {
             LoginFrame login = new LoginFrame();
             login.setVisible(true);

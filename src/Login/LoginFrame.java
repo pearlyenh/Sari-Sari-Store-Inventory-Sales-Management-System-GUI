@@ -15,6 +15,8 @@ import sarisaristoreinventoryandsalesmanagementsytem.FrameUtils;
 
 import sarisaristoreinventoryandsalesmanagementsytem.MainMenuFrame;
 
+
+
 public class LoginFrame extends javax.swing.JFrame {
     
     public LoginFrame() {
@@ -222,7 +224,7 @@ public class LoginFrame extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();//where the database and opening frames happing
             
             if (rs.next()) {
-                int userId = rs.getInt("userID                                                                                                                                                                                                                                                                                        ");
+                int userId = rs.getInt("userID");
                 String userRole = rs.getString("user_role");//database info
                      
             if (adminRbutton.isSelected() && !userRole.equals("Owner")) {
