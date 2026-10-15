@@ -33,88 +33,50 @@ public class AddProduct extends javax.swing.JInternalFrame {
     
 private void calculateProductValues() {
 
-    String purchaseCostText =
-            txtPurchaseCost.getText().trim();
+    String purchaseCostText =txtPurchaseCost.getText().trim();
 
-    String piecesText =
-            txtNumberOfPieces.getText().trim();
+    String piecesText =txtNumberOfPieces.getText().trim();
 
-    String sellingPriceText =
-            txtSellingPrice.getText().trim();
+    String sellingPriceText =txtSellingPrice.getText().trim();
 
     // Calculate Unit Cost first
     if (!purchaseCostText.isEmpty()
             && !piecesText.isEmpty()) {
 
         try {
+            BigDecimal purchaseCost =new BigDecimal(purchaseCostText);
 
-            BigDecimal purchaseCost =
-                    new BigDecimal(purchaseCostText);
-
-            int numberOfPieces =
-                    Integer.parseInt(piecesText);
+            int numberOfPieces =Integer.parseInt(piecesText);
 
             if (numberOfPieces > 0) {
 
-                BigDecimal unitCost =
-                        purchaseCost.divide(
-                                BigDecimal.valueOf(numberOfPieces),
-                                2,
-                                RoundingMode.HALF_UP
-                        );
+                BigDecimal unitCost =purchaseCost.divide(BigDecimal.valueOf(numberOfPieces),2,RoundingMode.HALF_UP);
 
-                lblUnitCost.setText(
-                        "Unit Cost / Original Price per Piece: "
-                                + unitCost + " pesos"
-                );
+                lblUnitCost.setText("Unit Cost / Original Price per Piece: "+ unitCost + " pesos");
 
                 // Calculate Potential Gain only
                 // when Selling Price is available
                 if (!sellingPriceText.isEmpty()) {
 
-                    BigDecimal sellingPrice =
-                            new BigDecimal(sellingPriceText);
+                    BigDecimal sellingPrice =new BigDecimal(sellingPriceText);
 
-                    BigDecimal potentialGain =
-                            sellingPrice.subtract(unitCost);
+                    BigDecimal potentialGain =sellingPrice.subtract(unitCost);
 
-                    lblPotentialGain.setText(
-                            "Potential Gain per Item: "
-                                    + potentialGain + " pesos"
-                    );
-
+                    lblPotentialGain.setText("Potential Gain per Item: "+ potentialGain + " pesos");
                 } else {
-
-                    lblPotentialGain.setText(
-                            "Potential Gain per Item: "
-                    );
+                    lblPotentialGain.setText("Potential Gain per Item: ");
                 }
-
             } else {
-
-                lblUnitCost.setText(
-                        "Unit Cost / Original Price per Piece: "
-                );
-
-                lblPotentialGain.setText(
-                        "Potential Gain per Item: "
-                );
+                lblUnitCost.setText("Unit Cost / Original Price per Piece: ");
+                lblPotentialGain.setText("Potential Gain per Item: ");
             }
-
         } catch (NumberFormatException e) {
-
             // User is still typing
         }
 
     } else {
-
-        lblUnitCost.setText(
-                "Unit Cost / Original Price per Piece: "
-        );
-
-        lblPotentialGain.setText(
-                "Potential Gain per Item: "
-        );
+        lblUnitCost.setText("Unit Cost / Original Price per Piece: ");
+        lblPotentialGain.setText("Potential Gain per Item: ");
     }
 }
     @SuppressWarnings("unchecked")
@@ -460,7 +422,7 @@ private void calculateProductValues() {
 
             JOptionPane.showMessageDialog(
                     this,"Please complete all required fields.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
-            return;
+                    return;
         }
 
         try {
@@ -483,72 +445,41 @@ private void calculateProductValues() {
 
                     if (rs.next()) {
 
-                        int answer = JOptionPane.showConfirmDialog(
-                                this,
-                                "This product already exists.\n\n"
-                                + "Would you like to restock it instead?",
-                                "Duplicate Product",
+                        int answer = JOptionPane.showConfirmDialog(this,"This product already exists.\n\n"+ "Would you like to restock it instead?","Duplicate Product",
                                 JOptionPane.YES_NO_OPTION,
                                 JOptionPane.WARNING_MESSAGE
                         );
 
                         if (answer == JOptionPane.YES_OPTION) {
-
-                            JOptionPane.showMessageDialog(
-                                    this,
-                                    "Please use the Restock Product section "
-                                    + "to add more stock.",
-                                    "Restock Product",
-                                    JOptionPane.INFORMATION_MESSAGE
-                            );
+                            JOptionPane.showMessageDialog(this,"Please use the Restock Product section "+ "to add more stock.","Restock Product",JOptionPane.INFORMATION_MESSAGE);
                         }
-
                         return;
                     }
                 }
             }
 
-            BigDecimal purchaseCost =
-                    new BigDecimal(txtPurchaseCost.getText().trim());
+            BigDecimal purchaseCost = new BigDecimal(txtPurchaseCost.getText().trim());
 
-            int numberOfPieces =
-                    Integer.parseInt(txtNumberOfPieces.getText().trim());
+            int numberOfPieces =Integer.parseInt(txtNumberOfPieces.getText().trim());
 
-            BigDecimal sellingPrice =
-                    new BigDecimal(txtSellingPrice.getText().trim());
+            BigDecimal sellingPrice =new BigDecimal(txtSellingPrice.getText().trim());
 
-            int lowStockDisplay =
-                    Integer.parseInt(
-                            cmbLowStockDisplay.getSelectedItem().toString()
-                    );
+            int lowStockDisplay =Integer.parseInt(cmbLowStockDisplay.getSelectedItem().toString() );
 
             // Number of pieces must be greater than zero
             if (numberOfPieces <= 0) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Number of pieces must be greater than zero.",
-                        "Invalid Quantity",
-                        JOptionPane.WARNING_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this, "Number of pieces must be greater than zero.", "Invalid Quantity", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             // Calculate unit cost
             BigDecimal unitCost =
-                    purchaseCost.divide(
-                            BigDecimal.valueOf(numberOfPieces),
-                            2,
-                            RoundingMode.HALF_UP
-                    );
+                    purchaseCost.divide(BigDecimal.valueOf(numberOfPieces),2,RoundingMode.HALF_UP);
 
             // Selling price must be higher than unit cost
             if (sellingPrice.compareTo(unitCost) <= 0) {
                 JOptionPane.showMessageDialog(
-                        this,
-                        "Selling price must be higher than the unit cost of ₱"
-                                + unitCost.setScale(2, RoundingMode.HALF_UP),
-                        "Invalid Selling Price",
-                        JOptionPane.WARNING_MESSAGE
+                        this,"Selling price must be higher than the unit cost of ₱"+ unitCost.setScale(2, RoundingMode.HALF_UP),"Invalid Selling Price",JOptionPane.WARNING_MESSAGE
                 );
                 return;
             }

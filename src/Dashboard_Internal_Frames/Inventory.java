@@ -169,8 +169,7 @@ public class Inventory extends javax.swing.JInternalFrame {
 }  
 
     private void applyStockFilter() {
-        String selectedFilter =
-                cmbStockFilter.getSelectedItem().toString();
+        String selectedFilter =cmbStockFilter.getSelectedItem().toString();
 
         String searchText = txtSearch.getText().trim();
 
@@ -190,7 +189,6 @@ public class Inventory extends javax.swing.JInternalFrame {
                 )
             );
         }
-
         // Filter by stock status (column 9)
         if (!selectedFilter.equals("ALL PRODUCTS")) {
             filters.add(
@@ -200,7 +198,6 @@ public class Inventory extends javax.swing.JInternalFrame {
                 )
             );
         }
-
         if (filters.isEmpty()) {
             sorter.setRowFilter(null);
         } else {
@@ -209,8 +206,6 @@ public class Inventory extends javax.swing.JInternalFrame {
             );
         }
     }
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -404,8 +399,7 @@ public class Inventory extends javax.swing.JInternalFrame {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         MainMenuFrame mainMenu =
-                (MainMenuFrame) javax.swing.SwingUtilities
-                        .getWindowAncestor(this);
+                (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
 
         if (mainMenu != null) {
             mainMenu.openAddProduct();
