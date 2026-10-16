@@ -408,6 +408,7 @@ public class Inventory extends javax.swing.JInternalFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int selectedRow = tblInventory.getSelectedRow();
+        System.out.println("update button!");
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(
@@ -425,8 +426,7 @@ public class Inventory extends javax.swing.JInternalFrame {
                 .getValueAt(modelRow, 0);
         
         MainMenuFrame mainMenu = 
-                (MainMenuFrame) javax.swing.SwingUtilities
-                        .getWindowAncestor(this);
+                (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
         
         mainMenu.openUpdateProduct(productID);
 
