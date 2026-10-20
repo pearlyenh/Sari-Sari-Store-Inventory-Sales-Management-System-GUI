@@ -408,8 +408,6 @@ public class Inventory extends javax.swing.JInternalFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int selectedRow = tblInventory.getSelectedRow();
-        System.out.println("Last day of this month");
-        System.out.println("Daghan kaayo kog nakaon karon");
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(
