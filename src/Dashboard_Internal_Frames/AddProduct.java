@@ -33,6 +33,7 @@ public class AddProduct extends javax.swing.JInternalFrame {
     
 private void calculateProductValues() {
     System.out.println("NETWORKING EXAM'S DONEE!!!");
+    System.out.println("Rizal nalang jud ang kulang Lord please");
 
     String purchaseCostText =txtPurchaseCost.getText().trim();
 
