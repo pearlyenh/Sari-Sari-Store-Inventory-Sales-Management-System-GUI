@@ -261,8 +261,8 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
         lblStoreName.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblStoreName.setForeground(new java.awt.Color(255, 255, 255));
-        lblStoreName.setText("SARI-SARI STORE");
-        pnlHeader.add(lblStoreName, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 26, 260, -1));
+        lblStoreName.setText("CONVENIENCE STORE");
+        pnlHeader.add(lblStoreName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 280, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\Screenshot_2026-09-28_194856-removebg-preview (1).png")); // NOI18N
         pnlHeader.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 70, -1));

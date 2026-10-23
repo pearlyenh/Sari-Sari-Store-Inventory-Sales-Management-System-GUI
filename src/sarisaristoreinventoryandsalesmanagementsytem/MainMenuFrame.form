@@ -376,11 +376,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="SARI-SARI STORE"/>
+            <Property name="text" type="java.lang.String" value="CONVENIENCE STORE"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="124" y="26" width="260" height="-1"/>
+              <AbsoluteConstraints x="120" y="30" width="280" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
