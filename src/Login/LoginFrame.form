@@ -164,11 +164,11 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="BEBING SARI-SARI STORE "/>
+            <Property name="text" type="java.lang.String" value="67 CONVENIENCE STORE"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="60" y="360" width="-1" height="56"/>
+              <AbsoluteConstraints x="90" y="360" width="-1" height="56"/>
             </Constraint>
           </Constraints>
         </Component>
