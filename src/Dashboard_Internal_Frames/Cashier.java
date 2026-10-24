@@ -51,6 +51,8 @@ public class Cashier extends javax.swing.JInternalFrame {
     }
 
     private void searchProduct() {
+        
+        System.out.println("Happy belated birthday to me");
 
         String searchText = txtSearchProduct.getText().trim();
 
