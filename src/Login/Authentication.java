@@ -178,10 +178,7 @@ public class Authentication extends javax.swing.JFrame {
         String pin = new String(pinField.getPassword());
 
         if (pin.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "Please enter your Admin PIN.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Please enter your Admin PIN.","Error",JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -197,33 +194,23 @@ public class Authentication extends javax.swing.JFrame {
 
                 if (storedPin != null && pin.equals(storedPin)) {
 
-                    JOptionPane.showMessageDialog(this,
-                            "Admin authentication successful!");
+                    JOptionPane.showMessageDialog(this,"Admin authentication successful!");
 
                     MainMenuFrame menu = new MainMenuFrame(userRole);
                     menu.setVisible(true);
                     this.dispose();
 
                 } else {
-                    JOptionPane.showMessageDialog(this,
-                            "Incorrect Admin PIN.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Incorrect Admin PIN.","Error",JOptionPane.ERROR_MESSAGE);
                     pinField.setText("");
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this,
-                        "Owner account not found.",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Owner account not found.","Error",JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Unable to verify PIN: " + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Unable to verify PIN: " + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_verifyActionPerformed

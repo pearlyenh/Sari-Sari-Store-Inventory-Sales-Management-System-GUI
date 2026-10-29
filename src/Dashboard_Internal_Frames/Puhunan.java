@@ -32,7 +32,6 @@ public class Puhunan extends javax.swing.JInternalFrame {
         loadCategoryValues();
     }
     
-    // private bc only this class needs to call it.
     private void loadSummary() {
 
         String sql =
@@ -49,36 +48,20 @@ public class Puhunan extends javax.swing.JInternalFrame {
 
             if (rs.next()) {
 
-                BigDecimal inventoryValue =
-                        rs.getBigDecimal("inventoryValue");
+                BigDecimal inventoryValue =rs.getBigDecimal("inventoryValue");
 
-                int totalProducts =
-                        rs.getInt("totalProducts");
+                int totalProducts = rs.getInt("totalProducts");
 
-                int totalStock =
-                        rs.getInt("totalStock");
+                int totalStock =rs.getInt("totalStock");
 
-                lblTotalInventoryValue.setText(
-                        inventoryValue.setScale(2).toPlainString()
-                );
-
-                lblTotalProducts.setText(
-                        String.valueOf(totalProducts)
-                );
-
-                lblTotalStock.setText(
-                        String.valueOf(totalStock)
-                );
+                lblTotalInventoryValue.setText(inventoryValue.setScale(2).toPlainString());
+                lblTotalProducts.setText(String.valueOf(totalProducts));
+                lblTotalStock.setText(String.valueOf(totalStock));
             }
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to load Puhunan summary: " + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Failed to load Puhunan summary: " + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -92,8 +75,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
                 + "GROUP BY category "
                 + "ORDER BY category ASC";
 
-        DefaultTableModel model =
-                (DefaultTableModel) tblCategoryValue.getModel();
+        DefaultTableModel model =(DefaultTableModel) tblCategoryValue.getModel();
 
         model.setRowCount(0);
 
@@ -105,8 +87,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
 
                 String category = rs.getString("category");
 
-                BigDecimal categoryValue =
-                        rs.getBigDecimal("categoryValue");
+                BigDecimal categoryValue = rs.getBigDecimal("categoryValue");
 
                 model.addRow(new Object[]{
                     category,
@@ -116,12 +97,7 @@ public class Puhunan extends javax.swing.JInternalFrame {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to load category values: " + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Failed to load category values: " + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 

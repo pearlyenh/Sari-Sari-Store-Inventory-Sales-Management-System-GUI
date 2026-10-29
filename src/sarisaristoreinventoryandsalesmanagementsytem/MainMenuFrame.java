@@ -37,7 +37,6 @@ public class MainMenuFrame extends javax.swing.JFrame {
         
         lblWelcome.setText("Welcome, " + userRole + "!");
         
-        
         InternalFrameUtils.setupDesktopPane(desktopPane);
     
         //Screen Size Code
@@ -108,13 +107,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
 
             LocalDate currentDate = LocalDate.now();
-
             lblDate.setText(currentDate.format(dateFormatter));
 
             LocalTime currentTime = LocalTime.now();
 
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
-
             lblTime.setText(currentTime.format(timeFormatter));
         }
     
@@ -261,7 +258,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
         lblStoreName.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblStoreName.setForeground(new java.awt.Color(255, 255, 255));
-        lblStoreName.setText("CONVENIENCE STORE");
+        lblStoreName.setText("SARI-SARI STORE");
         pnlHeader.add(lblStoreName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 280, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Helia Pearl Charish\\Downloads\\Screenshot_2026-09-28_194856-removebg-preview (1).png")); // NOI18N

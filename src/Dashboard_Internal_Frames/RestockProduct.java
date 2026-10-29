@@ -65,12 +65,7 @@ private void loadProducts() {
         }
 
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(
-                this,
-                "Failed to load products:\n" + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this,"Failed to load products:\n" + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
     }
 }
     
@@ -80,8 +75,7 @@ private void loadProductInformation() {
         return;
     }
 
-    String productName =
-            cmbProduct.getSelectedItem().toString();
+    String productName = cmbProduct.getSelectedItem().toString();
 
     if (productName.equals("Select a product...")) {
 
@@ -89,30 +83,12 @@ private void loadProductInformation() {
         currentUnitCost = null;
         currentSellingPrice = null;
 
-        lblCurrentStock.setText(
-                "Current Stock: "
-        );
-
-        lblCurrentUnitCost.setText(
-                "Current Unit Cost: "
-        );
-
-        lblCurrentSellingPrice.setText(
-                "Current Selling Price: "
-        );
-
-        lblNewUnitCost.setText(
-                "New Unit Cost: "
-        );
-
-        lblNewStock.setText(
-                "New Stock: "
-        );
-
-        lblPotentialGain.setText(
-                "Potential Gain per Item: "
-        );
-
+        lblCurrentStock.setText("Current Stock: ");
+        lblCurrentUnitCost.setText("Current Unit Cost: ");
+        lblCurrentSellingPrice.setText("Current Selling Price: ");
+        lblNewUnitCost.setText("New Unit Cost: ");
+        lblNewStock.setText("New Stock: ");
+        lblPotentialGain.setText("Potential Gain per Item: ");
         return;
     }
 
@@ -129,60 +105,20 @@ private void loadProductInformation() {
         try (ResultSet rs = pst.executeQuery()) {
 
             if (rs.next()) {
-
-                // Store database values
-                currentStock =
-                        rs.getInt("stock");
-
-                currentUnitCost =
-                        rs.getBigDecimal("unitCost");
-
-                currentSellingPrice =
-                        rs.getBigDecimal("sellingPrice");
-
-                // Display current information
-                lblCurrentStock.setText(
-                        "Current Stock: "
-                        + currentStock
-                        + " pieces"
-                );
-
-                lblCurrentUnitCost.setText(
-                        "Current Unit Cost: "
-                        + currentUnitCost
-                                .setScale(2, RoundingMode.HALF_UP)
-                );
-
-                lblCurrentSellingPrice.setText(
-                        "Current Selling Price: "
-                        + currentSellingPrice
-                                .setScale(2, RoundingMode.HALF_UP)
-                );
-
-                // Clear previous calculations
-                lblNewUnitCost.setText(
-                        "New Unit Cost: "
-                );
-
-                lblNewStock.setText(
-                        "New Stock: "
-                );
-
-                lblPotentialGain.setText(
-                        "Potential Gain per Item: "
-                );
+                currentStock =rs.getInt("stock");
+                currentUnitCost = rs.getBigDecimal("unitCost");
+                currentSellingPrice = rs.getBigDecimal("sellingPrice");
+                lblCurrentStock.setText("Current Stock: "+ currentStock+ " pieces");
+                lblCurrentUnitCost.setText("Current Unit Cost: "+ currentUnitCost.setScale(2, RoundingMode.HALF_UP));
+                lblCurrentSellingPrice.setText("Current Selling Price: "+ currentSellingPrice.setScale(2, RoundingMode.HALF_UP));
+                lblNewUnitCost.setText("New Unit Cost: ");
+                lblNewStock.setText("New Stock: ");
+                lblPotentialGain.setText("Potential Gain per Item: ");
             }
         }
 
     } catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Failed to load product information.\n"
-                        + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this,"Failed to load product information.\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
     }
 }
     
@@ -192,18 +128,14 @@ private void calculateRestockValues() {
         return;
     }
 
-    String productName =
-            cmbProduct.getSelectedItem().toString();
+    String productName = cmbProduct.getSelectedItem().toString();
 
     if (productName.equals("Select a product...")) {
         return;
     }
 
-    String additionalCostText =
-            txtAdditionalPurchaseCost.getText().trim();
-
-    String piecesText =
-            txtNumberOfPieces.getText().trim();
+    String additionalCostText = txtAdditionalPurchaseCost.getText().trim();
+    String piecesText = txtNumberOfPieces.getText().trim();
 
     // Do not calculate while information is incomplete
     if (additionalCostText.isEmpty()
@@ -211,101 +143,47 @@ private void calculateRestockValues() {
 
         lblNewUnitCost.setText("New Unit Cost: ");
         lblNewStock.setText("New Stock: ");
-        lblPotentialGain.setText(
-                "Potential Gain per Item: "
-        );
-
+        lblPotentialGain.setText("Potential Gain per Item: ");
         return;
     }
 
     try {
+        BigDecimal additionalPurchaseCost = new BigDecimal(additionalCostText);
 
-        BigDecimal additionalPurchaseCost =
-                new BigDecimal(additionalCostText);
+        int numberOfPieces = Integer.parseInt(piecesText);
 
-        int numberOfPieces =
-                Integer.parseInt(piecesText);
-
-        // Do not calculate invalid values
         if (additionalPurchaseCost.compareTo(
                 BigDecimal.ZERO) <= 0
                 || numberOfPieces <= 0) {
 
             lblNewUnitCost.setText("New Unit Cost: ");
             lblNewStock.setText("New Stock: ");
-            lblPotentialGain.setText(
-                    "Potential Gain per Item: "
-            );
-
+            lblPotentialGain.setText("Potential Gain per Item: ");
             return;
         }
-
         if (currentUnitCost == null
                 || currentSellingPrice == null) {
             return;
         }
 
-        // 1. Get the current total cost of existing stock
-        BigDecimal currentInventoryCost =
-                currentUnitCost.multiply(
-                        BigDecimal.valueOf(currentStock)
-                );
+        BigDecimal currentInventoryCost =currentUnitCost.multiply(BigDecimal.valueOf(currentStock));
+        BigDecimal newTotalCost =currentInventoryCost.add(additionalPurchaseCost);
 
-        // 2. Add the cost of the new stock
-        BigDecimal newTotalCost =
-                currentInventoryCost.add(
-                        additionalPurchaseCost
-                );
+        int newStock = currentStock + numberOfPieces;
 
-        // 3. Calculate the new total stock
-        int newStock =
-                currentStock + numberOfPieces;
+        BigDecimal newUnitCost = newTotalCost.divide(BigDecimal.valueOf(newStock),2,RoundingMode.HALF_UP);
 
-        // 4. Calculate the new average unit cost
-        BigDecimal newUnitCost =
-                newTotalCost.divide(
-                        BigDecimal.valueOf(newStock),
-                        2,
-                        RoundingMode.HALF_UP
-                );
+        BigDecimal potentialGain = currentSellingPrice.subtract( newUnitCost );
 
-        // 5. SAME GAIN LOGIC AS ADD PRODUCT
-        BigDecimal potentialGain =
-                currentSellingPrice.subtract(
-                        newUnitCost
-                );
-
-        // 6. Display calculated values
-        lblNewUnitCost.setText(
-                "New Unit Cost: "
-                + newUnitCost.setScale(
-                        2,
-                        RoundingMode.HALF_UP
-                )
-        );
-
-        lblNewStock.setText(
-                "New Stock: "
-                + newStock
-                + " pieces"
-        );
-
-        lblPotentialGain.setText(
-                "Potential Gain per Item: "
-                + potentialGain.setScale(
-                        2,
-                        RoundingMode.HALF_UP
-                )
-        );
+        lblNewUnitCost.setText("New Unit Cost: "+ newUnitCost.setScale(2,RoundingMode.HALF_UP));
+        lblNewStock.setText("New Stock: " + newStock + " pieces");
+        lblPotentialGain.setText("Potential Gain per Item: " + potentialGain.setScale(2,RoundingMode.HALF_UP));
 
     } catch (NumberFormatException e) {
-
         // User is still typing.
         lblNewUnitCost.setText("New Unit Cost: ");
         lblNewStock.setText("New Stock: ");
-        lblPotentialGain.setText(
-                "Potential Gain per Item: "
-        );
+        lblPotentialGain.setText("Potential Gain per Item: ");
     }
 }
     @SuppressWarnings("unchecked")
@@ -561,7 +439,6 @@ private void calculateRestockValues() {
         return;
     }
         loadProductInformation();
-        
     }//GEN-LAST:event_cmbProductActionPerformed
 
     private void txtAdditionalPurchaseCostKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdditionalPurchaseCostKeyReleased
@@ -580,12 +457,7 @@ private void calculateRestockValues() {
                     .toString()
                     .equals("Select a product...")) {
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Please select a product.",
-                "Product Required",
-                JOptionPane.WARNING_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this,"Please select a product.","Product Required",JOptionPane.WARNING_MESSAGE);
         
         if(cmbProduct.equals("Select a product...")){
             lblCurrentStock.setText("");
@@ -598,90 +470,48 @@ private void calculateRestockValues() {
             lblPotentialGain.setText("");
         }
 
-
         return;
     }
 
     // Get additional purchase cost
-    String additionalCostText =
-            txtAdditionalPurchaseCost.getText().trim();
+    String additionalCostText = txtAdditionalPurchaseCost.getText().trim();
 
     if (additionalCostText.isEmpty()) {
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Please enter the additional purchase cost.",
-                "Purchase Cost Required",
-                JOptionPane.WARNING_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Please enter the additional purchase cost.","Purchase Cost Required",JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Get number of additional pieces
-    String piecesText =
-            txtNumberOfPieces.getText().trim();
+    String piecesText =txtNumberOfPieces.getText().trim();
 
     if (piecesText.isEmpty()) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Please enter the number of pieces.",
-                "Number of Pieces Required",
-                JOptionPane.WARNING_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Please enter the number of pieces.","Number of Pieces Required",JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Convert input values
     BigDecimal additionalPurchaseCost;
     int numberOfPieces;
 
     try {
+        additionalPurchaseCost = new BigDecimal(additionalCostText);
 
-        additionalPurchaseCost =
-                new BigDecimal(additionalCostText);
-
-        numberOfPieces =
-                Integer.parseInt(piecesText);
+        numberOfPieces = Integer.parseInt(piecesText);
 
     } catch (NumberFormatException e) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Please enter valid numbers.",
-                "Invalid Input",
-                JOptionPane.WARNING_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Please enter valid numbers.","Invalid Input",JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Validate purchase cost
     if (additionalPurchaseCost.compareTo(
             BigDecimal.ZERO) <= 0) {
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Additional purchase cost must be greater than 0.",
-                "Invalid Purchase Cost",
-                JOptionPane.WARNING_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Additional purchase cost must be greater than 0.","Invalid Purchase Cost",JOptionPane.WARNING_MESSAGE);
         return;
     }
 
     // Validate number of pieces
     if (numberOfPieces <= 0) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Number of pieces must be greater than 0.",
-                "Invalid Number of Pieces",
-                JOptionPane.WARNING_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Number of pieces must be greater than 0.","Invalid Number of Pieces",JOptionPane.WARNING_MESSAGE);
         return;
     }
 
@@ -689,47 +519,17 @@ private void calculateRestockValues() {
     if (currentUnitCost == null
             || currentSellingPrice == null) {
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Please select a valid product.",
-                "Product Error",
-                JOptionPane.WARNING_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Please select a valid product.","Product Error",JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    // Calculate current inventory cost
-    BigDecimal currentInventoryCost =
-            currentUnitCost.multiply(
-                    BigDecimal.valueOf(currentStock)
-            );
+    BigDecimal currentInventoryCost = currentUnitCost.multiply(BigDecimal.valueOf(currentStock));
+    BigDecimal newTotalCost =currentInventoryCost.add(additionalPurchaseCost);
 
-    // Add the new purchase cost
-    BigDecimal newTotalCost =
-            currentInventoryCost.add(
-                    additionalPurchaseCost
-            );
+    int newStock = currentStock + numberOfPieces;
 
-    // Calculate new total stock
-    int newStock =
-            currentStock + numberOfPieces;
-
-    // Calculate new weighted-average unit cost
-    BigDecimal newUnitCost =
-            newTotalCost.divide(
-                    BigDecimal.valueOf(newStock),
-                    2,
-                    RoundingMode.HALF_UP
-            );
-
-    // Calculate potential gain
-    // SAME LOGIC AS ADD PRODUCT:
-    // Selling Price - Unit Cost
-    BigDecimal newPotentialGain =
-            currentSellingPrice.subtract(
-                    newUnitCost
-            );
+    BigDecimal newUnitCost =newTotalCost.divide(BigDecimal.valueOf(newStock),2,RoundingMode.HALF_UP);
+    BigDecimal newPotentialGain =currentSellingPrice.subtract(newUnitCost);
 
     // Prevent negative or zero gain
     if (newPotentialGain.compareTo(
@@ -758,8 +558,7 @@ private void calculateRestockValues() {
     }
 
     // Get selected product name
-    String productName =
-            cmbProduct.getSelectedItem().toString();
+    String productName = cmbProduct.getSelectedItem().toString();
 
     // Update product information
     String sql =
@@ -770,70 +569,33 @@ private void calculateRestockValues() {
             + "WHERE productName = ?";
 
     try (Connection conn = DBConnection.connect();
-         PreparedStatement pst =
-                 conn.prepareStatement(sql)) {
+         PreparedStatement pst = conn.prepareStatement(sql)) {
 
         pst.setInt(1, newStock);
         pst.setBigDecimal(2, newUnitCost);
         pst.setBigDecimal(3, newPotentialGain);
         pst.setString(4, productName);
 
-        int rowsUpdated =
-                pst.executeUpdate();
+        int rowsUpdated = pst.executeUpdate();
 
         if (rowsUpdated > 0) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Product restocked successfully!",
-                    "Restock Successful",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Product restocked successfully!","Restock Successful",JOptionPane.INFORMATION_MESSAGE);
         } else {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Product was not found.",
-                    "Restock Failed",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Product was not found.","Restock Failed",JOptionPane.WARNING_MESSAGE);
             return;
         }
-
     } catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Failed to restock product.\n"
-                + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
-        );
-
+        JOptionPane.showMessageDialog(this,"Failed to restock product.\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    // Clear input fields
     cmbProduct.setSelectedIndex(0);
     txtAdditionalPurchaseCost.setText("");
     txtNumberOfPieces.setText("");
+    lblNewUnitCost.setText("New Unit Cost: ");
+    lblNewStock.setText("New Stock: ");
+    lblPotentialGain.setText("Potential Gain per Item: ");
 
-    // Clear calculated values
-    lblNewUnitCost.setText(
-            "New Unit Cost: "
-    );
-
-    lblNewStock.setText(
-            "New Stock: "
-    );
-
-    lblPotentialGain.setText(
-            "Potential Gain per Item: "
-    );
-
-    // Reload current product information
     loadProductInformation();
     }//GEN-LAST:event_btnRestockActionPerformed
 
@@ -841,25 +603,14 @@ private void calculateRestockValues() {
         cmbProduct.setSelectedIndex(0);
         txtAdditionalPurchaseCost.setText("");
         txtNumberOfPieces.setText("");
-
-
-        lblNewUnitCost.setText(
-                "New Unit Cost: "
-        );
-
-        lblNewStock.setText(
-                "New Stock: "
-        );
-
-        lblPotentialGain.setText(
-                "Potential Gain per Item: "
-        );
+        lblNewUnitCost.setText("New Unit Cost: ");
+        lblNewStock.setText("New Stock: ");
+        lblPotentialGain.setText("Potential Gain per Item: ");
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void txtSearchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchProductKeyReleased
 
-        String searchText =
-                txtSearchProduct.getText().trim().toLowerCase();
+        String searchText = txtSearchProduct.getText().trim().toLowerCase();
 
         updatingProductDropdown = true;
 
@@ -867,21 +618,17 @@ private void calculateRestockValues() {
             cmbProduct.removeAllItems();
 
             for (String productName : allProductNames) {
-
                 if (productName.toLowerCase().contains(searchText)) {
                     cmbProduct.addItem(productName);
                 }
             }
-
         } finally {
             updatingProductDropdown = false;
         }
-
         if (cmbProduct.getItemCount() > 0) {
             cmbProduct.setSelectedIndex(0);
             loadProductInformation();
         } else {
-            // Clear details if no product matches
             lblCurrentStock.setText("Current Stock: -");
             lblCurrentUnitCost.setText("Current Unit Cost: -");
             lblCurrentSellingPrice.setText("Current Selling Price: -");

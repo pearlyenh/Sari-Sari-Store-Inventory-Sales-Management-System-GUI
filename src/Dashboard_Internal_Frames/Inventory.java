@@ -40,9 +40,7 @@ public class Inventory extends javax.swing.JInternalFrame {
 
         this.userRole = userRole;
 
-        sorter = new TableRowSorter<>(
-            (DefaultTableModel) tblInventory.getModel()
-        );
+        sorter = new TableRowSorter<>((DefaultTableModel) tblInventory.getModel());
 
         tblInventory.setRowSorter(sorter);
 
@@ -60,8 +58,7 @@ public class Inventory extends javax.swing.JInternalFrame {
              PreparedStatement pst = conn.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
-            DefaultTableModel model =
-                    (DefaultTableModel) tblInventory.getModel();
+            DefaultTableModel model =(DefaultTableModel) tblInventory.getModel();
 
             model.setRowCount(0);
 
@@ -98,12 +95,7 @@ public class Inventory extends javax.swing.JInternalFrame {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to load products.\n" + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Failed to load products.\n" + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -138,31 +130,25 @@ public class Inventory extends javax.swing.JInternalFrame {
                             : value.toString();
 
                     if (status.equals("NO STOCK")) {
-
                         component.setBackground(Color.GRAY);
                         component.setForeground(Color.WHITE);
 
                     } else if (status.equals("LOW STOCK")) {
-
                         component.setBackground(Color.RED);
                         component.setForeground(Color.WHITE);
 
                     } else if (status.equals("ALMOST LOW")) {
-
                         component.setBackground(Color.ORANGE);
                         component.setForeground(Color.BLACK);
 
                     } else if (status.equals("MANY STOCKS")) {
-
                         component.setBackground(Color.GREEN);
                         component.setForeground(Color.BLACK);
 
                     } else {
-
                         component.setBackground(Color.WHITE);
                         component.setForeground(Color.BLACK);
                     }
-
                     return component;
                 }
             });
@@ -398,8 +384,7 @@ public class Inventory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
-        MainMenuFrame mainMenu =
-                (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        MainMenuFrame mainMenu = (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
 
         if (mainMenu != null) {
             mainMenu.openAddProduct();
@@ -409,34 +394,22 @@ public class Inventory extends javax.swing.JInternalFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int selectedRow = tblInventory.getSelectedRow();
         
-        System.out.println("Happy Birthdat to me!");
-
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please select a product to update.",
-                    "No Product Selected",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Please select a product to update.","No Product Selected",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         int modelRow = tblInventory.convertRowIndexToModel(selectedRow);
 
-        int productID = (int) tblInventory.getModel()
-                .getValueAt(modelRow, 0);
+        int productID = (int) tblInventory.getModel().getValueAt(modelRow, 0);
         
-        MainMenuFrame mainMenu = 
-                (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-        
+        MainMenuFrame mainMenu =  (MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
         mainMenu.openUpdateProduct(productID);
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestockActionPerformed
-        MainMenuFrame mainMenu =
-            (MainMenuFrame) javax.swing.SwingUtilities
-                        .getWindowAncestor(this);
+        MainMenuFrame mainMenu =(MainMenuFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
 
         if (mainMenu != null) {
             mainMenu.openRestockProduct();
@@ -446,29 +419,16 @@ public class Inventory extends javax.swing.JInternalFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = tblInventory.getSelectedRow();
 
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(
-                this,
-                "Please select a product to delete.",
-                "No Product Selected",
-                JOptionPane.WARNING_MESSAGE
-            );
+        if (selectedRow == -1) {JOptionPane.showMessageDialog(this,"Please select a product to delete.","No Product Selected",JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         //Get the Product ID
         int modelRow = tblInventory.convertRowIndexToModel(selectedRow);
 
-        int productID =
-                (int) tblInventory.getModel().getValueAt(modelRow, 0);
+        int productID = (int) tblInventory.getModel().getValueAt(modelRow, 0);
         
-        int answer = JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete this product? \nThis cannot be undone.",
-            "Delete Product",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-        );
+        int answer = JOptionPane.showConfirmDialog(this,"Are you sure you want to delete this product? \nThis cannot be undone.","Delete Product",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 
         if (answer != JOptionPane.YES_OPTION) {
             return;
@@ -487,26 +447,13 @@ public class Inventory extends javax.swing.JInternalFrame {
             int rowsUpdated = pst.executeUpdate();
 
             if (rowsUpdated > 0) {
-
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Product deleted successfully! \nThis cannot be undone.",
-                    "Delete Product",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this,"Product deleted successfully! \nThis cannot be undone.","Delete Product",JOptionPane.INFORMATION_MESSAGE);
 
                 loadProducts();
             }
 
         } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Failed to delete product:\n"
-                + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Failed to delete product:\n" + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

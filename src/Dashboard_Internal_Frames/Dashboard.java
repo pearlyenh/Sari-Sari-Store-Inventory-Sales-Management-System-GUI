@@ -45,22 +45,15 @@ public class Dashboard extends javax.swing.JInternalFrame {
          ResultSet rs = pst.executeQuery()) {
 
         if (rs.next()) {
-
             int totalProducts = rs.getInt("totalProducts");
             int lowStock = rs.getInt("lowStock");
 
             lblTotalProduct.setText(String.valueOf(totalProducts));
             lblLowStock.setText(String.valueOf(lowStock));
         }
-
     } catch (SQLException e) {
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Failed to load dashboard summary: " + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this,"Failed to load dashboard summary: " + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
     }
 }
 

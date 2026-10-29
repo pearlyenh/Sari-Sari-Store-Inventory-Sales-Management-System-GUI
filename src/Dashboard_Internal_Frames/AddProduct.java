@@ -32,8 +32,6 @@ public class AddProduct extends javax.swing.JInternalFrame {
     }
     
 private void calculateProductValues() {
-    System.out.println("NETWORKING EXAM'S DONEE!!!");
-    System.out.println("Rizal nalang jud ang kulang Lord please");
 
     String purchaseCostText =txtPurchaseCost.getText().trim();
 
@@ -422,8 +420,7 @@ private void calculateProductValues() {
                 || txtSellingPrice.getText().trim().isEmpty()
                 || cmbLowStockDisplay.getSelectedItem() == null) {
 
-            JOptionPane.showMessageDialog(
-                    this,"Please complete all required fields.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Please complete all required fields.","Incomplete Information",JOptionPane.WARNING_MESSAGE);
                     return;
         }
 
@@ -447,10 +444,7 @@ private void calculateProductValues() {
 
                     if (rs.next()) {
 
-                        int answer = JOptionPane.showConfirmDialog(this,"This product already exists.\n\n"+ "Would you like to restock it instead?","Duplicate Product",
-                                JOptionPane.YES_NO_OPTION,
-                                JOptionPane.WARNING_MESSAGE
-                        );
+                        int answer = JOptionPane.showConfirmDialog(this,"This product already exists.\n\n"+ "Would you like to restock it instead?","Duplicate Product",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 
                         if (answer == JOptionPane.YES_OPTION) {
                             JOptionPane.showMessageDialog(this,"Please use the Restock Product section "+ "to add more stock.","Restock Product",JOptionPane.INFORMATION_MESSAGE);
@@ -475,20 +469,16 @@ private void calculateProductValues() {
             }
 
             // Calculate unit cost
-            BigDecimal unitCost =
-                    purchaseCost.divide(BigDecimal.valueOf(numberOfPieces),2,RoundingMode.HALF_UP);
+            BigDecimal unitCost = purchaseCost.divide(BigDecimal.valueOf(numberOfPieces),2,RoundingMode.HALF_UP);
 
             // Selling price must be higher than unit cost
             if (sellingPrice.compareTo(unitCost) <= 0) {
-                JOptionPane.showMessageDialog(
-                        this,"Selling price must be higher than the unit cost of ₱"+ unitCost.setScale(2, RoundingMode.HALF_UP),"Invalid Selling Price",JOptionPane.WARNING_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this,"Selling price must be higher than the unit cost of ₱"+ unitCost.setScale(2, RoundingMode.HALF_UP),"Invalid Selling Price",JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             // Calculate potential gain
-            BigDecimal potentialGain =
-                    sellingPrice.subtract(unitCost);
+            BigDecimal potentialGain = sellingPrice.subtract(unitCost);
 
             // Initial stock = number of pieces purchased
             int stock = numberOfPieces;
@@ -515,10 +505,8 @@ private void calculateProductValues() {
 
                 if (rowsInserted > 0) {
 
-                    JOptionPane.showMessageDialog(
-                            this,"Product successfully added! \nCheck inventory to see newly added product.","Success",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Product successfully added! \nCheck inventory to see newly added product.","Success",JOptionPane.INFORMATION_MESSAGE);
 
-                    // Reset fields
                     txtProductName.setText("Enter Product Name");
                     cmbCategory.setSelectedIndex(0);
                     txtPurchaseCost.setText("Enter purchase cost");
@@ -532,14 +520,10 @@ private void calculateProductValues() {
             }
 
         } catch (NumberFormatException e) {
-
-            JOptionPane.showMessageDialog(
-                    this,"Please enter valid numbers for purchase cost, number of pieces, and selling price.","Invalid Input",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Please enter valid numbers for purchase cost, number of pieces, and selling price.","Invalid Input",JOptionPane.WARNING_MESSAGE);
 
         } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(
-                    this,"Failed to save product.\n" + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Failed to save product.\n" + e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveProductActionPerformed
 

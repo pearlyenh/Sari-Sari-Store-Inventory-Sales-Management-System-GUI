@@ -21,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class DailyGain extends javax.swing.JInternalFrame {
 
-    
     private String userRole;
     
     public DailyGain(String userRole) {
@@ -31,13 +30,11 @@ public class DailyGain extends javax.swing.JInternalFrame {
 
         InternalFrameUtils.setupInternalFrame(this);
         
-        // Set default dates to today
         java.util.Date today = new java.util.Date();
 
         dateFrom.setDate(today);
         dateTo.setDate(today);
 
-        // Set date display format
         dateFrom.setDateFormatString("MM/dd/yyyy");
         dateTo.setDateFormatString("MM/dd/yyyy");
         
@@ -47,8 +44,7 @@ public class DailyGain extends javax.swing.JInternalFrame {
 
     private void loadDailyGain() {
 
-        DefaultTableModel model =
-                (DefaultTableModel) tblDailyGain.getModel();
+        DefaultTableModel model =(DefaultTableModel) tblDailyGain.getModel();
 
         model.setRowCount(0);
 
@@ -104,9 +100,7 @@ public class DailyGain extends javax.swing.JInternalFrame {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,"Failed to load daily gain history:\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Failed to load daily gain history:\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -117,15 +111,11 @@ public class DailyGain extends javax.swing.JInternalFrame {
             + "FROM tbl_daily_gain "
             + "WHERE gainDate = CURDATE()";
 
-    // Default values if today's record does not exist
-    java.math.BigDecimal totalSales =
-            java.math.BigDecimal.ZERO;
+    java.math.BigDecimal totalSales = java.math.BigDecimal.ZERO;
 
-    java.math.BigDecimal totalCost =
-            java.math.BigDecimal.ZERO;
+    java.math.BigDecimal totalCost = java.math.BigDecimal.ZERO;
 
-    java.math.BigDecimal totalGain =
-            java.math.BigDecimal.ZERO;
+    java.math.BigDecimal totalGain = java.math.BigDecimal.ZERO;
 
     try (Connection conn = DBConnection.connect();
          PreparedStatement pst = conn.prepareStatement(sql);
@@ -137,35 +127,14 @@ public class DailyGain extends javax.swing.JInternalFrame {
             totalGain = rs.getBigDecimal("totalGain");
         }
 
-        lblTotalSales.setText(
-                totalSales.setScale(
-                        2,
-                        java.math.RoundingMode.HALF_UP
-                ).toPlainString()
-        );
-
-        lblTotalCost.setText(
-                totalCost.setScale(
-                        2,
-                        java.math.RoundingMode.HALF_UP
-                ).toPlainString()
-        );
-
-        lblTotalGain.setText(
-                totalGain.setScale(
-                        2,
-                        java.math.RoundingMode.HALF_UP
-                ).toPlainString()
-        );
+        lblTotalSales.setText( totalSales.setScale(2,java.math.RoundingMode.HALF_UP).toPlainString());
+        lblTotalCost.setText( totalCost.setScale(2,java.math.RoundingMode.HALF_UP).toPlainString());
+        lblTotalGain.setText(totalGain.setScale(2,java.math.RoundingMode.HALF_UP).toPlainString());
 
     } catch (SQLException e) {
 
         JOptionPane.showMessageDialog(
-                this,
-                "Failed to load today's summary:\n"
-                + e.getMessage(),
-                "Database Error",
-                JOptionPane.ERROR_MESSAGE
+                this,"Failed to load today's summary:\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE
         );
     }
 }

@@ -40,20 +40,15 @@ public class Cashier extends javax.swing.JInternalFrame {
         tblCart.getColumnModel().getColumn(4).setMaxWidth(0);
         tblCart.getColumnModel().getColumn(4).setPreferredWidth(0);
 
-        DefaultTableModel cartModel =
-                (DefaultTableModel) tblCart.getModel();
+        DefaultTableModel cartModel = (DefaultTableModel) tblCart.getModel();
 
         cartModel.setRowCount(0);
-
         setupCartActionColumn();
 
         searchProduct();
     }
 
     private void searchProduct() {
-        
-        System.out.println("Happy belated birthday to me");
-
         String searchText = txtSearchProduct.getText().trim();
 
         if (searchText.equals("Search product by name...")) {
@@ -61,8 +56,7 @@ public class Cashier extends javax.swing.JInternalFrame {
         }
 
         String sql;
-
-
+        
         if (searchText.isEmpty()) {
             sql = "SELECT productID, productName, category, sellingPrice, stock "
                     + "FROM tbl_products "
@@ -73,7 +67,6 @@ public class Cashier extends javax.swing.JInternalFrame {
                     + "WHERE productName LIKE ? AND status = 'Active'";
         }
 
-
         try (Connection conn = DBConnection.connect();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -83,8 +76,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
             ResultSet rs = pst.executeQuery();
 
-            DefaultTableModel model =
-                    (DefaultTableModel) tblProductList.getModel();
+            DefaultTableModel model = (DefaultTableModel) tblProductList.getModel();
 
             model.setRowCount(0);
 
@@ -102,13 +94,7 @@ public class Cashier extends javax.swing.JInternalFrame {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to search product.\n"
-                            + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Failed to search product.\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -116,31 +102,21 @@ private void calculateCartTotal() {
 
     BigDecimal total = BigDecimal.ZERO;
 
-    DefaultTableModel cartModel =
-            (DefaultTableModel) tblCart.getModel();
+    DefaultTableModel cartModel = (DefaultTableModel) tblCart.getModel();
 
     for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-        BigDecimal subtotal =
-                (BigDecimal) cartModel.getValueAt(i, 3);
-
+        BigDecimal subtotal = (BigDecimal) cartModel.getValueAt(i, 3);
         total = total.add(subtotal);
     }
 
-    lblTotal.setText(
-            "Total: "
-            + total.setScale(
-                    2,
-                    java.math.RoundingMode.HALF_UP
-            )
-    );
+    lblTotal.setText("Total: "+ total.setScale(2,java.math.RoundingMode.HALF_UP));
 }
     
     
     private void calculateChange() {
 
-    String cashText =
-            txtCashReceived.getText().trim();
+    String cashText = txtCashReceived.getText().trim();
 
     if (cashText.isEmpty()) {
         lblChange.setText("Change: 0.00");
@@ -148,57 +124,29 @@ private void calculateCartTotal() {
     }
 
     try {
-
-        BigDecimal cashReceived =
-                new BigDecimal(cashText);
-
+        BigDecimal cashReceived = new BigDecimal(cashText);
         BigDecimal total = BigDecimal.ZERO;
-
-        DefaultTableModel cartModel =
-                (DefaultTableModel) tblCart.getModel();
+        DefaultTableModel cartModel = (DefaultTableModel) tblCart.getModel();
 
         for (int i = 0; i < cartModel.getRowCount(); i++) {
-
-            BigDecimal subtotal =
-                    (BigDecimal) cartModel.getValueAt(i, 3);
-
+            BigDecimal subtotal = (BigDecimal) cartModel.getValueAt(i, 3);
             total = total.add(subtotal);
         }
 
-        BigDecimal change =
-                cashReceived.subtract(total);
+        BigDecimal change = cashReceived.subtract(total);
 
         if (change.compareTo(BigDecimal.ZERO) < 0) {
-
-            lblChange.setText(
-                    "Change: 0.00"
-            );
-
+            lblChange.setText("Change: 0.00" );
             return;
         }
-
-        lblChange.setText(
-                "Change: "
-                + change.setScale(
-                        2,
-                        java.math.RoundingMode.HALF_UP
-                )
-        );
-
+        lblChange.setText("Change: "+ change.setScale(2,java.math.RoundingMode.HALF_UP));
+        
     } catch (NumberFormatException e) {
-
-        lblChange.setText(
-                "Change: 0.00"
-        );
+        lblChange.setText("Change: 0.00");
     }
 }
     
-    
-private void updateDailyGain(
-        Connection conn,
-        BigDecimal totalSales,
-        BigDecimal totalCost
-) throws SQLException {
+private void updateDailyGain(Connection conn,BigDecimal totalSales,BigDecimal totalCost) throws SQLException {
 
     BigDecimal totalGain = totalSales.subtract(totalCost);
 
@@ -220,10 +168,8 @@ private void updateDailyGain(
 }
     
 private void setupCartActionColumn() {
-
     // + Button - Blue
-    DefaultTableCellRenderer addRenderer =
-            new DefaultTableCellRenderer() {
+    DefaultTableCellRenderer addRenderer = new DefaultTableCellRenderer() {
 
         @Override
         public Component getTableCellRendererComponent(
@@ -250,7 +196,6 @@ private void setupCartActionColumn() {
             setHorizontalAlignment(
                     DefaultTableCellRenderer.CENTER
             );
-
             return component;
         }
     };
@@ -342,14 +287,8 @@ private void setupCartActionColumn() {
     private void updateCartSubtotal(
             DefaultTableModel model, int row, int quantity) {
 
-        BigDecimal price = new BigDecimal(
-                model.getValueAt(row, 2).toString()
-        );
-
-        BigDecimal subtotal = price.multiply(
-                BigDecimal.valueOf(quantity)
-        );
-
+        BigDecimal price = new BigDecimal(model.getValueAt(row, 2).toString());
+        BigDecimal subtotal = price.multiply(BigDecimal.valueOf(quantity));
         model.setValueAt(subtotal, row, 3);
     }
 
@@ -723,193 +662,85 @@ private void setupCartActionColumn() {
         if (selectedRow == -1) {
              return;
         }
-        
-        selectedProductID =
-                (int) tblProductList.getValueAt(selectedRow, 0);
-        
-        String selectedProductName =
-                tblProductList.getValueAt(selectedRow, 1).toString();
-        
-        lblSelectedProduct.setText(
-                 selectedProductName
-        );
+       
+        selectedProductID = (int) tblProductList.getValueAt(selectedRow, 0);
+        String selectedProductName = tblProductList.getValueAt(selectedRow, 1).toString();
+        lblSelectedProduct.setText(selectedProductName);
         txtQuantity.setText("");
     }//GEN-LAST:event_tblProductListMouseClicked
 
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
 
-        // Get the quantity entered by the cashier
-        String quantityText =
-                txtQuantity.getText().trim();
+        String quantityText = txtQuantity.getText().trim();
 
-        System.out.println(
-                "Quantity entered: [" + quantityText + "]"
-        );
-
-        // Check if quantity is empty
         if (quantityText.isEmpty()) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter a quantity.",
-                    "Quantity Required",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Please enter a quantity.","Quantity Required",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Convert quantity from String to int
         int quantity;
 
         try {
-
             quantity = Integer.parseInt(quantityText);
-
+            
         } catch (NumberFormatException e) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please enter a valid quantity.",
-                    "Invalid Quantity",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Please enter a valid quantity.","Invalid Quantity",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Check if quantity is greater than 0
         if (quantity <= 0) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Quantity must be greater than 0.",
-                    "Invalid Quantity",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Quantity must be greater than 0.","Invalid Quantity",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Check if a product was selected
         if (tblProductList.getSelectedRow() == -1) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Please select a product first.",
-                    "No Product Selected",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Please select a product first.","No Product Selected",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Get the available stock of the selected product
         int availableStock =
-                (int) tblProductList.getValueAt(
-                        tblProductList.getSelectedRow(), 4
-                );
+                (int) tblProductList.getValueAt(tblProductList.getSelectedRow(), 4);
         
         if (quantity > availableStock) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Not enough stock. Only "
-                            + availableStock
-                            + " pieces available.",
-                    "Insufficient Stock",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Not enough stock. Only "+ availableStock+ " pieces available.","Insufficient Stock",JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        String productName =
-            tblProductList.getValueAt(
-                    tblProductList.getSelectedRow(), 1
-            ).toString();
+        String productName = tblProductList.getValueAt(tblProductList.getSelectedRow(), 1).toString();
+        String category =tblProductList.getValueAt(tblProductList.getSelectedRow(), 2).toString();
+        BigDecimal sellingPrice =(BigDecimal) tblProductList.getValueAt(tblProductList.getSelectedRow(), 3
+);
         
-        String category =
-            tblProductList.getValueAt(
-                    tblProductList.getSelectedRow(), 2
-            ).toString();
+        BigDecimal subtotal = sellingPrice.multiply(BigDecimal.valueOf(quantity));
         
-        BigDecimal sellingPrice =
-            (BigDecimal) tblProductList.getValueAt(
-                tblProductList.getSelectedRow(), 3
-        );
-        
-        BigDecimal subtotal =
-            sellingPrice.multiply(
-                BigDecimal.valueOf(quantity)
-        );
-        
-        DefaultTableModel cartModel =
-                (DefaultTableModel) tblCart.getModel();
+        DefaultTableModel cartModel =(DefaultTableModel) tblCart.getModel();
 
-        // Check if product already exists in the cart
         boolean productAlreadyInCart = false;
 
         for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-            String cartProductName =
-                    cartModel.getValueAt(i, 0).toString();
+            String cartProductName = cartModel.getValueAt(i, 0).toString();
 
             if (cartProductName.equals(productName)) {
+                int currentQuantity =(int) cartModel.getValueAt(i, 1);
+                int newQuantity = currentQuantity + quantity;
 
-                int currentQuantity =
-                        (int) cartModel.getValueAt(i, 1);
-
-                int newQuantity =
-                        currentQuantity + quantity;
-
-                // Check combined quantity against stock
                 if (newQuantity > availableStock) {
-
-                    JOptionPane.showMessageDialog(
-                        this,
-                        "Not enough stock available.\n"
-                        + "Available stock: " + availableStock
-                        + "\nCurrent quantity in cart: "
-                        + currentQuantity,
-                        "Insufficient Stock",
-                        JOptionPane.WARNING_MESSAGE
-                    );
-
+                    JOptionPane.showMessageDialog(this,"Not enough stock available.\n"+ "Available stock: " + availableStock+ "\nCurrent quantity in cart: " + currentQuantity,"Insufficient Stock",JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+                BigDecimal newSubtotal = sellingPrice.multiply(BigDecimal.valueOf(newQuantity));
 
-                BigDecimal newSubtotal =
-                        sellingPrice.multiply(
-                                BigDecimal.valueOf(newQuantity)
-                        );
-
-                cartModel.setValueAt(
-                        newQuantity,
-                        i,
-                        1
-                );
-
-                cartModel.setValueAt(
-                        newSubtotal,
-                        i,
-                        3
-                );
-
+                cartModel.setValueAt(newQuantity,i,1);
+                cartModel.setValueAt(newSubtotal,i,3);
                 productAlreadyInCart = true;
-
                 break;
             }
         }
 
-        // If product is NOT already in cart, create a new row
         if (!productAlreadyInCart) {
 
-        int productID = Integer.parseInt(
-                tblProductList.getValueAt(
-                        tblProductList.getSelectedRow(), 0
-                ).toString()
-        );
+        int productID = Integer.parseInt(tblProductList.getValueAt(tblProductList.getSelectedRow(), 0).toString());
 
         cartModel.addRow(new Object[]{
             productName,
@@ -926,9 +757,7 @@ private void setupCartActionColumn() {
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
     private void txtCashReceivedKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashReceivedKeyReleased
-
         calculateChange();
-
     }//GEN-LAST:event_txtCashReceivedKeyReleased
 
     private void txtQuantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantityKeyReleased
@@ -946,18 +775,12 @@ private void setupCartActionColumn() {
         if (selectedRow < 0) {
             return;
         }
-        
         if (selectedColumn == 5) {
+            int currentQuantity =(int) tblCart.getValueAt(selectedRow, 1);
 
-            int currentQuantity =
-                    (int) tblCart.getValueAt(selectedRow, 1);
+            String productName = tblCart.getValueAt(selectedRow, 0).toString();
 
-            String productName =
-                    tblCart.getValueAt(selectedRow, 0).toString();
-
-            String sql =
-                    "SELECT stock FROM tbl_products "
-                    + "WHERE productName = ?";
+            String sql ="SELECT stock FROM tbl_products "+ "WHERE productName = ?";
 
             try (Connection conn = DBConnection.connect();
                  PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -965,101 +788,46 @@ private void setupCartActionColumn() {
                 pst.setString(1, productName);
 
                 try (ResultSet rs = pst.executeQuery()) {
-
                     if (rs.next()) {
-
-                        int availableStock =
-                                rs.getInt("stock");
+                        int availableStock =rs.getInt("stock");
 
                         if (currentQuantity >= availableStock) {
 
-                            JOptionPane.showMessageDialog(
-                                this,
-                                "Cannot add more.\n"
-                                + "Available stock: "
-                                + availableStock,
-                                "Stock Limit",
-                                JOptionPane.WARNING_MESSAGE
-                            );
-
+                            JOptionPane.showMessageDialog(this,"Cannot add more.\n" + "Available stock: "+ availableStock,"Stock Limit",JOptionPane.WARNING_MESSAGE);
                             return;
                         }
+                        int newQuantity =currentQuantity + 1;
+                        
+                        BigDecimal price =(BigDecimal) tblCart.getValueAt(selectedRow, 2);
 
-                        int newQuantity =
-                                currentQuantity + 1;
+                        BigDecimal newSubtotal =price.multiply(BigDecimal.valueOf(newQuantity));
 
-                        BigDecimal price =
-                                (BigDecimal) tblCart
-                                        .getValueAt(selectedRow, 2);
-
-                        BigDecimal newSubtotal =
-                                price.multiply(
-                                    BigDecimal.valueOf(newQuantity)
-                                );
-
-                        tblCart.setValueAt(
-                                newQuantity,
-                                selectedRow,
-                                1
-                        );
-
-                        tblCart.setValueAt(
-                                newSubtotal,
-                                selectedRow,
-                                3
-                        );
-
+                        tblCart.setValueAt(newQuantity,selectedRow,1);
+                        tblCart.setValueAt(newSubtotal,selectedRow,3);
+                        
                         calculateCartTotal();
                     }
                 }
 
             } catch (SQLException e) {
 
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Failed to check stock:\n"
-                    + e.getMessage(),
-                    "Database Error",
-                    JOptionPane.ERROR_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this,"Failed to check stock:\n"+ e.getMessage(),"Database Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         if (selectedColumn == 6) {
 
-            int currentQuantity =
-                    (int) tblCart.getValueAt(selectedRow, 1);
-
-            int newQuantity =
-                    currentQuantity - 1;
+            int currentQuantity =(int) tblCart.getValueAt(selectedRow, 1);
+            int newQuantity =currentQuantity - 1;
 
             if (newQuantity <= 0) {
-
-                ((DefaultTableModel) tblCart.getModel())
-                        .removeRow(selectedRow);
-
+                ((DefaultTableModel) tblCart.getModel()).removeRow(selectedRow);
             } else {
+                BigDecimal price =(BigDecimal) tblCart.getValueAt(selectedRow, 2);
 
-                BigDecimal price =
-                        (BigDecimal) tblCart.getValueAt(
-                                selectedRow, 2
-                        );
+                BigDecimal newSubtotal = price.multiply( BigDecimal.valueOf(newQuantity));
 
-                BigDecimal newSubtotal =
-                        price.multiply(
-                                BigDecimal.valueOf(newQuantity)
-                        );
-
-                tblCart.setValueAt(
-                        newQuantity,
-                        selectedRow,
-                        1
-                );
-
-                tblCart.setValueAt(
-                        newSubtotal,
-                        selectedRow,
-                        3
-                );
+                tblCart.setValueAt(newQuantity,selectedRow,1);
+                tblCart.setValueAt(newSubtotal,selectedRow,3);
             }
 
             calculateCartTotal();
@@ -1067,9 +835,7 @@ private void setupCartActionColumn() {
         
         if (selectedColumn == 7) {
 
-            DefaultTableModel cartModel =
-                    (DefaultTableModel) tblCart.getModel();
-
+            DefaultTableModel cartModel =(DefaultTableModel) tblCart.getModel();
             cartModel.removeRow(selectedRow);
 
             calculateCartTotal();
@@ -1110,8 +876,7 @@ private void setupCartActionColumn() {
         BigDecimal total = BigDecimal.ZERO;
 
         for (int i = 0; i < cartModel.getRowCount(); i++) {
-            BigDecimal subtotal =
-                    (BigDecimal) cartModel.getValueAt(i, 3);
+            BigDecimal subtotal = (BigDecimal) cartModel.getValueAt(i, 3);
 
             total = total.add(subtotal);
         }
@@ -1180,11 +945,9 @@ private void setupCartActionColumn() {
                 // Deduct stock
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                    String productName =
-                            cartModel.getValueAt(i, 0).toString();
+                    String productName = cartModel.getValueAt(i, 0).toString();
 
-                    int quantity =
-                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+                    int quantity = ((Number) cartModel.getValueAt(i, 1)).intValue();
 
                     String sql =
                             "UPDATE tbl_products "
@@ -1193,17 +956,14 @@ private void setupCartActionColumn() {
                             + "AND status = 'Active' "
                             + "AND stock >= ?";
 
-                    try (PreparedStatement pst =
-                                 conn.prepareStatement(sql)) {
+                    try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
                         pst.setInt(1, quantity);
                         pst.setString(2, productName);
                         pst.setInt(3, quantity);
 
                         if (pst.executeUpdate() != 1) {
-                            throw new SQLException(
-                                    "Stock update failed for " + productName
-                            );
+                            throw new SQLException("Stock update failed for " + productName);
                         }
                     }
                 }
@@ -1306,17 +1066,10 @@ private void setupCartActionColumn() {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Payment could not be completed:\n"
-                    + e.getMessage(),
-                    "Payment Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"Payment could not be completed:\n"+ e.getMessage(),"Payment Error",JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 5. Reset the cart after a successful transaction
         cartModel.setRowCount(0);
         txtCashReceived.setText("");
         lblChange.setText("Change: 0.00");
@@ -1326,7 +1079,6 @@ private void setupCartActionColumn() {
 
         searchProduct();
 
-        // 6. Show payment receipt summary
         JOptionPane.showMessageDialog(
                 this,
                 "Payment successful!\n"
@@ -1345,43 +1097,23 @@ private void setupCartActionColumn() {
 
     private void btnUtangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtangActionPerformed
 
-        DefaultTableModel cartModel =
-                (DefaultTableModel) tblCart.getModel();
+        DefaultTableModel cartModel =(DefaultTableModel) tblCart.getModel();
 
-        // 1. Check if cart is empty
         if (cartModel.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "The cart is empty.",
-                    "Empty Cart",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,"The cart is empty.","Empty Cart",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 2. Confirm that this is an UTANG transaction
         String cashText = txtCashReceived.getText().trim();
 
         if (!cashText.isEmpty()) {
-
-            int confirmation = JOptionPane.showConfirmDialog(
-                    this,
-                    "Cash received has been entered.\n\n"
-                    + "Are you sure you want to record this "
-                    + "as an UTANG transaction?",
-                    "UTANG Transaction",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE
-                    
-            );
+            int confirmation = JOptionPane.showConfirmDialog(this,"Cash received has been entered.\n\n"+ "Are you sure you want to record this "+ "as an UTANG transaction?","UTANG Transaction",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 
             if (confirmation != JOptionPane.YES_OPTION) {
                 return;
             }
         }
       
-
-        // 3. Build the physical notebook reminder
         StringBuilder utangList = new StringBuilder();
 
         utangList.append(
@@ -1392,14 +1124,9 @@ private void setupCartActionColumn() {
 
         for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-            String productName =
-                    cartModel.getValueAt(i, 0).toString();
-
-            int quantity =
-                    ((Number) cartModel.getValueAt(i, 1)).intValue();
-
-            BigDecimal subtotal =
-                    (BigDecimal) cartModel.getValueAt(i, 3);
+            String productName = cartModel.getValueAt(i, 0).toString();
+            int quantity =((Number) cartModel.getValueAt(i, 1)).intValue();
+            BigDecimal subtotal =(BigDecimal) cartModel.getValueAt(i, 3);
 
             utangList.append(
                     "x" + quantity
@@ -1415,56 +1142,35 @@ private void setupCartActionColumn() {
                 + "\n\nHave you written the utang list?"
         );
 
-        // 4. Confirm that the notebook entry has been written
-        int answer = JOptionPane.showOptionDialog(
-                this,
-                utangList.toString(),
-                "UTANG REMINDER",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                new Object[]{"YES"},
-                "YES"
-        );
+        int answer = JOptionPane.showOptionDialog(this,utangList.toString(),"UTANG REMINDER",JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{"YES"},"YES");
 
-        // Stop if the dialog is closed without choosing YES
         if (answer != 0) {
             return;
         }
 
-        // 5. Calculate total sales and prepare total cost
         BigDecimal totalSales = BigDecimal.ZERO;
         BigDecimal totalCost = BigDecimal.ZERO;
 
         for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-            BigDecimal subtotal =
-                    (BigDecimal) cartModel.getValueAt(i, 3);
-
+            BigDecimal subtotal =(BigDecimal) cartModel.getValueAt(i, 3);
             totalSales = totalSales.add(subtotal);
         }
 
-        // 6. Check stock, deduct inventory, and update Daily Gain
         try (Connection conn = DBConnection.connect()) {
 
             if (conn == null) {
-                throw new SQLException(
-                        "Could not connect to the database."
-                );
+                throw new SQLException("Could not connect to the database.");
             }
 
             conn.setAutoCommit(false);
 
             try {
-
-                // Check available stock and retrieve unit cost
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                    String productName =
-                            cartModel.getValueAt(i, 0).toString();
+                    String productName =cartModel.getValueAt(i, 0).toString();
 
-                    int quantity =
-                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+                    int quantity =((Number) cartModel.getValueAt(i, 1)).intValue();
 
                     String sql =
                             "SELECT stock, unitCost "
@@ -1473,8 +1179,7 @@ private void setupCartActionColumn() {
                             + "AND status = 'Active' "
                             + "FOR UPDATE";
 
-                    try (PreparedStatement pst =
-                                 conn.prepareStatement(sql)) {
+                    try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
                         pst.setString(1, productName);
 
@@ -1497,13 +1202,9 @@ private void setupCartActionColumn() {
                                 );
                             }
 
-                            BigDecimal unitCost =
-                                    rs.getBigDecimal("unitCost");
+                            BigDecimal unitCost = rs.getBigDecimal("unitCost");
 
-                            BigDecimal itemCost =
-                                    unitCost.multiply(
-                                            BigDecimal.valueOf(quantity)
-                                    );
+                            BigDecimal itemCost =unitCost.multiply(BigDecimal.valueOf(quantity));
 
                             totalCost = totalCost.add(itemCost);
                         }
@@ -1513,11 +1214,8 @@ private void setupCartActionColumn() {
                 // Deduct stock only after all products pass validation
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                    String productName =
-                            cartModel.getValueAt(i, 0).toString();
-
-                    int quantity =
-                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+                    String productName =cartModel.getValueAt(i, 0).toString();
+                    int quantity =((Number) cartModel.getValueAt(i, 1)).intValue();
 
                     String sql =
                             "UPDATE tbl_products "
@@ -1526,8 +1224,7 @@ private void setupCartActionColumn() {
                             + "AND status = 'Active' "
                             + "AND stock >= ?";
 
-                    try (PreparedStatement pst =
-                                 conn.prepareStatement(sql)) {
+                    try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
                         pst.setInt(1, quantity);
                         pst.setString(2, productName);
@@ -1541,8 +1238,6 @@ private void setupCartActionColumn() {
                     }
                 }
 
-
-                // Save the UTANG sale header
                 String saleSQL =
                         "INSERT INTO tbl_sales "
                         + "(userID, totalAmount, amountPaid, "
@@ -1580,20 +1275,15 @@ private void setupCartActionColumn() {
                         + "sellingPrice, unitCost) "
                         + "VALUES (?, ?, ?, ?, ?)";
 
-                try (PreparedStatement itemPst =
-                             conn.prepareStatement(itemSQL)) {
+                try (PreparedStatement itemPst = conn.prepareStatement(itemSQL)) {
 
                     for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                        int productID = Integer.parseInt(
-                                cartModel.getValueAt(i, 4).toString()
-                        );
+                        int productID = Integer.parseInt(cartModel.getValueAt(i, 4).toString());
 
-                        int quantity = ((Number)
-                                cartModel.getValueAt(i, 1)).intValue();
+                        int quantity = ((Number) cartModel.getValueAt(i, 1)).intValue();
 
-                        BigDecimal sellingPrice = (BigDecimal)
-                                cartModel.getValueAt(i, 2);
+                        BigDecimal sellingPrice = (BigDecimal) cartModel.getValueAt(i, 2);
 
                         String productSQL =
                                 "SELECT unitCost FROM tbl_products "
@@ -1601,19 +1291,14 @@ private void setupCartActionColumn() {
 
                         BigDecimal unitCost;
 
-                        try (PreparedStatement productPst =
-                                     conn.prepareStatement(productSQL)) {
+                        try (PreparedStatement productPst = conn.prepareStatement(productSQL)) {
 
                             productPst.setInt(1, productID);
 
-                            try (ResultSet rs =
-                                         productPst.executeQuery()) {
+                            try (ResultSet rs = productPst.executeQuery()) {
 
                                 if (!rs.next()) {
-                                    throw new SQLException(
-                                            "Product not found. ID: "
-                                            + productID
-                                    );
+                                    throw new SQLException("Product not found. ID: "+ productID);
                                 }
 
                                 unitCost = rs.getBigDecimal("unitCost");
@@ -1646,24 +1331,15 @@ private void setupCartActionColumn() {
                 } catch (SQLException rollbackError) {
                     e.addSuppressed(rollbackError);
                 }
-
                 throw e;
             }
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Utang could not be recorded:\n"
-                    + e.getMessage(),
-                    "Utang Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-
+            JOptionPane.showMessageDialog(this,"Utang could not be recorded:\n"+ e.getMessage(),"Utang Error",JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // 7. Reset the cashier interface after success
         cartModel.setRowCount(0);
         
         txtCashReceived.setText("");
@@ -1674,10 +1350,8 @@ private void setupCartActionColumn() {
 
         searchProduct();
 
-        // 8. Show confirmation
         JOptionPane.showMessageDialog(
-                this,
-                "Utang recorded successfully!\n"
+                this,"Utang recorded successfully!\n"
                 + "The items have been deducted from inventory."
                 + "\n\nTotal: ₱"
                 + totalSales.setScale(2, java.math.RoundingMode.HALF_UP)
@@ -1697,7 +1371,6 @@ private void setupCartActionColumn() {
             return;
         }
 
-        // Confirm the deduction
         int confirmation = JOptionPane.showConfirmDialog(
                 this,
                 "Are you sure you want to deduct these products "
@@ -1722,8 +1395,6 @@ private void setupCartActionColumn() {
             conn.setAutoCommit(false);
 
             try {
-
-                // Validate every product before deducting stock
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
                     String productName =cartModel.getValueAt(i, 0).toString();
@@ -1754,24 +1425,17 @@ private void setupCartActionColumn() {
                             int stock = rs.getInt("stock");
 
                             if (quantity > stock) {
-                                throw new SQLException(
-                                        "Not enough stock for " + productName
-                                        + ". Available stock: " + stock
-                                        + "\nQuantity selected: " + quantity
-                                );
+                                throw new SQLException("Not enough stock for " + productName+ ". Available stock: " + stock + "\nQuantity selected: " + quantity);
                             }
                         }
                     }
                 }
 
-                // Deduct stock after all products pass validation
                 for (int i = 0; i < cartModel.getRowCount(); i++) {
 
-                    String productName =
-                            cartModel.getValueAt(i, 0).toString();
+                    String productName = cartModel.getValueAt(i, 0).toString();
 
-                    int quantity =
-                            ((Number) cartModel.getValueAt(i, 1)).intValue();
+                    int quantity = ((Number) cartModel.getValueAt(i, 1)).intValue();
 
                     String sql =
                             "UPDATE tbl_products "
@@ -1780,17 +1444,14 @@ private void setupCartActionColumn() {
                             + "AND status = 'Active' "
                             + "AND stock >= ?";
 
-                    try (PreparedStatement pst =
-                                 conn.prepareStatement(sql)) {
+                    try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
                         pst.setInt(1, quantity);
                         pst.setString(2, productName);
                         pst.setInt(3, quantity);
 
                         if (pst.executeUpdate() != 1) {
-                            throw new SQLException(
-                                    "Stock deduction failed for " + productName
-                            );
+                            throw new SQLException("Stock deduction failed for " + productName);
                         }
                     }
                 }
@@ -1812,7 +1473,6 @@ private void setupCartActionColumn() {
                     pst.executeUpdate();
                 }
 
-                // 6. Save all deductions together
                 conn.commit();
 
             } catch (SQLException e) {
@@ -1828,16 +1488,11 @@ private void setupCartActionColumn() {
 
         } catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Stock deduction failed:\n" + e.getMessage(),
-                    "Deduction Error",
-                    JOptionPane.ERROR_MESSAGE
+            JOptionPane.showMessageDialog(this,"Stock deduction failed:\n" + e.getMessage(),"Deduction Error",JOptionPane.ERROR_MESSAGE
             );
             return;
         }
 
-        // 7. Reset the Cashier interface
         cartModel.setRowCount(0);
 
         txtCashReceived.setText("");
@@ -1848,15 +1503,7 @@ private void setupCartActionColumn() {
 
         searchProduct();
 
-        // 8. Show success message
-        JOptionPane.showMessageDialog(
-                this,
-                "Products deducted successfully!\n"
-                + "Inventory stock has been updated.\n"
-                + "No sale, utang, or daily gain was recorded.",
-                "Stock Deducted",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+        JOptionPane.showMessageDialog(this,"Products deducted successfully!\n"+ "Inventory stock has been updated.\n"+ "No sale, utang, or daily gain was recorded.","Stock Deducted",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnPersonalUseActionPerformed
 
     private void txtSearchProductKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchProductKeyReleased
